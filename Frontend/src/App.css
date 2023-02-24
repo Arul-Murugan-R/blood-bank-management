@@ -1,0 +1,84 @@
+.intro {
+	background: transparent;
+	height: 100vh;
+	overflow: hidden;
+}
+
+@keyframes text-pop-up-top {
+	0% {
+		-webkit-transform: translateY(0);
+		transform: translateY(0);
+		-webkit-transform-origin: 50% 50%;
+		transform-origin: 50% 50%;
+		text-shadow: none;
+	}
+	100% {
+		-webkit-transform: translateY(-50px);
+		transform: translateY(-50px);
+		-webkit-transform-origin: 50% 50%;
+		transform-origin: 50% 50%;
+		text-shadow: 0 1px 0 #cccccc, 0 2px 0 #cccccc, 0 3px 0 #cccccc,
+			0 4px 0 #cccccc, 0 5px 0 #cccccc, 0 6px 0 #cccccc, 0 7px 0 #cccccc,
+			0 8px 0 #cccccc, 0 9px 0 #cccccc, 0 50px 30px rgba(0, 0, 0, 0.3);
+	}
+}
+@keyframes text-shadow-pop-br {
+	0% {
+		text-shadow: 0 0 #555555, 0 0 #555555, 0 0 #555555, 0 0 #555555,
+			0 0 #555555, 0 0 #555555, 0 0 #555555, 0 0 #555555;
+		-webkit-transform: translateX(0) translateY(0);
+		transform: translateX(0) translateY(0);
+	}
+	100% {
+		text-shadow: 1px 1px #555555, 2px 2px #555555, 3px 3px #555555,
+			4px 4px #555555, 5px 5px #555555, 6px 6px #555555, 7px 7px #555555,
+			8px 8px #555555;
+		-webkit-transform: translateX(-8px) translateY(-8px);
+		transform: translateX(-8px) translateY(-8px);
+	}
+}
+
+.intro .intro-text h1 {
+	font-family: "Times New Roman", Times, serif;
+	font-size: 65px;
+	letter-spacing: 10px;
+	word-spacing: 0.2px;
+	color: #ffffff;
+	font-weight: 700;
+	text-decoration: none solid rgb(68, 68, 68);
+	font-style: normal;
+	font-variant: normal;
+	text-transform: uppercase;
+	position: absolute;
+	top: 200px;
+	left: 100px;
+	cursor: pointer;
+	text-shadow: 2px 2px 2px rgba(206, 89, 55, 0);
+	inset: 0 0 0 0 rgba(206, 89, 55, 0);
+	transition: all 1s ease-in;
+	transition-delay: 2s;
+}
+.intro .intro-text h1:hover::after {
+	content: "DONATE BLOOD";
+	-webkit-text-stroke: 1px #fff;
+	font-family: "Times New Roman", Times, serif;
+	font-size: 65px;
+	letter-spacing: 10px;
+	word-spacing: 0.2px;
+	color: #ffffff;
+	font-weight: 700;
+	text-decoration: none solid rgb(68, 68, 68);
+	font-style: normal;
+	font-variant: normal;
+	text-transform: uppercase;
+	position: relative;
+	bottom: 50px;
+	right: 0;
+	color: transparent;
+	/* animation: text-shadow-pop-br 1s ease-out 1s forwards; */
+}
+
+.intro video {
+	/* width: 100vw; */
+	z-index: -1;
+}

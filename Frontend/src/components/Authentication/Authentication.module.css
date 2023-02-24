@@ -1,0 +1,44 @@
+.card {
+	width: 400px;
+	position: fixed;
+	top: 50vh;
+	left: 50vw;
+	transform: translate(-50%, -50%);
+}
+
+.authLink {
+	color: #007bff;
+	align-self: center;
+	text-decoration: none;
+	margin-top: 0.5rem;
+}
+
+.authOptionIcon {
+	height: 40px;
+	width: 40px;
+}
+
+.cardMedia {
+	height: 300px;
+	width: 300px !important;
+	transform: rotate(0deg);
+	margin-left: 50px;
+}
+
+@media (max-width: 480px) {
+	.form {
+		width: 80%;
+		margin-left: 10%;
+	}
+}
+
+@media (max-width: 400px) {
+	.card {
+		width: 95%;
+	}
+
+	.cardMedia {
+		width: 100% !important;
+		margin-left: 0 !important;
+	}
+}
