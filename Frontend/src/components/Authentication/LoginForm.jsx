@@ -5,6 +5,7 @@ import {
 	CardContent,
 	Button,
 	CardActions,
+	Typography
 } from "@mui/material";
 import { useState } from "react";
 import {
@@ -72,7 +73,20 @@ const LoginForm = () => {
 	};
 
 	return (
+		<div className={classes.form}>
 		<Card className={classes.card} sx={{ backgroundColor: "#850E35" }}>
+		<Typography variant="h6" noWrap component="a"href="/"
+				sx={{
+					mr: 2,
+					display: { xs: "none", md: "flex" },
+					fontFamily: "monospace",
+					fontWeight: 700,
+					color: "white",
+					textDecoration: "none",
+				}}
+			>
+				{"< Home"}
+			</Typography>
 			<CardMedia
 				className={classes.cardMedia}
 				component="img"
@@ -122,6 +136,7 @@ const LoginForm = () => {
 				</Link>
 			</CardActions>
 		</Card>
+		</div>
 	);
 };
 

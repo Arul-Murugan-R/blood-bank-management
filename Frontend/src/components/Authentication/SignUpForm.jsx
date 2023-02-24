@@ -9,6 +9,7 @@ import {
 	Select,
 	MenuItem,
 	FormControl,
+	Typography,
 } from "@mui/material";
 import { useState } from "react";
 import {
@@ -90,78 +91,92 @@ const SignUpForm = () => {
 	};
 
 	return (
-		<Card className={classes.card} sx={{ backgroundColor: "#850E35" }}>
-			<CardMedia
-				className={classes.cardMedia}
-				component="img"
-				image="/assets/signUp.gif"
-				alt="green iguana"
-			/>
-			<CardContent>
-				<form
-					id="signUp-Form"
-					style={{
-						backgroundColor: "white",
-						borderRadius: "5px",
-						padding: "10px 5px",
-					}}
-				>
-					{registrationError && <Error message={registrationError} />}
-					<CustomFormControl
-						field={userField}
-						IconBtnProps={{ disabled: true }}
-						icon="AccountCircle"
-					/>
-					<CustomFormControl
-						field={emailField}
-						IconBtnProps={{ disabled: true }}
-						icon="Email"
-					/>
-					<CustomFormControl
-						field={passwordField}
-						IconBtnProps={{
-							onClick: handleClickShowPassword,
-							onMouseDown: handleMouseDownPassword,
-							disabled:
-								passwordField.properties.value.length === 0,
-						}}
-						icon={showPassword ? "VisibilityOff" : "Visibility"}
-						type={showPassword ? "text" : "password"}
-					/>
-					<FormControl
-						fullWidth
-						sx={{ backgroundColor: "white", borderRadius: "5px" }}
-					>
-						<InputLabel id="role-select-label">Age</InputLabel>
-						<Select
-							labelId="role-select-label"
-							id="demo-simple-select"
-							value={role || ""}
-							label="Age"
-							onChange={(event) =>
-								setRole((prev) => event.target.value)
-							}
-						>
-							<MenuItem value={"donor"}>Donor</MenuItem>
-							<MenuItem value={"recipient"}>Recipient</MenuItem>
-						</Select>
-					</FormControl>
-				</form>
-			</CardContent>
-			<CardActions
+		<div className={classes.form}>
+			<Card className={classes.card} sx={{ backgroundColor: "#850E35" }}>
+			<Typography variant="h6" noWrap component="a"href="/"
 				sx={{
-					justifyContent: "space-evenly",
-					flexWrap: "wrap",
+					mr: 2,
+					display: { xs: "none", md: "flex" },
+					fontFamily: "monospace",
+					fontWeight: 700,
+					color: "white",
+					textDecoration: "none",
 				}}
 			>
-				<Button variant="contained" fullWidth onClick={registerUser}>
-					Sign Up
-				</Button>
-				<Link to="/login" className={classes.authLink}>
-					Already a member? Login
-				</Link>
-			</CardActions>
-		</Card>
+				{"< Home"}
+			</Typography>
+				<CardMedia
+					className={classes.cardMedia}
+					component="img"
+					image="/assets/signUp.gif"
+					alt="green iguana"
+				/>
+				<CardContent className={classes.CardContent}>
+					<form
+						id="signUp-Form"
+						style={{
+							backgroundColor: "white",
+							borderRadius: "5px",
+							padding: "10px 5px",
+						}}
+					>
+						{registrationError && <Error message={registrationError} />}
+						<CustomFormControl
+							field={userField}
+							IconBtnProps={{ disabled: true }}
+							icon="AccountCircle"
+						/>
+						<CustomFormControl
+							field={emailField}
+							IconBtnProps={{ disabled: true }}
+							icon="Email"
+						/>
+						<CustomFormControl
+							field={passwordField}
+							IconBtnProps={{
+								onClick: handleClickShowPassword,
+								onMouseDown: handleMouseDownPassword,
+								disabled:
+									passwordField.properties.value.length === 0,
+							}}
+							icon={showPassword ? "VisibilityOff" : "Visibility"}
+							type={showPassword ? "text" : "password"}
+						/>
+						<FormControl
+							fullWidth
+							sx={{ backgroundColor: "white", borderRadius: "5px" }}
+						>
+							<InputLabel id="role-select-label">Age</InputLabel>
+							<Select
+								labelId="role-select-label"
+								id="demo-simple-select"
+								value={role || ""}
+								label="Age"
+								onChange={(event) =>
+									setRole((prev) => event.target.value)
+								}
+							>
+								<MenuItem value={"donor"}>Donor</MenuItem>
+								<MenuItem value={"recipient"}>Recipient</MenuItem>
+							</Select>
+						</FormControl>
+					</form>
+				</CardContent>
+				<CardActions
+					sx={{
+						justifyContent: "space-evenly",
+						flexWrap: "wrap",
+					}}
+				>
+					<Button variant="contained" fullWidth onClick={registerUser}>
+						Sign Up
+					</Button>
+					<Link to="/login" className={classes.authLink}>
+						Already a member? Login
+					</Link>
+				</CardActions>
+			</Card>
+		</div>
 	);
 };
 

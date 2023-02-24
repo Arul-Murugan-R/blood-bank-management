@@ -1,9 +1,12 @@
+.form{
+	display: grid;
+	place-items: center;
+	justify-content: center;
+	margin: 20px 0px;
+}
 .card {
 	width: 400px;
-	position: fixed;
-	top: 50vh;
-	left: 50vw;
-	transform: translate(-50%, -50%);
+	padding: 10px;
 	background-color: #f06292;
 }
 
