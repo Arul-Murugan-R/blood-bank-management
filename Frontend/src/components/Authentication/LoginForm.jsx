@@ -48,6 +48,10 @@ const LoginForm = () => {
 	const handleMouseDownPassword = (event) => event.preventDefault();
 
 	const loginUser = async (event) => {
+		if (!formIsValid) {
+			setLoginError("Please enter valid credentials");
+			return;
+		}
 		try {
 			event.preventDefault();
 			const response = await axios.post(
@@ -68,7 +72,7 @@ const LoginForm = () => {
 	};
 
 	return (
-		<Card className={classes.card}>
+		<Card className={classes.card} sx={{ backgroundColor: "#850E35" }}>
 			<CardMedia
 				className={classes.cardMedia}
 				component="img"
@@ -76,8 +80,16 @@ const LoginForm = () => {
 				alt="green iguana"
 			/>
 			<CardContent>
-				{loginError && <Error message={loginError} />}
-				<form id="login-form">
+				<form
+					id="login-form"
+					style={{
+						backgroundColor: "white",
+						borderRadius: "5px",
+						padding: "10px 5px",
+						paddingBottom: "1px",
+					}}
+				>
+					{loginError && <Error message={loginError} />}
 					<CustomFormControl
 						field={userField}
 						IconBtnProps={{ disabled: true }}
@@ -102,14 +114,7 @@ const LoginForm = () => {
 					flexWrap: "wrap",
 				}}
 			>
-				<Button
-					variant="contained"
-					fullWidth
-					onClick={loginUser}
-					disabled={!formIsValid}
-					type="submit"
-					form="login-form"
-				>
+				<Button variant="contained" fullWidth onClick={loginUser}>
 					Login
 				</Button>
 				<Link to="/register" className={classes.authLink}>

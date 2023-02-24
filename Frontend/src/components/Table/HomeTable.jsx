@@ -68,11 +68,8 @@ export default function HomeTable() {
 
 	const handleChangeRowsPerPage = (event) => {
 		setRowsPerPage(+event.target.value);
-		console.log(rowsPerPage);
 		setPage(0);
 	};
-
-	console.log(rows);
 
 	return (
 		<>

@@ -17,6 +17,15 @@ const UserSchema = new Schema({
 		required: true,
 		unique: true,
 	},
+	role: {
+		type: String,
+		required: true,
+		enum: ["recipient", "donor"],
+	},
+	isProfileComplete: {
+		type: Boolean,
+		default: false,
+	},
 });
 
 module.exports = mongoose.model("User", UserSchema);

@@ -10,9 +10,14 @@ const options = {
 
 module.exports.registerUser = async (req, res, next) => {
 	try {
-		const { email, username, password } = req.body;
+		const { email, username, password, role } = req.body;
 		const hashedPassword = await bcrypt.hash(password, 12);
-		const user = new User({ email, username, password: hashedPassword });
+		const user = new User({
+			email,
+			username,
+			password: hashedPassword,
+			role,
+		});
 		await user.save();
 		const token = jwt.sign({ id: user._id.toString() }, secret, options);
 

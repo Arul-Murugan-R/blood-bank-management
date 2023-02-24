@@ -1,6 +1,7 @@
 import Navbar from "../Navbar/Navbar";
 import Bank from "./Bank";
 import HomeTable from "../Table/HomeTable";
+import DonorsMap from "../Map/DonorsMap";
 
 const HomePage = () => {
 	return (
@@ -22,6 +23,7 @@ const HomePage = () => {
 			</div>
 			<Bank />
 			<HomeTable />
+			<DonorsMap />
 		</div>
 	);
 };

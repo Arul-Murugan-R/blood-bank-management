@@ -5,6 +5,10 @@ import {
 	CardContent,
 	Button,
 	CardActions,
+	InputLabel,
+	Select,
+	MenuItem,
+	FormControl,
 } from "@mui/material";
 import { useState } from "react";
 import {
@@ -43,12 +47,15 @@ const SignUpForm = () => {
 		},
 		validateEmail
 	);
+
 	const [showPassword, setShowPassword] = useState(false);
 	const [registrationError, setRegistrationerror] = useState(null);
+	const [role, setRole] = useState(null);
 	const formIsValid =
 		userField.validities.isValid &&
 		emailField.validities.isValid &&
-		passwordField.validities.isValid;
+		passwordField.validities.isValid &&
+		role;
 
 	const handleClickShowPassword = () => {
 		setShowPassword((prev) => !prev);
@@ -57,6 +64,10 @@ const SignUpForm = () => {
 	const handleMouseDownPassword = (event) => event.preventDefault();
 
 	const registerUser = async () => {
+		if (!formIsValid) {
+			setRegistrationerror("Please fill all the fields");
+			return;
+		}
 		try {
 			const response = await axios.post(
 				"http://localhost:5000/user/register",
@@ -64,6 +75,7 @@ const SignUpForm = () => {
 					username: userField.properties.value,
 					email: emailField.properties.value,
 					password: passwordField.properties.value,
+					role,
 				}
 			);
 			const user = response.data.user;
@@ -78,7 +90,7 @@ const SignUpForm = () => {
 	};
 
 	return (
-		<Card className={classes.card}>
+		<Card className={classes.card} sx={{ backgroundColor: "#850E35" }}>
 			<CardMedia
 				className={classes.cardMedia}
 				component="img"
@@ -86,8 +98,15 @@ const SignUpForm = () => {
 				alt="green iguana"
 			/>
 			<CardContent>
-				{registrationError && <Error message={registrationError} />}
-				<form id="signUp-Form">
+				<form
+					id="signUp-Form"
+					style={{
+						backgroundColor: "white",
+						borderRadius: "5px",
+						padding: "10px 5px",
+					}}
+				>
+					{registrationError && <Error message={registrationError} />}
 					<CustomFormControl
 						field={userField}
 						IconBtnProps={{ disabled: true }}
@@ -109,6 +128,24 @@ const SignUpForm = () => {
 						icon={showPassword ? "VisibilityOff" : "Visibility"}
 						type={showPassword ? "text" : "password"}
 					/>
+					<FormControl
+						fullWidth
+						sx={{ backgroundColor: "white", borderRadius: "5px" }}
+					>
+						<InputLabel id="role-select-label">Age</InputLabel>
+						<Select
+							labelId="role-select-label"
+							id="demo-simple-select"
+							value={role || ""}
+							label="Age"
+							onChange={(event) =>
+								setRole((prev) => event.target.value)
+							}
+						>
+							<MenuItem value={"donor"}>Donor</MenuItem>
+							<MenuItem value={"recipient"}>Recipient</MenuItem>
+						</Select>
+					</FormControl>
 				</form>
 			</CardContent>
 			<CardActions
@@ -117,12 +154,7 @@ const SignUpForm = () => {
 					flexWrap: "wrap",
 				}}
 			>
-				<Button
-					variant="contained"
-					fullWidth
-					onClick={registerUser}
-					disabled={!formIsValid}
-				>
+				<Button variant="contained" fullWidth onClick={registerUser}>
 					Sign Up
 				</Button>
 				<Link to="/login" className={classes.authLink}>
