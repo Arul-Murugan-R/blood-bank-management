@@ -75,18 +75,12 @@ const LoginForm = () => {
 	return (
 		<div className={classes.form}>
 		<Card className={classes.card} sx={{ backgroundColor: "#850E35" }}>
-		<Typography variant="h6" noWrap component="a"href="/"
-				sx={{
-					mr: 2,
-					display: { xs: "none", md: "flex" },
-					fontFamily: "monospace",
-					fontWeight: 700,
-					color: "white",
-					textDecoration: "none",
-				}}
-			>
+		<Link
+				to="/"
+				style={{color:'white',textDecoration:'none',fontFamily: "monospace",fontWeight:'700',}}
+				>
 				{"< Home"}
-			</Typography>
+			</Link>
 			<CardMedia
 				className={classes.cardMedia}
 				component="img"
