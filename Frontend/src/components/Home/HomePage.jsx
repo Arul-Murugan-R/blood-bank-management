@@ -6,6 +6,11 @@ import CircularCarousel from "./CircularCarousel";
 import Cards from "../Cards/Cards";
 
 const HomePage = () => {
+	const details = {
+		type:'availability',
+		count:2
+
+	}
 	return (
 		<>
 			<div className="intro">
@@ -22,8 +27,9 @@ const HomePage = () => {
 					</h1>
 				</div>
 			</div>
-			<Cards dir="reverse"/>
-			<Cards />
+			<Cards details={details}/>
+			<Cards details={{dir:'reverse',type:''}}/>
+			<Cards details={{type:''}}/>
 		</>
 	);
 };
