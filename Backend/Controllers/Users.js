@@ -76,7 +76,7 @@ module.exports.verifyUser = async (req, res, next) => {
 	try {
 		const verificationResult = jwt.verify(token, secret);
 		const user = await User.findById(verificationResult.id);
-		res.status(200).json({
+		return res.status(200).json({
 			message: "Authentic user",
 			user: {
 				username: user.username,

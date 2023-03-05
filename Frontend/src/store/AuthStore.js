@@ -76,11 +76,12 @@ export const verifyToken = () => {
 							})
 						);
 					}
+					console.log(response);
 					return {
 						userId: response.data.user.userId,
 						username: response.data.user.username,
 						token: token,
-						role: role,
+						role: response.data.user.role,
 					};
 				} catch (error) {
 					return {
@@ -96,6 +97,7 @@ export const verifyToken = () => {
 		};
 
 		const verificationResult = await verifier();
+		console.log(verificationResult);
 		dispatch(authActions.checkToken({ ...verificationResult }));
 	};
 };
