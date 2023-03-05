@@ -113,12 +113,17 @@ const SignUpForm = () => {
 	return (
 		<div className={classes.form}>
 			<Card className={classes.card} sx={{ backgroundColor: "#850E35" }}>
-			<Link
-				to="/"
-				style={{color:'white',textDecoration:'none',fontFamily: "monospace",fontWeight:'700',}}
+				<Link
+					to="/"
+					style={{
+						color: "white",
+						textDecoration: "none",
+						fontFamily: "monospace",
+						fontWeight: "700",
+					}}
 				>
-				{"< Home"}
-			</Link>
+					{"< Home"}
+				</Link>
 				<CardMedia
 					className={classes.cardMedia}
 					component="img"
@@ -134,7 +139,9 @@ const SignUpForm = () => {
 							padding: "10px 5px",
 						}}
 					>
-						{registrationError && <Error message={registrationError} />}
+						{registrationError && (
+							<Error message={registrationError} />
+						)}
 						<CustomFormControl
 							field={userField}
 							IconBtnProps={{ disabled: true }}
@@ -145,6 +152,7 @@ const SignUpForm = () => {
 							IconBtnProps={{ disabled: true }}
 							icon="Email"
 						/>
+
 						<CustomFormControl
 							field={passwordField}
 							IconBtnProps={{
@@ -158,22 +166,33 @@ const SignUpForm = () => {
 						/>
 						<FormControl
 							fullWidth
-							sx={{ backgroundColor: "white", borderRadius: "5px" }}
+							sx={{
+								backgroundColor: "white",
+								borderRadius: "5px",
+								mb: 2,
+							}}
 						>
-							<InputLabel id="role-select-label">Role</InputLabel>
+							<InputLabel id="role-select-label">
+								Registering as
+							</InputLabel>
 							<Select
 								labelId="role-select-label"
 								id="demo-simple-select"
 								value={role || ""}
-								label="Role"
+								label="Registering as"
 								onChange={(event) =>
 									setRole((prev) => event.target.value)
 								}
 							>
 								<MenuItem value={"donor"}>Donor</MenuItem>
-								<MenuItem value={"recipient"}>Recipient</MenuItem>
+								<MenuItem value={"recipient"}>
+									Recipient
+								</MenuItem>
 							</Select>
 						</FormControl>
+						{role === "donor" && (
+							<CustomFormControl field={dobField} />
+						)}
 					</form>
 				</CardContent>
 				<CardActions
@@ -182,73 +201,11 @@ const SignUpForm = () => {
 						flexWrap: "wrap",
 					}}
 				>
-<<<<<<< HEAD
-					{registrationError && <Error message={registrationError} />}
-					<CustomFormControl
-						field={userField}
-						IconBtnProps={{ disabled: true }}
-						icon="AccountCircle"
-					/>
-					<CustomFormControl
-						field={emailField}
-						IconBtnProps={{ disabled: true }}
-						icon="Email"
-					/>
-
-					<CustomFormControl
-						field={passwordField}
-						IconBtnProps={{
-							onClick: handleClickShowPassword,
-							onMouseDown: handleMouseDownPassword,
-							disabled:
-								passwordField.properties.value.length === 0,
-						}}
-						icon={showPassword ? "VisibilityOff" : "Visibility"}
-						type={showPassword ? "text" : "password"}
-					/>
-					<FormControl
+					<Button
+						variant="contained"
 						fullWidth
-						sx={{
-							backgroundColor: "white",
-							borderRadius: "5px",
-							mb: 2,
-						}}
+						onClick={registerUser}
 					>
-						<InputLabel id="role-select-label">
-							Registering as
-						</InputLabel>
-						<Select
-							labelId="role-select-label"
-							id="demo-simple-select"
-							value={role || ""}
-							label="Registering as"
-							onChange={(event) =>
-								setRole((prev) => event.target.value)
-							}
-						>
-							<MenuItem value={"donor"}>Donor</MenuItem>
-							<MenuItem value={"recipient"}>Recipient</MenuItem>
-						</Select>
-					</FormControl>
-					{role === "donor" && <CustomFormControl field={dobField} />}
-				</form>
-			</CardContent>
-			<CardActions
-				sx={{
-					justifyContent: "space-evenly",
-					flexWrap: "wrap",
-				}}
-			>
-				<Button variant="contained" fullWidth onClick={registerUser}>
-					Sign Up
-				</Button>
-				<Link to="/login" className={classes.authLink}>
-					Already a member? Login
-				</Link>
-			</CardActions>
-		</Card>
-=======
-					<Button variant="contained" fullWidth onClick={registerUser}>
 						Sign Up
 					</Button>
 					<Link to="/login" className={classes.authLink}>
@@ -257,7 +214,6 @@ const SignUpForm = () => {
 				</CardActions>
 			</Card>
 		</div>
->>>>>>> fd79d0a089a3f0ce1e3fc5374bd9f3c540b3c565
 	);
 };
 

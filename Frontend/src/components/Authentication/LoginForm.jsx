@@ -5,7 +5,7 @@ import {
 	CardContent,
 	Button,
 	CardActions,
-	Typography
+	Typography,
 } from "@mui/material";
 import { useState } from "react";
 import {
@@ -74,62 +74,67 @@ const LoginForm = () => {
 
 	return (
 		<div className={classes.form}>
-		<Card className={classes.card} sx={{ backgroundColor: "#850E35" }}>
-		<Link
-				to="/"
-				style={{color:'white',textDecoration:'none',fontFamily: "monospace",fontWeight:'700',}}
-				>
-				{"< Home"}
-			</Link>
-			<CardMedia
-				className={classes.cardMedia}
-				component="img"
-				image="/assets/signUp.gif"
-				alt="green iguana"
-			/>
-			<CardContent>
-				<form
-					id="login-form"
+			<Card className={classes.card} sx={{ backgroundColor: "#850E35" }}>
+				<Link
+					to="/"
 					style={{
-						backgroundColor: "white",
-						borderRadius: "5px",
-						padding: "10px 5px",
-						paddingBottom: "1px",
+						color: "white",
+						textDecoration: "none",
+						fontFamily: "monospace",
+						fontWeight: "700",
 					}}
 				>
-					{loginError && <Error message={loginError} />}
-					<CustomFormControl
-						field={userField}
-						IconBtnProps={{ disabled: true }}
-						icon="AccountCircle"
-					/>
-					<CustomFormControl
-						field={passwordField}
-						IconBtnProps={{
-							onClick: handleClickShowPassword,
-							onMouseDown: handleMouseDownPassword,
-							disabled:
-								passwordField.properties.value.length === 0,
-						}}
-						icon={showPassword ? "VisibilityOff" : "Visibility"}
-						type={showPassword ? "text" : "password"}
-					/>
-				</form>
-			</CardContent>
-			<CardActions
-				sx={{
-					justifyContent: "space-evenly",
-					flexWrap: "wrap",
-				}}
-			>
-				<Button variant="contained" fullWidth onClick={loginUser}>
-					Login
-				</Button>
-				<Link to="/register" className={classes.authLink}>
-					New user? Sign up
+					{"< Home"}
 				</Link>
-			</CardActions>
-		</Card>
+				<CardMedia
+					className={classes.cardMedia}
+					component="img"
+					image="/assets/signUp.gif"
+					alt="green iguana"
+				/>
+				<CardContent>
+					<form
+						id="login-form"
+						style={{
+							backgroundColor: "white",
+							borderRadius: "5px",
+							padding: "10px 5px",
+							paddingBottom: "1px",
+						}}
+					>
+						{loginError && <Error message={loginError} />}
+						<CustomFormControl
+							field={userField}
+							IconBtnProps={{ disabled: true }}
+							icon="AccountCircle"
+						/>
+						<CustomFormControl
+							field={passwordField}
+							IconBtnProps={{
+								onClick: handleClickShowPassword,
+								onMouseDown: handleMouseDownPassword,
+								disabled:
+									passwordField.properties.value.length === 0,
+							}}
+							icon={showPassword ? "VisibilityOff" : "Visibility"}
+							type={showPassword ? "text" : "password"}
+						/>
+					</form>
+				</CardContent>
+				<CardActions
+					sx={{
+						justifyContent: "space-evenly",
+						flexWrap: "wrap",
+					}}
+				>
+					<Button variant="contained" fullWidth onClick={loginUser}>
+						Login
+					</Button>
+					<Link to="/register" className={classes.authLink}>
+						New user? Sign up
+					</Link>
+				</CardActions>
+			</Card>
 		</div>
 	);
 };
