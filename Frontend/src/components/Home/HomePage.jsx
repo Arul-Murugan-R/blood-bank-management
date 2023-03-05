@@ -7,7 +7,7 @@ import Cards from "../Cards/Cards";
 
 const HomePage = () => {
 	return (
-		<div>
+		<>
 			<div className="intro">
 				<video
 					src="homepagegif.mp4"
@@ -22,7 +22,9 @@ const HomePage = () => {
 					</h1>
 				</div>
 			</div>
-		</div>
+			<Cards dir="reverse"/>
+			<Cards />
+		</>
 	);
 };
 
