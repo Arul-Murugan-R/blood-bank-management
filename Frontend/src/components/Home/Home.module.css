@@ -56,3 +56,99 @@
 	left: -17%;
 	top: 93%;
 }
+
+/* Cirular Carousel */
+
+.container {
+	background-color: #7db9b6;
+	padding: 15% 15%;
+}
+
+.container .large-circle {
+	position: relative;
+	width: 80%;
+	max-width: 400px;
+	aspect-ratio: 1/1;
+	border-radius: 50%;
+	background-color: #e96479;
+}
+
+.container .small-circle {
+	position: absolute;
+	width: 10%;
+	height: 10%;
+	border-radius: 50%;
+	background-color: #4d455d;
+}
+
+.large-circle .small-circle1 {
+	top: 15%;
+	left: 11.5%;
+	transition: all 0.5s ease-in-out;
+	z-index: 1;
+}
+
+.large-circle .small-circle2 {
+	top: 15%;
+	left: 78.5%;
+	/* right: 400px; */
+	background-color: #4d455d;
+	transition: all 0.5s ease-in-out;
+	z-index: 1;
+}
+
+.large-circle .small-circle3 {
+	top: 78.5%;
+	left: 75%;
+	transition: all 0.5s ease-in-out;
+	z-index: 1;
+}
+
+.large-circle .small-circle4 {
+	top: 75%;
+	left: 11.5%;
+	transition: all 0.5s ease-in-out;
+	z-index: 1;
+}
+
+.large-circle .small-circle5 {
+	top: 0;
+	left: 45%;
+	transition: all 0.5s ease-in-out;
+	z-index: 1;
+}
+
+.large-circle .small-circle6 {
+	top: 90%;
+	left: 45%;
+	transition: all 0.5s ease-in-out;
+	z-index: 1;
+}
+
+.large-circle .small-circle7 {
+	top: 45%;
+	left: 0;
+	transition: all 0.5s ease-in-out;
+	z-index: 1;
+}
+
+.large-circle .small-circle8 {
+	top: 45%;
+	left: 90%;
+	transition: all 0.5s ease-in-out;
+	z-index: 1;
+}
+
+.large-circle:hover {
+	animation: orbit 2s linear infinite;
+}
+
+@keyframes orbit {
+	0% {
+		transform: rotate(0deg);
+	}
+
+	100% {
+		transform: rotate(360deg);
+	}
+}

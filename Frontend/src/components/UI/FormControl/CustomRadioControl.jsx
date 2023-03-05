@@ -6,9 +6,10 @@ import {
 	FormControlLabel,
 	RadioGroup,
 	Radio,
+	FormLabel,
 } from "@mui/material";
 
-const CustomFormControl = (props) => {
+const CustomRadioControl = (props) => {
 	const { field } = props;
 
 	return (
@@ -17,23 +18,17 @@ const CustomFormControl = (props) => {
 			error={field.validities.isInvalid}
 			color={field.validities.isValid ? "success" : "primary"}
 		>
-			<InputLabel htmlFor={field.properties.id}>
+			<FormLabel htmlFor={field.properties.id}>
 				{field.validities.label}
-			</InputLabel>
+			</FormLabel>
 			<RadioGroup
 				aria-labelledby="radio-buttons-group-label"
 				name="radio-buttons-group"
+				onChange={field.properties.onChange}
+				onBlur={field.properties.onBlur}
 			>
-				<FormControlLabel
-					value={true}
-					control={<Radio />}
-					label="Yes"
-				/>
-				<FormControlLabel
-					value={false}
-					control={<Radio />}
-					label="No"
-				/>
+				<FormControlLabel value={1} control={<Radio />} label="Yes" />
+				<FormControlLabel value={0} control={<Radio />} label="No" />
 			</RadioGroup>
 			{field.validities.isInvalid && (
 				<FormHelperText id="component-error-text">
@@ -44,4 +39,4 @@ const CustomFormControl = (props) => {
 	);
 };
 
-export default CustomFormControl;
+export default CustomRadioControl;

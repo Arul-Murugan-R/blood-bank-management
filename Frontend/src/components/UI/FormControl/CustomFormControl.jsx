@@ -11,7 +11,7 @@ import {
 
 const CustomFormControl = (props) => {
 	const { field } = props;
-	const InputIcon = Icon[props.icon];
+	const InputIcon = props.icon ? Icon[props.icon] : null;
 
 	return (
 		<FormControl
@@ -26,11 +26,13 @@ const CustomFormControl = (props) => {
 				sx={{ marginRight: "1rem", width: "100%" }}
 				{...field.properties}
 				endAdornment={
-					<InputAdornment position="end">
-						<IconButton {...props.IconBtnProps}>
-							<InputIcon />
-						</IconButton>
-					</InputAdornment>
+					props.icon && (
+						<InputAdornment position="end">
+							<IconButton {...props.IconBtnProps}>
+								<InputIcon />
+							</IconButton>
+						</InputAdornment>
+					)
 				}
 				type={props.type ? props.type : field.properties.type}
 			/>

@@ -12,6 +12,7 @@ import {
 } from "@mui/material";
 import { useState } from "react";
 import {
+	validateAge,
 	validateEmail,
 	validatePassword,
 	validateText,
@@ -48,6 +49,15 @@ const SignUpForm = () => {
 		validateEmail
 	);
 
+	const dobField = useInput(
+		{
+			type: "date",
+			label: "Date of Birth",
+			name: "dob",
+		},
+		validateAge
+	);
+
 	const [showPassword, setShowPassword] = useState(false);
 	const [registrationError, setRegistrationerror] = useState(null);
 	const [role, setRole] = useState(null);
@@ -55,7 +65,10 @@ const SignUpForm = () => {
 		userField.validities.isValid &&
 		emailField.validities.isValid &&
 		passwordField.validities.isValid &&
-		role;
+		role &&
+		role == "donor"
+			? dobField.validities.isValid
+			: true;
 
 	const handleClickShowPassword = () => {
 		setShowPassword((prev) => !prev);
@@ -64,10 +77,16 @@ const SignUpForm = () => {
 	const handleMouseDownPassword = (event) => event.preventDefault();
 
 	const registerUser = async () => {
-		if (!formIsValid) {
-			setRegistrationerror("Please fill all the fields");
-			return;
+		if (!dobField.validities.isValid && role == "donor") {
+			dobField.validities.reset();
+			return setRegistrationerror(
+				"Only people between 18 and 60 years of age can donate blood"
+			);
 		}
+
+		if (!formIsValid)
+			return setRegistrationerror("Please fill all the fields");
+
 		try {
 			const response = await axios.post(
 				"http://localhost:5000/user/register",
@@ -76,6 +95,7 @@ const SignUpForm = () => {
 					email: emailField.properties.value,
 					password: passwordField.properties.value,
 					role,
+					dob: role == "donor" ? dobField.properties.value : null,
 				}
 			);
 			const user = response.data.user;
@@ -83,7 +103,7 @@ const SignUpForm = () => {
 			userField.validities.reset();
 			emailField.validities.reset();
 			passwordField.validities.reset();
-			return navigate(-1);
+			return navigate("/donor-info");
 		} catch (error) {
 			setRegistrationerror(error.response.data.message);
 		}
@@ -117,6 +137,7 @@ const SignUpForm = () => {
 						IconBtnProps={{ disabled: true }}
 						icon="Email"
 					/>
+
 					<CustomFormControl
 						field={passwordField}
 						IconBtnProps={{
@@ -130,14 +151,20 @@ const SignUpForm = () => {
 					/>
 					<FormControl
 						fullWidth
-						sx={{ backgroundColor: "white", borderRadius: "5px" }}
+						sx={{
+							backgroundColor: "white",
+							borderRadius: "5px",
+							mb: 2,
+						}}
 					>
-						<InputLabel id="role-select-label">Age</InputLabel>
+						<InputLabel id="role-select-label">
+							Registering as
+						</InputLabel>
 						<Select
 							labelId="role-select-label"
 							id="demo-simple-select"
 							value={role || ""}
-							label="Age"
+							label="Registering as"
 							onChange={(event) =>
 								setRole((prev) => event.target.value)
 							}
@@ -146,6 +173,7 @@ const SignUpForm = () => {
 							<MenuItem value={"recipient"}>Recipient</MenuItem>
 						</Select>
 					</FormControl>
+					{role === "donor" && <CustomFormControl field={dobField} />}
 				</form>
 			</CardContent>
 			<CardActions

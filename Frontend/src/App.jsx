@@ -53,6 +53,7 @@ import { verifyToken } from "./store/AuthStore";
 import ProtectedRoute from "./ProtectedRoute";
 import { Provider } from "react-redux";
 import store from "./store/redux";
+import DonorDetailsForm from "./components/Profile/DonorDetailsForm";
 
 let initial = true;
 
@@ -88,6 +89,7 @@ function App() {
 					</ProtectedRoute>
 				}
 			/>
+			<Route path="/donor-info" element={<DonorDetailsForm />} />
 		</Routes>
 	);
 }

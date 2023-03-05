@@ -3,7 +3,8 @@ import { useState } from "react";
 
 const useInput = (
 	descriptors = { type: "", name: "", label: "", initialValue: "" },
-	validationFunction
+	validationFunction,
+	updationFunction = null
 ) => {
 	const [enteredValue, setEnteredValue] = useState(
 		descriptors.initialValue || ""
@@ -21,6 +22,7 @@ const useInput = (
 	const valueIsInvalid = inpWasTouched && !valueIsValid;
 
 	const updateValue = (event) => {
+		if (updationFunction) updationFunction(event.target.value);
 		setEnteredValue((prevState) => event.target.value);
 	};
 

@@ -6,3 +6,10 @@
 	background-color: white;
 	border-radius: 5px;
 }
+
+input[value=""]::-webkit-datetime-edit {
+	color: transparent;
+}
+input:focus::-webkit-datetime-edit {
+	color: #000;
+}
