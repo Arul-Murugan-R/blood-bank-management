@@ -2,7 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialRequestState = [
 	{
-		requestId: null,
+		_id: null,
 		requiredBefore: null,
 		numberOfUnits: null,
 		bloodGroup: null,
@@ -22,17 +22,17 @@ const RequestDataSlice = createSlice({
 		},
 		addRequestData(state, action) {
 			const { requestData } = action.payload;
-			return [...state, { ...requestData, requestId: requestData._id }];
+			return [...state, { ...requestData }];
 		},
 		deleteRequestData(state, action) {
 			const { requestId } = action.payload;
-			return state.filter((request) => request.requestId !== requestId);
+			return state.filter((request) => request._id !== requestId);
 		},
 		updateRequestData(state, action) {
 			const { requestData } = action.payload;
 			return state.map((request) => {
-				if (request.requestId === requestData._id) {
-					return { ...requestData, requestId: requestData._id };
+				if (request._id === requestData._id) {
+					return { ...requestData };
 				} else {
 					return request;
 				}
