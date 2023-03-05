@@ -2,6 +2,7 @@ import Navbar from "../Navbar/Navbar";
 import Bank from "./Bank";
 import HomeTable from "../Table/HomeTable";
 import DonorsMap from "../Map/DonorsMap";
+import Cards from "../Cards/Cards";
 
 const HomePage = () => {
 	return (
@@ -22,6 +23,9 @@ const HomePage = () => {
 				</div>
 			</div>
 			<Bank />
+			<Cards />
+			<Cards />
+
 			<HomeTable />
 			<DonorsMap />
 		</div>

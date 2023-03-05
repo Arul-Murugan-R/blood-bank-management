@@ -4,8 +4,8 @@
 	margin: 0;
 }
 .outer-circle {
-	width: 400px;
-	height: 400px;
+	width: 400px !important;
+	height: 400px !important;
 	border: 1px solid white;
 	border-radius: 50%;
 	position: relative;
