@@ -27,6 +27,7 @@ const Navbar = () => {
 	};
 
 	const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
+	const userRole = useSelector((state) => state.auth.role);
 
 	const pages = ["Search", "Donate", "Request", "About", "Contact"];
 	const settings = [
@@ -52,7 +53,6 @@ const Navbar = () => {
 			name: "Logout",
 			onClick: logoutUser,
 		},
-		"Dashboard",
 	];
 
 	const [anchorElNav, setAnchorElNav] = useState(null);
@@ -133,15 +133,31 @@ const Navbar = () => {
 							}}
 						>
 							{pages.map((page) => (
-								<MenuItem
+								<Button
 									key={page}
 									onClick={handleCloseNavMenu}
+									sx={{
+										my: 2,
+										color: "white",
+										display: "block",
+									}}
 								>
-									<Typography textAlign="center">
-										{page}
-									</Typography>
-								</MenuItem>
+									{page}
+								</Button>
 							))}
+							{userRole === "recipient" && (
+								<Button
+									key="Request Blood"
+									onClick={() => navigate("/request-blood")}
+									sx={{
+										my: 2,
+										color: "white",
+										display: "block",
+									}}
+								>
+									Request Blood
+								</Button>
+							)}
 						</Menu>
 					</Box>
 					<AdbIcon
@@ -180,6 +196,19 @@ const Navbar = () => {
 								{page}
 							</Button>
 						))}
+						{userRole === "recipient" && (
+							<Button
+								key="Request Blood"
+								onClick={() => navigate("/request-blood")}
+								sx={{
+									my: 2,
+									color: "white",
+									display: "block",
+								}}
+							>
+								Request Blood
+							</Button>
+						)}
 					</Box>
 
 					{!isLoggedIn && (

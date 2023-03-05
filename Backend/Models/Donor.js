@@ -58,4 +58,4 @@ const DonorInfoSchema = new Schema({
 	},
 });
 
-module.exports = mongoose.model("DonorInfo", DonorInfoSchema);
+module.exports = mongoose.model("Donor", DonorInfoSchema);

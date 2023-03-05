@@ -19,7 +19,9 @@ import CustomFormControl from "../UI/FormControl/CustomFormControl";
 import CustomRadioControl from "../UI/FormControl/CustomRadioControl";
 import Error from "../UI/Typography/Error";
 import classes from "./Profile.module.css";
-import { useselector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import axios from "axios";
+import { DonorDataActions } from "../../store/DonorData";
 
 /* 
 phone
@@ -36,6 +38,7 @@ weight
 */
 
 const allBloodGroups = ["A+", "A-", "B+", "B-", "AB+", "AB-", "O+", "O-"];
+const backendUrl = import.meta.env.VITE_BACKEND_URL;
 
 const UserDetailsForm = (props) => {
 	const navigate = useNavigate();
@@ -44,13 +47,15 @@ const UserDetailsForm = (props) => {
 		longitude: null,
 	});
 
-	const userId = useselector((state) => state.auth.userId);
+	const userId = useSelector((state) => state.auth.userId);
 
 	const [previousDonated, setPreviousDonated] = useState(false);
 
 	const [bloodGroup, setBloodGroup] = useState(null);
 
 	const [error, setError] = useState(null);
+
+	const dispatch = useDispatch();
 
 	const updatePreviousDonated = (value) => {
 		console.log(previousDonated);
@@ -139,30 +144,40 @@ const UserDetailsForm = (props) => {
 		phone.validities.isValid;
 
 	const SubmitDetails = async () => {
-		console.log(bloodGroup, antibiotics.properties.val);
-		if (!formIsValid) {
-			return setError("Please fill all the fields!");
+		try {
+			if (!formIsValid) {
+				return setError("Please fill all the fields!");
+			}
+
+			if (!location.latitude || !location.longitude) {
+				return setError("Please allow location access!");
+			}
+			setError(null);
+			const data = {
+				userId,
+				bloodGroup,
+				antibiotics: Boolean(+antibiotics.properties.value),
+				tattoos: Boolean(+tattoos.properties.value),
+				recentTravel: Boolean(+recentTravel.properties.value),
+				diseases: Boolean(+diseases.properties.value),
+				previousDonation: Boolean(+previousDonation.properties.value),
+				lastDonation: Boolean(+previousDonation.properties.value)
+					? lastDonation.properties.value
+					: null,
+				phone: phone.properties.value,
+				location,
+			};
+
+			const response = await axios.post(backendUrl + "/donor/insert", {
+				data,
+			});
+			if (response.status === 200)
+				return dispatch(
+					DonorDataActions.setDonorData({ donorData: data })
+				);
+		} catch (error) {
+			setError(error.response.data.message);
 		}
-
-		if (!location.latitude || !location.longitude) {
-			return setError("Please allow location access!");
-		}
-
-		setError(null);
-
-		const data = {
-			bloodGroup,
-			antibiotics: Boolean(+antibiotics.properties.value),
-			tattoos: Boolean(+tattoos.properties.value),
-			recentTravel: Boolean(+recentTravel.properties.value),
-			diseases: Boolean(+diseases.properties.value),
-			previousDonation: Boolean(+previousDonation.properties.value),
-			lastDonation: Boolean(+previousDonation.properties.value)
-				? lastDonation.properties.value
-				: null,
-			phone: phone.properties.value,
-			location,
-		};
 	};
 
 	return (

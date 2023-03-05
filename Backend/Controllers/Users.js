@@ -60,6 +60,7 @@ module.exports.loginUser = async (req, res, next) => {
 					userId: user._id,
 					expiresAt: expiry,
 					username: user.username,
+					role: user.role,
 				},
 			});
 		}
@@ -80,6 +81,7 @@ module.exports.verifyUser = async (req, res, next) => {
 			user: {
 				username: user.username,
 				userId: user._id,
+				role: user.role,
 			},
 		});
 	} catch (error) {

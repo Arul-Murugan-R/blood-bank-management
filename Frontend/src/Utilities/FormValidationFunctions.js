@@ -173,3 +173,26 @@ export const validateAge = (value) => {
 		message: "Only people between 18 and 60 years of age can donate blood",
 	};
 };
+
+export const validateRequestDate = (value) => {
+	const dateFormat = "YYYY-MM-DD"; // format of the date string
+	const today = moment(); // get today's date
+	const maxDate = moment().add(7, "days"); // get the date 7 days from now
+	const date = moment(value, dateFormat); // parse the input date string using the given format
+
+	// Check if the input date is valid and within the range of today and 7 days from now
+	const validity =
+		date.isValid() &&
+		date.isSameOrAfter(today, "day") &&
+		date.isSameOrBefore(maxDate, "day");
+	if (validity) {
+		return {
+			validity,
+			message: "Looks good!",
+		};
+	}
+	return {
+		validity,
+		message: "Dates within 7 days from today are allowed",
+	};
+};

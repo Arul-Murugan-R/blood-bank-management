@@ -20,6 +20,8 @@ import { useDispatch } from "react-redux";
 import { authActions } from "../../store/AuthStore";
 import CustomFormControl from "../UI/FormControl/CustomFormControl";
 
+const backendUrl = import.meta.env.VITE_BACKEND_URL;
+
 const LoginForm = () => {
 	const navigate = useNavigate();
 	const dispatch = useDispatch();
@@ -55,13 +57,10 @@ const LoginForm = () => {
 		}
 		try {
 			event.preventDefault();
-			const response = await axios.post(
-				"http://localhost:5000/user/login",
-				{
-					username: userField.properties.value,
-					password: passwordField.properties.value,
-				}
-			);
+			const response = await axios.post(backendUrl + "/user/login", {
+				username: userField.properties.value,
+				password: passwordField.properties.value,
+			});
 			const user = response.data.user;
 			dispatch(authActions.loginHandler({ user: user }));
 			userField.validities.reset();

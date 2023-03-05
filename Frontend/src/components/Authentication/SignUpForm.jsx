@@ -26,6 +26,8 @@ import { Link, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { authActions } from "../../store/AuthStore";
 
+const backendUrl = import.meta.env.VITE_BACKEND_URL;
+
 const SignUpForm = () => {
 	const navigate = useNavigate();
 	const dispatch = useDispatch();
@@ -89,16 +91,13 @@ const SignUpForm = () => {
 			return setRegistrationerror("Please fill all the fields");
 
 		try {
-			const response = await axios.post(
-				"http://localhost:5000/user/register",
-				{
-					username: userField.properties.value,
-					email: emailField.properties.value,
-					password: passwordField.properties.value,
-					role,
-					dob: role == "donor" ? dobField.properties.value : null,
-				}
-			);
+			const response = await axios.post(backendUrl + "/user/register", {
+				username: userField.properties.value,
+				email: emailField.properties.value,
+				password: passwordField.properties.value,
+				role,
+				dob: role == "donor" ? dobField.properties.value : null,
+			});
 			const user = response.data.user;
 			dispatch(authActions.loginHandler({ user: user }));
 			userField.validities.reset();

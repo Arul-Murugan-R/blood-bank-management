@@ -1,5 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
+import { DonorDataActions } from "./DonorData";
 
 const initialAuthState = {
 	isLoggedIn: false,
@@ -7,6 +8,7 @@ const initialAuthState = {
 	userId: null,
 	token: null,
 	expiresIn: 0,
+	role: null,
 };
 
 const base_url = import.meta.env.VITE_BACKEND_URL + "/user";
@@ -29,7 +31,7 @@ const AuthSlice = createSlice({
 			return { ...initialAuthState };
 		},
 		checkToken(state, action) {
-			const { userId, username, token } = action.payload;
+			const { userId, username, token, role } = action.payload;
 			const storedUserId = localStorage.getItem("userId");
 			const storedUsername = localStorage.getItem("username");
 			if (
@@ -43,6 +45,8 @@ const AuthSlice = createSlice({
 				userId: userId,
 				username: username,
 				token: token,
+				role,
+				expiresIn: +localStorage.getItem("expiresAt"),
 			};
 		},
 	},
@@ -61,10 +65,22 @@ export const verifyToken = () => {
 					const response = await axios.post(base_url + "/verify", {
 						token: token,
 					});
+					if (response.data.user.role === "donor") {
+						const donorDataResponse = await axios.get(
+							base_url + "/donor/" + response.data.user.userId
+						);
+						const donorData = donorDataResponse.data.donorData;
+						dispatch(
+							DonorDataActions.setDonorData({
+								donorData: donorData,
+							})
+						);
+					}
 					return {
 						userId: response.data.user.userId,
 						username: response.data.user.username,
 						token: token,
+						role: role,
 					};
 				} catch (error) {
 					return {

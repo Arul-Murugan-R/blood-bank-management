@@ -4,6 +4,8 @@ const mongoose = require("mongoose");
 
 const ExpressError = require("./utilities/ExpressError");
 const userRoutes = require("./Routes/User");
+const donorRoutes = require("./Routes/Donor");
+const requestRoutes = require("./Routes/Request");
 require("dotenv").config();
 app.use(express.json());
 
@@ -29,6 +31,8 @@ mongoose
 	});
 
 app.use("/user", userRoutes);
+app.use("/donor", donorRoutes);
+app.use("/request", requestRoutes);
 
 app.all("*", (req, res, next) => {
 	next(new ExpressError("Page not found", 404));

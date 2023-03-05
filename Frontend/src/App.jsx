@@ -51,8 +51,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { verifyToken } from "./store/AuthStore";
 import ProtectedRoute from "./ProtectedRoute";
-import { Provider } from "react-redux";
-import store from "./store/redux";
 import DonorDetailsForm from "./components/Profile/DonorDetailsForm";
 import Wrapper from "./components/Layout/Wrapper";
 import HomeTable from "./components/Table/HomeTable";
@@ -60,6 +58,7 @@ import Cards from "./components/Cards/Cards";
 import Bank from "./components/Home/Bank";
 import DonorsMap from "./components/Map/DonorsMap";
 import CircularCarousel from "./components/Home/CircularCarousel";
+import RequestBloodForm from "./components/Profile/RequestBloodForm";
 
 let initial = true;
 
@@ -122,6 +121,7 @@ function App() {
 				}
 			/>
 			<Route path="/donor-info" element={<DonorDetailsForm />} />
+			<Route path="/request-blood" element={<RequestBloodForm />} />
 		</Routes>
 	);
 }
