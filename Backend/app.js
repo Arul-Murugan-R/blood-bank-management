@@ -16,8 +16,10 @@ app.use((req, res, next) => {
 	next();
 });
 
+const url = process.env.DB_URL || "mongodb://localhost:27017/blood-bank";
+
 mongoose
-	.connect("mongodb://localhost:27017/blood-bank")
+	.connect(url)
 	.then(() => {
 		console.log("MONGO CONNECTION OPEN!!!");
 	})

@@ -22,13 +22,6 @@ const HomePage = () => {
 					</h1>
 				</div>
 			</div>
-			<Bank />
-			<Cards />
-			<Cards />
-
-			<HomeTable />
-			<DonorsMap />
-			<CircularCarousel />
 		</div>
 	);
 };

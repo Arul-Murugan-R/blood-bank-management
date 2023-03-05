@@ -19,6 +19,7 @@ import CustomFormControl from "../UI/FormControl/CustomFormControl";
 import CustomRadioControl from "../UI/FormControl/CustomRadioControl";
 import Error from "../UI/Typography/Error";
 import classes from "./Profile.module.css";
+import { useselector } from "react-redux";
 
 /* 
 phone
@@ -42,6 +43,8 @@ const UserDetailsForm = (props) => {
 		latitude: null,
 		longitude: null,
 	});
+
+	const userId = useselector((state) => state.auth.userId);
 
 	const [previousDonated, setPreviousDonated] = useState(false);
 
