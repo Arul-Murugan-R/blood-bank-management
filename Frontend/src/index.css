@@ -1,7 +1,17 @@
+/* :root{
+    --primary:#181918;
+    --secondary:#fe0130;
+    rgba(223, 64, 90, 1)
+} */
 body{
     margin:0;
     /* background: #18191A; */
     --bg-color:#1a1a1a;
     --red-color:#fe0130;
+    --doubt:rgba(223, 64, 90, 1);
     background: var(--bg-color);
 }
+
+/* h1,h2,h3,h4,content label{
+    color:rgba(223, 64, 90, 1) !important;
+} */

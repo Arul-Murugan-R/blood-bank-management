@@ -58,7 +58,30 @@
 	transition: all 1s ease-in;
 	transition-delay: 2s;
 }
-.intro .intro-text h1:hover::after {
+/* .intro .intro-text h1  {
+	width: 21.5ch;
+	white-space: nowrap;
+	overflow: hidden;
+	border-right: 4px solid #212121;
+	animation: cursor 1s step-start infinite, 
+    text 5s steps(18) alternate infinite;
+}
+
+@keyframes cursor {
+	0%, 100% { 
+    border-color: #212121; 
+  }
+}
+
+@keyframes text {
+	0% { 
+    width: 0; 
+  }
+	100% { 
+    width: 21.5ch; 
+  }
+} */
+/* .intro .intro-text h1:hover::after {
 	content: "DONATE BLOOD";
 	-webkit-text-stroke: 1px #fff;
 	font-family: "Times New Roman", Times, serif;
@@ -75,8 +98,7 @@
 	bottom: 50px;
 	right: 0;
 	color: transparent;
-	/* animation: text-shadow-pop-br 1s ease-out 1s forwards; */
-}
+} */
 
 .intro video {
 	/* width: 100vw; */
