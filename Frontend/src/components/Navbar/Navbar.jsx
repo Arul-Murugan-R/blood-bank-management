@@ -29,7 +29,7 @@ const Navbar = () => {
 	const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
 	const userRole = useSelector((state) => state.auth.role);
 
-	const pages = ["Search", "Donate", "Request", "About", "Contact"];
+	const pages = ["Search", "Donate", "About", "Contact"];
 	const settings = [
 		{
 			name: "Profile",
@@ -130,7 +130,7 @@ const Navbar = () => {
 							open={Boolean(anchorElNav)}
 							onClose={handleCloseNavMenu}
 							sx={{
-								display: { xs: "block", md: "none" },
+								display: { xs: "flex", md: "none" },
 							}}
 						>
 							{pages.map((page) => (
@@ -138,8 +138,7 @@ const Navbar = () => {
 									key={page}
 									onClick={handleCloseNavMenu}
 									sx={{
-										my: 2,
-										color: "white",
+										color: "black",
 										display: "block",
 									}}
 								>
@@ -152,7 +151,7 @@ const Navbar = () => {
 									onClick={() => navigate("/request-blood")}
 									sx={{
 										my: 2,
-										color: "white",
+										color: "black",
 										display: "block",
 									}}
 								>
