@@ -1,94 +1,45 @@
 import './Cards.css'
+import Card from './Card'
+const Cards = (props) => {
+    var details = {
+        // user:'Olaí Monteiro',
+        title:'Required B+ve',
+        req:'AB',
+        type:'request',
 
-const Cards = () => {
+    }
+    if(props.details.type=='availability'){
+        details = {
+            title:'Donars Available',
+        }
+        return (
+            <div class="user-list no-animation">
+            <Card details={details}>12200+</Card>
+            <Card details={details}>2000+</Card>
+            </div>
+        )
+    }
     return (
         <>
-            <div id="app" class="container">
-                <div class="user-list">
-                    <div class="user-item">
-                        <div class="user-item-card">
-                            <div class="user-item-media">
-                                <div class="media-top">
-                                    <img
-                                        src="https://tinypic.host/images/2023/02/21/pikrepo.com-2.jpg"
-                                        alt="Image"
-                                    />
-                                </div>
-                                <div class="media-name">
-                                    <p>Olaí Monteiro</p>
-                                </div>
-                            </div>
-                            <div class="content">
-                                <label>Business Card</label>
-                                <span>
-                                    Username:<span class="content-title">blueleopard527 </span>
-                                </span>
-                                <span
-                                >Email:
-                                    <span class="content-title"
-                                    >olai.monteiro@example.com</span
-                                    ></span
-                                >
-                                <span>City: <span class="content-title">Santos</span></span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="user-item">
-                        <div class="user-item-card">
-                            <div class="user-item-media">
-                                <div class="media-top">
-                                    <img
-                                        src="https://tinypic.host/images/2023/02/21/pikrepo.com-2.jpg"
-                                        alt="Image"
-                                    />
-                                </div>
-                                <div class="media-name">
-                                    <p>Orhan Roos</p>
-                                </div>
-                            </div>
-                            <div class="content">
-                                <label>Business Card</label>
+            <div class="container">
 
-                                <span
-                                >Username:
-                                    <span class="content-title">beautifulleopard418</span></span
-                                >
-                                <span
-                                >Email:
-                                    <span class="content-title">orhan.roos@example.com</span></span
-                                >
-                                <span>City: <span class="content-title">Oppenau</span></span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="user-item">
-                        <div class="user-item-card">
-                            <div class="user-item-media">
-                                <div class="media-top">
-                                    <img
-                                        src="https://tinypic.host/images/2023/02/21/pikrepo.com-2.jpg"
-                                        alt="Image"
-                                    />
-                                </div>
-                                <div class="media-name">
-                                    <p>Orhan Roos</p>
-                                </div>
-                            </div>
-                            <div class="content">
-                                <label>Business Card</label>
-
-                                <span
-                                >Username:
-                                    <span class="content-title">beautifulleopard418</span></span
-                                >
-                                <span
-                                >Email:
-                                    <span class="content-title">orhan.roos@example.com</span></span
-                                >
-                                <span>City: <span class="content-title">Oppenau</span></span>
-                            </div>
-                        </div>
-                    </div>
+                <div class={"user-list "+props.details.dir}>
+                    <Card details={details}>We are waiting for your call</Card>
+                    <Card details={details}>We are waiting for your call</Card>
+                    <Card details={details}>We are waiting for your call</Card>
+                    <Card details={details}>We are waiting for your call</Card>
+                    <Card details={details}>We are waiting for your call</Card>
+                    <Card details={details}>We are waiting for your call</Card>
+                    <Card details={details}>We are waiting for your call</Card>
+                    <Card details={details}>We are waiting for your call</Card>
+                    <Card details={details}>We are waiting for your call</Card>
+                    <Card details={details}>We are waiting for your call</Card>
+                    <Card details={details}>We are waiting for your call</Card>
+                    <Card details={details}>We are waiting for your call</Card>
+                    <Card details={details}>We are waiting for your call</Card>
+                    <Card details={details}>We are waiting for your call</Card>
+                    <Card details={details}>We are waiting for your call</Card>
+                    <Card details={details}>We are waiting for your call</Card>
                 </div>
             </div>
 

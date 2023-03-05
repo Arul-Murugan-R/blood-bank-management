@@ -6,8 +6,13 @@ import CircularCarousel from "./CircularCarousel";
 import Cards from "../Cards/Cards";
 
 const HomePage = () => {
+	const details = {
+		type:'availability',
+		count:2
+
+	}
 	return (
-		<div>
+		<>
 			<div className="intro">
 				<video
 					src="homepagegif.mp4"
@@ -22,7 +27,10 @@ const HomePage = () => {
 					</h1>
 				</div>
 			</div>
-		</div>
+			<Cards details={details}/>
+			<Cards details={{dir:'reverse',type:''}}/>
+			<Cards details={{type:''}}/>
+		</>
 	);
 };
 
