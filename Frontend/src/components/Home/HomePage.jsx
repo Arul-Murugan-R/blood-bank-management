@@ -8,7 +8,6 @@ import Cards from "../Cards/Cards";
 const HomePage = () => {
 	return (
 		<div>
-			<Navbar />
 			<div className="intro">
 				<video
 					src="homepagegif.mp4"
@@ -29,7 +28,7 @@ const HomePage = () => {
 
 			<HomeTable />
 			<DonorsMap />
-			{/* <CircularCarousel /> */}
+			<CircularCarousel />
 		</div>
 	);
 };

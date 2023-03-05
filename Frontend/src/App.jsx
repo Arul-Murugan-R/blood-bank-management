@@ -54,6 +54,12 @@ import ProtectedRoute from "./ProtectedRoute";
 import { Provider } from "react-redux";
 import store from "./store/redux";
 import DonorDetailsForm from "./components/Profile/DonorDetailsForm";
+import Wrapper from "./components/Layout/Wrapper";
+import HomeTable from "./components/Table/HomeTable";
+import Cards from "./components/Cards/Cards";
+import Bank from "./components/Home/Bank";
+import DonorsMap from "./components/Map/DonorsMap";
+import CircularCarousel from "./components/Home/CircularCarousel";
 
 let initial = true;
 
@@ -72,7 +78,33 @@ function App() {
 
 	return (
 		<Routes>
-			<Route path="/" element={<HomePage />} />
+			<Route
+				path="/"
+				element={
+					<Wrapper>
+						<HomePage />
+					</Wrapper>
+				}
+			/>
+			<Route
+				path="/search"
+				element={
+					<Wrapper>
+						<HomeTable />
+					</Wrapper>
+				}
+			/>
+			<Route
+				path="/rest"
+				element={
+					<Wrapper>
+						<Cards />
+						<Bank />
+						<DonorsMap />
+						<CircularCarousel />
+					</Wrapper>
+				}
+			/>
 			<Route
 				path="/register"
 				element={
