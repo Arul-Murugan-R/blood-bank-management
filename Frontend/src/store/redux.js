@@ -1,11 +1,13 @@
 import { configureStore } from "@reduxjs/toolkit";
 import { authReducers } from "./AuthStore";
 import { DonorDataReducers } from "./DonorData";
+import { RequestDataReducers } from "./RequestStore";
 
 const store = configureStore({
 	reducer: {
 		auth: authReducers,
-		donordata: DonorDataReducers,
+		donorData: DonorDataReducers,
+		requestData: RequestDataReducers,
 	},
 });
 

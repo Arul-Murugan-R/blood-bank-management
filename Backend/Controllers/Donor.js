@@ -46,7 +46,7 @@ module.exports.getDonorDetails = async (req, res, next) => {
 		const donor = await Donor.findOne({ userId: userId });
 		return res.status(200).json({
 			message: "Donor data fetched successfully",
-			donordata: donor,
+			donorData: donor,
 		});
 	} catch (e) {
 		return res.status(401).json({

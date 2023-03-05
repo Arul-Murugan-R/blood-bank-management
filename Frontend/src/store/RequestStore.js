@@ -22,7 +22,6 @@ const RequestDataSlice = createSlice({
 		},
 		addRequestData(state, action) {
 			const { requestData } = action.payload;
-			console.log(requestData);
 			return [...state, { ...requestData, requestId: requestData._id }];
 		},
 		deleteRequestData(state, action) {

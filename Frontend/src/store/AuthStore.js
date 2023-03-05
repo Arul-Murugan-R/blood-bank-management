@@ -1,6 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
 import { DonorDataActions } from "./DonorData";
+import { RequestDataActions } from "./RequestStore";
 
 const initialAuthState = {
 	isLoggedIn: false,
@@ -11,7 +12,7 @@ const initialAuthState = {
 	role: null,
 };
 
-const base_url = import.meta.env.VITE_BACKEND_URL + "/user";
+const base_url = import.meta.env.VITE_BACKEND_URL;
 
 const AuthSlice = createSlice({
 	name: "Authentication",
@@ -62,9 +63,12 @@ export const verifyToken = () => {
 			const expiresAt = localStorage.getItem("expiresAt");
 			if (+expiresAt > Date.now()) {
 				try {
-					const response = await axios.post(base_url + "/verify", {
-						token: token,
-					});
+					const response = await axios.post(
+						base_url + "/user/verify",
+						{
+							token: token,
+						}
+					);
 					if (response.data.user.role === "donor") {
 						const donorDataResponse = await axios.get(
 							base_url + "/donor/" + response.data.user.userId
@@ -76,7 +80,19 @@ export const verifyToken = () => {
 							})
 						);
 					}
-					console.log(response);
+					const requestData = await axios.get(
+						base_url + "/request/all"
+					);
+					if (
+						requestData.status === 200 &&
+						requestData.data.requests.length > 0
+					)
+						dispatch(
+							RequestDataActions.setRequestsData({
+								requestsData: requestData.data.requests,
+							})
+						);
+
 					return {
 						userId: response.data.user.userId,
 						username: response.data.user.username,
@@ -97,7 +113,6 @@ export const verifyToken = () => {
 		};
 
 		const verificationResult = await verifier();
-		console.log(verificationResult);
 		dispatch(authActions.checkToken({ ...verificationResult }));
 	};
 };

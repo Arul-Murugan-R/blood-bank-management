@@ -58,6 +58,7 @@ module.exports.getRequestDetails = async (req, res, next) => {
 module.exports.getAllRequests = async (req, res, next) => {
 	try {
 		const requests = await Request.find({});
+		console.log(requests);
 		return res.status(200).json({
 			message: "Requests fetched successfully",
 			requests: requests,
