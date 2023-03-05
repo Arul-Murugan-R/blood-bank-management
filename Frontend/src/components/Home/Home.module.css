@@ -4,11 +4,13 @@
 	margin: 0;
 }
 .outer-circle {
-	width: 400px;
-	height: 400px;
+	width: 400px !important;
+	height: 400px !important;
 	border: 1px solid white;
 	border-radius: 50%;
-	transform: translate(450px, 100px);
+	position: relative;
+	left: 5%;
+	top: 10%;
 	/* position: absolute; */
 }
 .inner-circle {

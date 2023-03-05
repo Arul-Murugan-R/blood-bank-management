@@ -9,6 +9,7 @@ import {
 	Select,
 	MenuItem,
 	FormControl,
+	Typography,
 } from "@mui/material";
 import { useState } from "react";
 import {
@@ -110,22 +111,78 @@ const SignUpForm = () => {
 	};
 
 	return (
-		<Card className={classes.card} sx={{ backgroundColor: "#850E35" }}>
-			<CardMedia
-				className={classes.cardMedia}
-				component="img"
-				image="/assets/signUp.gif"
-				alt="green iguana"
-			/>
-			<CardContent>
-				<form
-					id="signUp-Form"
-					style={{
-						backgroundColor: "white",
-						borderRadius: "5px",
-						padding: "10px 5px",
+		<div className={classes.form}>
+			<Card className={classes.card} sx={{ backgroundColor: "#850E35" }}>
+			<Link
+				to="/"
+				style={{color:'white',textDecoration:'none',fontFamily: "monospace",fontWeight:'700',}}
+				>
+				{"< Home"}
+			</Link>
+				<CardMedia
+					className={classes.cardMedia}
+					component="img"
+					image="/assets/signUp.gif"
+					alt="green iguana"
+				/>
+				<CardContent className={classes.CardContent}>
+					<form
+						id="signUp-Form"
+						style={{
+							backgroundColor: "white",
+							borderRadius: "5px",
+							padding: "10px 5px",
+						}}
+					>
+						{registrationError && <Error message={registrationError} />}
+						<CustomFormControl
+							field={userField}
+							IconBtnProps={{ disabled: true }}
+							icon="AccountCircle"
+						/>
+						<CustomFormControl
+							field={emailField}
+							IconBtnProps={{ disabled: true }}
+							icon="Email"
+						/>
+						<CustomFormControl
+							field={passwordField}
+							IconBtnProps={{
+								onClick: handleClickShowPassword,
+								onMouseDown: handleMouseDownPassword,
+								disabled:
+									passwordField.properties.value.length === 0,
+							}}
+							icon={showPassword ? "VisibilityOff" : "Visibility"}
+							type={showPassword ? "text" : "password"}
+						/>
+						<FormControl
+							fullWidth
+							sx={{ backgroundColor: "white", borderRadius: "5px" }}
+						>
+							<InputLabel id="role-select-label">Role</InputLabel>
+							<Select
+								labelId="role-select-label"
+								id="demo-simple-select"
+								value={role || ""}
+								label="Role"
+								onChange={(event) =>
+									setRole((prev) => event.target.value)
+								}
+							>
+								<MenuItem value={"donor"}>Donor</MenuItem>
+								<MenuItem value={"recipient"}>Recipient</MenuItem>
+							</Select>
+						</FormControl>
+					</form>
+				</CardContent>
+				<CardActions
+					sx={{
+						justifyContent: "space-evenly",
+						flexWrap: "wrap",
 					}}
 				>
+<<<<<<< HEAD
 					{registrationError && <Error message={registrationError} />}
 					<CustomFormControl
 						field={userField}
@@ -190,6 +247,17 @@ const SignUpForm = () => {
 				</Link>
 			</CardActions>
 		</Card>
+=======
+					<Button variant="contained" fullWidth onClick={registerUser}>
+						Sign Up
+					</Button>
+					<Link to="/login" className={classes.authLink}>
+						Already a member? Login
+					</Link>
+				</CardActions>
+			</Card>
+		</div>
+>>>>>>> fd79d0a089a3f0ce1e3fc5374bd9f3c540b3c565
 	);
 };
 

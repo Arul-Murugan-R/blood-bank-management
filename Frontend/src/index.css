@@ -1,0 +1,7 @@
+body{
+    margin:0;
+    /* background: #18191A; */
+    --bg-color:#1a1a1a;
+    --red-color:#fe0130;
+    background: var(--bg-color);
+}

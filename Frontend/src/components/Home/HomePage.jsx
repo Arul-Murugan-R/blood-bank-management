@@ -3,6 +3,7 @@ import Bank from "./Bank";
 import HomeTable from "../Table/HomeTable";
 import DonorsMap from "../Map/DonorsMap";
 import CircularCarousel from "./CircularCarousel";
+import Cards from "../Cards/Cards";
 
 const HomePage = () => {
 	return (
@@ -23,6 +24,9 @@ const HomePage = () => {
 				</div>
 			</div>
 			<Bank />
+			<Cards />
+			<Cards />
+
 			<HomeTable />
 			<DonorsMap />
 			{/* <CircularCarousel /> */}
