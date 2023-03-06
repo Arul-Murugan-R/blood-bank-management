@@ -1,0 +1,83 @@
+.wrapper-desc{
+    display: flex;
+    /* border: 1px solid var(--doubt); */
+    padding:40px 20px;
+    margin:20px;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    grid-template-columns: 1fr 1fr;
+
+}
+.circ-cont {
+    display: grid;
+    /* grid-template-areas: stack; */
+  /*   animation: animation 8s linear infinite;  */
+  border:1px solid var(--doubt);
+  width:370px;
+  height: 370px;
+    border-radius: 50%;
+    margin-left: 50px ;
+    position: relative;
+  }
+  .inner-circle{
+    width:70%;
+    height:70%;
+    border-radius: 50%;
+    background-color: var(--doubt);
+    border: 1px solid var(--doubt);
+    position: absolute;
+    top:50%;
+    left:50%;
+    transform: translate(-50%,-50%);
+    text-align: center;
+    color:white;
+    display: grid;
+    place-items: center;
+    font-size: 30px;
+  }
+  
+  .circ-cont img, .circ-cont .bloods {
+    width: 50px;
+    height: 50px;
+    object-fit: cover;
+    border-radius: 50%;
+    grid-area: stack;
+    --n-angle: calc(-1 * var(--angle));
+    transform: rotate(var(--angle)) translateX(180px) rotate(var(--n-angle));
+  }
+  .bloods{
+    width:50px;
+    height:50px;
+    text-align: center;
+    background-color: var(--doubt);
+    color:white;
+    border-radius: 50%;
+    display: grid;
+    place-items: center;
+    justify-content: center
+    
+}
+.bloods label{
+    text-align: center;
+    font-weight: bold;
+    
+}
+.catchy {
+  padding: 0;
+}
+.catchy .heading{
+  font-family: "Times New Roman", Times, serif;
+    font-size: 60px;
+    letter-spacing: 10px;
+    word-spacing: 0.2px;
+    color: white;
+}
+.catchy b{
+  color: var(--doubt);
+}
+
+  @keyframes animation {
+    to {
+      transform: rotate(360deg);
+    }
+  }

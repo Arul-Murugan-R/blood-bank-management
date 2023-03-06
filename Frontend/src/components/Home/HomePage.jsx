@@ -4,6 +4,7 @@ import HomeTable from "../Table/HomeTable";
 import DonorsMap from "../Map/DonorsMap";
 import CircularCarousel from "./CircularCarousel";
 import Cards from "../Cards/Cards";
+import CircularDesc from "../CircularDesc/CircularDesc";
 
 const HomePage = () => {
 	const details = {
@@ -25,9 +26,11 @@ const HomePage = () => {
 					<h1>
 						<br /> Donate Blood<br></br>
 					</h1>
+					<label className="quote">Donating blood is like giving a part of yourself to save someone else's life. Be a hero, donate blood!</label>
 				</div>
 			</div>
 			<Cards details={details}/>
+			<CircularDesc/>
 			<Cards details={{dir:'reverse',type:''}}/>
 			<Cards details={{type:''}}/>
 		</>

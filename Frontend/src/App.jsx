@@ -59,6 +59,7 @@ import Bank from "./components/Home/Bank";
 import DonorsMap from "./components/Map/DonorsMap";
 import CircularCarousel from "./components/Home/CircularCarousel";
 import RequestBloodForm from "./components/Profile/RequestBloodForm";
+import CircularDesc from "./components/CircularDesc/CircularDesc";
 
 let initial = true;
 
@@ -97,10 +98,8 @@ function App() {
 				path="/rest"
 				element={
 					<Wrapper>
-						<Cards />
-						<Bank />
+						<CircularDesc/>
 						<DonorsMap />
-						<CircularCarousel />
 					</Wrapper>
 				}
 			/>
