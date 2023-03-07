@@ -9,7 +9,7 @@ body {
 	--bg-color: #1a1a1a;
 	--red-color: #fe0130;
 	/* --doubt:rgba(223, 64, 90, 1); */
-	--doubt: #b51e23;
+	--doubt: rgb(181, 30, 35);
 	background: var(--bg-color);
 }
 ::-webkit-scrollbar {

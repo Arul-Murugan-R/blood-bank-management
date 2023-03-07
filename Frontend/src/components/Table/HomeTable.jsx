@@ -8,54 +8,71 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import TablePagination from "@mui/material/TablePagination";
+import TableFilterCus from "./TableFilter";
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
 	[`&.${tableCellClasses.head}`]: {
-		backgroundColor: theme.palette.common.black,
-		color: theme.palette.common.white,
+		backgroundColor: '#2a3338',
+		fontWeight: 'bold',
+		fontSize: 16,
+		letterSpacing: 1,
+		textAlign:'center',
+		fontFamily: 'Salsa',
+		color:'rgb(181, 30, 35)',
+		border:0
 	},
 	[`&.${tableCellClasses.body}`]: {
+		// backgroundColor: 'rgb(48, 48, 48)',
+		backgroundColor: '#2a3338',
+		color: 'white',
 		fontSize: 14,
+		textAlign:'center',
 	},
 }));
 
 const StyledTableRow = styled(TableRow)(({ theme }) => ({
+	"&:hover": {
+		cursor: "pointer",
+	},
 	"&:nth-of-type(odd)": {
 		backgroundColor: theme.palette.action.hover,
 	},
 	// hide last border
+	"th,td ":{
+		border: "1px solid rgb(181, 30, 35)",
+	},
 	"&:last-child td, &:last-child th": {
-		border: 0,
+		border: "1px solid rgb(181, 30, 35)",
 	},
 }));
 
-function createData(name, group, age, number, address, email) {
-	return { name, group, age, number, address, email };
+function createData(name, group, age, number, state, email) {
+	return { name, group, age, number, state, email };
 }
 
 const rows = [
-	createData("Ajay", "AB+ve", 25, 9876543210, "Delhi", "ajay123@gmail.com"),
-	createData("Rahul", "O+ve", 23, 9876543210, "Delhi", "rahul23@email.com"),
-	createData("Raj", "B+ve", 21, 9876543210, "Delhi", "rajkumar@yahoo.com"),
+	createData("Ajay", "AB+ve", 25, 9876543210, "Tamil Nadu", "ajay123@gmail.com"),
+	createData("Rahul", "O+ve", 23, 9876543210, "Tamil Nadu", "rahul23@email.com"),
+	createData("Raj", "B+ve", 21, 9876543210, "Tamil Nadu", "rajkumar@yahoo.com"),
 	createData(
 		"Ravi",
 		"A+ve",
 		22,
 		9876543210,
-		"Delhi",
+		"Tamil Nadu",
 		"raviprasth2541@gmail.com"
 	),
-	createData("Rajesh", "AB+ve", 24, 9876543210, "Delhi", "rajesh@co.in"),
-	createData("Rajat", "O+ve", 25, 9876543210, "Delhi", ""),
-	createData("Rajeev", "B+ve", 23, 9876543210, "Delhi", ""),
-	createData("Rajkumar", "A+ve", 22, 9876543210, "Delhi", ""),
-	createData("lalit", "O+ve", 25, 9876543210, "Delhi", ""),
-	createData("monu", "B+ve", 23, 9876543210, "Delhi", ""),
-	createData("lucky", "A+ve", 22, 9876543210, "Delhi", ""),
-	createData("cr7", "A-ve", 45, 9876543210, "Delhi", ""),
-	createData("messi", "B-ve", 45, 9876543210, "Delhi", ""),
-	createData("ronaldo", "O-ve", 45, 9876543210, "Delhi", ""),
-	createData("neymar", "AB-ve", 45, 9876543210, "Delhi", ""),
+	createData("Rajesh", "AB+ve", 24, 9876543210, "Tamil Nadu", "rajesh@co.in"),
+	createData("Rajat", "O+ve", 25, 9876543210, "Tamil Nadu", ""),
+	createData("Rajeev", "B+ve", 23, 9876543210, "Tamil Nadu", ""),
+	createData("Rajkumar", "A+ve", 22, 9876543210, "Tamil Nadu", ""),
+	createData("lalit", "O+ve", 25, 9876543210, "Tamil Nadu", ""),
+	createData("monu", "B+ve", 23, 9876543210, "Tamil Nadu", ""),
+	createData("lucky", "A+ve", 22, 9876543210, "Tamil Nadu", ""),
+	createData("cr7", "A-ve", 45, 9876543210, "Tamil Nadu", ""),
+	createData("messi", "B-ve", 45, 9876543210, "Tamil Nadu", ""),
+	createData("ronaldo", "O-ve", 45, 9876543210, "Tamil Nadu", ""),
+	createData("neymar", "AB-ve", 45, 9876543210, "Tamil Nadu", ""),
 ].sort((a, b) => (a.name < b.name ? -1 : 1));
 
 export default function HomeTable() {
@@ -73,31 +90,32 @@ export default function HomeTable() {
 
 	return (
 		<>
+			<TableFilterCus />
 			<TableContainer
 				component={Paper}
 				sx={{
-					marginTop: "100px",
-					height: "640px auto",
-					overflow: "auto",
+					mt:2,
+					mb:2,
+					maxHeight:'660px',
 				}}
 			>
-				<Table aria-label="customized table" stickyHeader>
+				<Table aria-label="customized table" stickyHeader style={{borderRadius:'10px'}}>
 					<TableHead>
 						<TableRow>
 							<StyledTableCell>Donor Name</StyledTableCell>
-							<StyledTableCell align="right">
+							<StyledTableCell >
 								Blood Group
 							</StyledTableCell>
-							<StyledTableCell align="right">
+							<StyledTableCell >
+								State&nbsp;
+							</StyledTableCell>
+							<StyledTableCell >
 								Age&nbsp;
 							</StyledTableCell>
-							<StyledTableCell align="right">
+							<StyledTableCell >
 								Phone No&nbsp;
 							</StyledTableCell>
-							<StyledTableCell align="right">
-								Address&nbsp;
-							</StyledTableCell>
-							<StyledTableCell align="right">
+							<StyledTableCell >
 								Email Id&nbsp;
 							</StyledTableCell>
 						</TableRow>
@@ -113,26 +131,26 @@ export default function HomeTable() {
 									<StyledTableCell component="th" scope="row">
 										{row.name}
 									</StyledTableCell>
-									<StyledTableCell align="right">
+									<StyledTableCell >
 										{row.group}
 									</StyledTableCell>
-									<StyledTableCell align="right">
+									<StyledTableCell >
+										{row.state}
+									</StyledTableCell>
+									<StyledTableCell >
 										{row.age}
 									</StyledTableCell>
-									<StyledTableCell align="right">
+									<StyledTableCell >
 										{row.number}
 									</StyledTableCell>
-									<StyledTableCell align="right">
-										{row.address}
-									</StyledTableCell>
-									<StyledTableCell align="right">
+									<StyledTableCell >
 										{row.email}&nbsp;
 									</StyledTableCell>
 								</StyledTableRow>
 							))}
 					</TableBody>
 				</Table>
-				<TablePagination
+				<TablePagination style={{backgroundColor:'#2a3338',color:'white'}}
 					rowsPerPageOptions={[10, 25, 100]}
 					component="div"
 					count={rows.length}
