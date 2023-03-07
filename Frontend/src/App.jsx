@@ -94,11 +94,12 @@ function App() {
 					</Wrapper>
 				}
 			/>
+			<Route path="/donor-info" element={<DonorDetailsForm />} />
 			<Route
 				path="/rest"
 				element={
 					<Wrapper>
-						<CircularDesc/>
+						<CircularDesc />
 						<DonorsMap />
 					</Wrapper>
 				}
@@ -119,7 +120,6 @@ function App() {
 					</ProtectedRoute>
 				}
 			/>
-			<Route path="/donor-info" element={<DonorDetailsForm />} />
 			<Route path="/request-blood" element={<RequestBloodForm />} />
 		</Routes>
 	);
