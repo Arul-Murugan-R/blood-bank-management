@@ -77,7 +77,9 @@ const RequestBloodForm = () => {
 			});
 			if (response.status === 200) {
 				console.log(response.data.data);
-				dispatch(RequestDataActions.addRequestData(response.data.data));
+				await dispatch(
+					RequestDataActions.addRequestData(response.data.data)
+				);
 				return navigate("/");
 			}
 		} catch (error) {
