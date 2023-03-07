@@ -19,7 +19,6 @@ const DonorInfoSchema = new Schema({
 	tattoo: {
 		type: Boolean,
 		required: true,
-		unique: true,
 	},
 	recentTravel: {
 		type: Boolean,
