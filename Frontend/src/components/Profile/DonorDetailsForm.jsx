@@ -65,7 +65,6 @@ const UserDetailsForm = (props) => {
 		navigator.geolocation.getCurrentPosition((position) => {
 			const { latitude, longitude } = position.coords;
 			setLocation({ latitude, longitude });
-			console.log(latitude, longitude);
 		});
 	}, []);
 
@@ -139,7 +138,8 @@ const UserDetailsForm = (props) => {
 		recentTravel.validities.isValid &&
 		diseases.validities.isValid &&
 		previousDonation.validities.isValid &&
-		(!previousDonated || lastDonation.validities.isValid) &&
+		(!+previousDonation.properties.value ||
+			lastDonation.validities.isValid) &&
 		phone.validities.isValid;
 
 	const SubmitDetails = async () => {
