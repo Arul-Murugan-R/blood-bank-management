@@ -11,7 +11,7 @@ import { Button } from "@mui/material";
 import TextField from '@mui/material/TextField';
 import MenuItem from '@mui/material/MenuItem';
 
-const doubt = 'rgb(181, 30, 35)';
+const doubt = 'red';
 
 const Blood = [
 	{
@@ -223,9 +223,11 @@ export default function TableFilterCus() {
 				</Table>
 			</TableContainer>
 			<center>
-				<Button variant="contained" sx={{
+				<Button  sx={{width:'200px',
 					mt: 2, mb: 2, ml: 2, color: doubt, border: '1px solid rgb(181, 30, 35)',
-					background: 'transparent', transition: 'all 0.5 linear', "&:hover": { backgroundColor: doubt, color: 'white' }
+					background: 'transparent', transition: 'all 0.5 linear',cursor:'pointer', "&:hover": { backgroundColor: doubt, color: 'white',
+			
+				}
 				}}>Filter</Button>
 			</center>
 		</>
