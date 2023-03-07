@@ -71,7 +71,9 @@ export const verifyToken = () => {
 					);
 					if (response.data.user.role === "donor") {
 						const donorDataResponse = await axios.get(
-							base_url + "/donor/" + response.data.user.userId
+							base_url +
+								"/donor/get-info/" +
+								response.data.user.userId
 						);
 						const donorData = donorDataResponse.data.donorData;
 						dispatch(
@@ -100,16 +102,23 @@ export const verifyToken = () => {
 						role: response.data.user.role,
 					};
 				} catch (error) {
+					localStorage.removeItem("token");
+					localStorage.removeItem("expiresAt");
+					localStorage.removeItem("userId");
 					return {
 						userId: null,
 						username: null,
 					};
 				}
-			} else
+			} else {
+				localStorage.removeItem("token");
+				localStorage.removeItem("expiresAt");
+				localStorage.removeItem("userId");
 				return {
 					userId: null,
 					username: null,
 				};
+			}
 		};
 
 		const verificationResult = await verifier();

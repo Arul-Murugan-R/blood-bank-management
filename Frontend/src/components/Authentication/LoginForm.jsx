@@ -62,7 +62,7 @@ const LoginForm = () => {
 				password: passwordField.properties.value,
 			});
 			const user = response.data.user;
-			dispatch(authActions.loginHandler({ user: user }));
+			await dispatch(authActions.loginHandler({ user: user }));
 			userField.validities.reset();
 			passwordField.validities.reset();
 			return navigate(-1);

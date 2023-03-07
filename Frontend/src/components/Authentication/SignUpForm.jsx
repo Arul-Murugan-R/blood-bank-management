@@ -22,7 +22,7 @@ import useInput from "../../Hooks/use-input";
 import CustomFormControl from "../UI/FormControl/CustomFormControl";
 import axios from "axios";
 import Error from "../UI/Typography/Error";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, redirect, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { authActions } from "../../store/AuthStore";
 
@@ -80,15 +80,15 @@ const SignUpForm = () => {
 	const handleMouseDownPassword = (event) => event.preventDefault();
 
 	const registerUser = async () => {
-		if (!dobField.validities.isValid && role == "donor") {
-			dobField.validities.reset();
-			return setRegistrationerror(
-				"Only people between 18 and 60 years of age can donate blood"
-			);
-		}
+		// if (!dobField.validities.isValid && role == "donor") {
+		// 	dobField.validities.reset();
+		// 	return setRegistrationerror(
+		// 		"Only people between 18 and 60 years of age can donate blood"
+		// 	);
+		// }
 
-		if (!formIsValid)
-			return setRegistrationerror("Please fill all the fields");
+		// if (!formIsValid)
+		// 	return setRegistrationerror("Please fill all the fields");
 
 		try {
 			const response = await axios.post(backendUrl + "/user/register", {
@@ -98,12 +98,14 @@ const SignUpForm = () => {
 				role,
 				dob: role == "donor" ? dobField.properties.value : null,
 			});
+			navigate("/rest");
+
 			const user = response.data.user;
-			dispatch(authActions.loginHandler({ user: user }));
+			await dispatch(authActions.loginHandler({ user: user }));
 			userField.validities.reset();
 			emailField.validities.reset();
 			passwordField.validities.reset();
-			return navigate("/donor-info");
+			role === "donor" ? navigate("/donor-info") : navigate("/");
 		} catch (error) {
 			setRegistrationerror(error.response.data.message);
 		}

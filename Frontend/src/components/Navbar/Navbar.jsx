@@ -16,6 +16,8 @@ import { Link, Navigate, useNavigate } from "react-router-dom";
 import { authActions } from "../../store/AuthStore";
 import { useEffect, useState } from "react";
 import classes from "./Navbar.module.css";
+import { RequestDataActions } from "../../store/RequestStore";
+import { DonorDataActions } from "../../store/DonorData";
 
 const Navbar = () => {
 	const dispatch = useDispatch();
@@ -23,6 +25,7 @@ const Navbar = () => {
 
 	const logoutUser = () => {
 		dispatch(authActions.logoutHandler());
+		dispatch(DonorDataActions.clearDonorData());
 		return <Navigate to="/" replace />;
 	};
 
@@ -145,7 +148,7 @@ const Navbar = () => {
 									{page}
 								</Button>
 							))}
-							{userRole === "recipient" && (
+							{isLoggedIn && (
 								<Button
 									key="Request Blood"
 									onClick={() => navigate("/request-blood")}
@@ -196,7 +199,7 @@ const Navbar = () => {
 								{page}
 							</Button>
 						))}
-						{userRole === "recipient" && (
+						{isLoggedIn && (
 							<Button
 								key="Request Blood"
 								onClick={() => navigate("/request-blood")}
@@ -235,10 +238,7 @@ const Navbar = () => {
 									onClick={handleOpenUserMenu}
 									sx={{ p: 0 }}
 								>
-									<Avatar
-										alt="Remy Sharp"
-										src="/static/images/avatar/2.jpg"
-									/>
+									<Avatar alt="Remy Sharp" />
 								</IconButton>
 							</Tooltip>
 							<Menu

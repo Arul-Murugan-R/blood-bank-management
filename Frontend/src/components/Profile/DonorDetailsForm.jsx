@@ -10,7 +10,6 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import useInput from "../../Hooks/use-input";
 import {
-	validateAge,
 	validateLastDonationDate,
 	validatePhoneNumber,
 	validateYesNo,
@@ -157,31 +156,36 @@ const UserDetailsForm = (props) => {
 				userId,
 				bloodGroup,
 				antibiotics: Boolean(+antibiotics.properties.value),
-				tattoos: Boolean(+tattoos.properties.value),
+				tattoo: Boolean(+tattoos.properties.value),
 				recentTravel: Boolean(+recentTravel.properties.value),
 				diseases: Boolean(+diseases.properties.value),
 				previousDonation: Boolean(+previousDonation.properties.value),
 				lastDonation: Boolean(+previousDonation.properties.value)
 					? lastDonation.properties.value
 					: null,
-				phone: phone.properties.value,
+				mobilenumber: phone.properties.value,
 				location,
 			};
 
 			const response = await axios.post(backendUrl + "/donor/insert", {
 				data,
 			});
-			if (response.status === 200)
-				return dispatch(
+			if (response.status === 200) {
+				await dispatch(
 					DonorDataActions.setDonorData({ donorData: data })
 				);
+				navigate("/");
+			}
 		} catch (error) {
 			setError(error.response.data.message);
 		}
 	};
 
 	return (
-		<Container sx={{}} maxWidth="lg">
+		<Container
+			sx={{ backgroundColor: "white", my: 4, borderRadius: 2, pt: 1 }}
+			maxWidth="lg"
+		>
 			<div className={classes.formContainer}>
 				<form className={classes.form}>
 					{error && <Error message={error} />}
@@ -227,7 +231,7 @@ const UserDetailsForm = (props) => {
 					<Button
 						variant="contained"
 						color={"error"}
-						sx={{ mt: 2 }}
+						sx={{ my: 2 }}
 						onClick={SubmitDetails}
 					>
 						Submit
