@@ -38,7 +38,6 @@ const DonorInfoSchema = new Schema({
 	},
 	lastDonation: {
 		type: Date,
-		required: true,
 	},
 	location: {
 		type: {

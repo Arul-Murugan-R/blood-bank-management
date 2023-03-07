@@ -65,7 +65,6 @@ const UserDetailsForm = (props) => {
 		navigator.geolocation.getCurrentPosition((position) => {
 			const { latitude, longitude } = position.coords;
 			setLocation({ latitude, longitude });
-			console.log(latitude, longitude);
 		});
 	}, []);
 
@@ -89,7 +88,7 @@ const UserDetailsForm = (props) => {
 	const previousDonation = useInput(
 		{
 			type: "radio",
-			label: "Have you donated blood before?",
+			label: "Have you donated blood before?(in the last 6 months)",
 			name: "previousDonation",
 		},
 		validateYesNo,
@@ -139,7 +138,8 @@ const UserDetailsForm = (props) => {
 		recentTravel.validities.isValid &&
 		diseases.validities.isValid &&
 		previousDonation.validities.isValid &&
-		(!previousDonated || lastDonation.validities.isValid) &&
+		(!+previousDonation.properties.value ||
+			lastDonation.validities.isValid) &&
 		phone.validities.isValid;
 
 	const SubmitDetails = async () => {
