@@ -88,7 +88,7 @@ const UserDetailsForm = (props) => {
 	const previousDonation = useInput(
 		{
 			type: "radio",
-			label: "Have you donated blood before?",
+			label: "Have you donated blood before?(in the last 6 months)",
 			name: "previousDonation",
 		},
 		validateYesNo,
