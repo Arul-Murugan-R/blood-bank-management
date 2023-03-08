@@ -7,11 +7,6 @@ import Cards from "../Cards/Cards";
 import CircularDesc from "../CircularDesc/CircularDesc";
 
 const HomePage = () => {
-	const details = {
-		type:'availability',
-		count:2
-
-	}
 	return (
 		<>
 			<div className="intro">
@@ -29,10 +24,10 @@ const HomePage = () => {
 					<label className="quote">Donating blood is like giving a part of yourself to save someone else's life. Be a hero, donate blood!</label>
 				</div>
 			</div>
-			<Cards details={details}/>
+			<Cards avail="1"/>
 			<CircularDesc/>
-			<Cards details={{dir:'reverse',type:''}}/>
-			<Cards details={{type:''}}/>
+			<Cards rev="1"/>
+			<Cards />
 		</>
 	);
 };

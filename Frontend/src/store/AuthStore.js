@@ -61,6 +61,18 @@ export const verifyToken = () => {
 		const verifier = async () => {
 			const token = localStorage.getItem("token");
 			const expiresAt = localStorage.getItem("expiresAt");
+			const requestData = await axios.get(
+				base_url + "/request/all"
+			);
+			if (
+				requestData.status === 200 &&
+				requestData.data.requests.length > 0
+			)
+				dispatch(
+					RequestDataActions.setRequestsData({
+						requestsData: requestData.data.requests,
+					})
+				);
 			if (+expiresAt > Date.now()) {
 				try {
 					const response = await axios.post(
@@ -82,18 +94,7 @@ export const verifyToken = () => {
 							})
 						);
 					}
-					const requestData = await axios.get(
-						base_url + "/request/all"
-					);
-					if (
-						requestData.status === 200 &&
-						requestData.data.requests.length > 0
-					)
-						dispatch(
-							RequestDataActions.setRequestsData({
-								requestsData: requestData.data.requests,
-							})
-						);
+					
 
 					return {
 						userId: response.data.user.userId,

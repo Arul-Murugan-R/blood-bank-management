@@ -1,8 +1,10 @@
 import {useState,useRef,useEffect} from 'react'
 import './Cards.css'
 import Card from './Card'
+import { useSelector } from 'react-redux'
 const Cards = (props) => {
     const donRef = useRef();
+    const store = useSelector(state => state.requestData.slice(0,6));
     const [count,setCount] = useState({donor:0,req:0});
     const counter = (minimum, maximum,set,title) => {
         for (let i = minimum; i <= maximum; i++) {
@@ -34,14 +36,8 @@ const Cards = (props) => {
         });
         observer.observe(document.querySelector('.user-list'));
     },[])
-    var details = {
-        // user:'Olaí Monteiro',
-        title: 'Required B+ve',
-        req: 'AB',
-        type: 'request',
-
-    }
-    if (props.details.type == 'availability') {
+    var details = {}
+    if (props.avail == '1') {
         details = {
             title: 'Donors Available',
             req: null,
@@ -54,27 +50,20 @@ const Cards = (props) => {
             </div>
         )
     }
+    var i = 0 
+    var calWid = store.length*25+'vw'
     return (
         <>
             <div className="container">
-
-                <div className={"user-list " + props.details.dir}>
-                    <Card details={details}>We are waiting for your call</Card>
-                    <Card details={details}>We are waiting for your call</Card>
-                    <Card details={details}>We are waiting for your call</Card>
-                    <Card details={details}>We are waiting for your call</Card>
-                    <Card details={details}>We are waiting for your call</Card>
-                    <Card details={details}>We are waiting for your call</Card>
-                    <Card details={details}>We are waiting for your call</Card>
-                    <Card details={details}>We are waiting for your call</Card>
-                    <Card details={details}>We are waiting for your call</Card>
-                    <Card details={details}>We are waiting for your call</Card>
-                    <Card details={details}>We are waiting for your call</Card>
-                    <Card details={details}>We are waiting for your call</Card>
-                    <Card details={details}>We are waiting for your call</Card>
-                    <Card details={details}>We are waiting for your call</Card>
-                    <Card details={details}>We are waiting for your call</Card>
-                    <Card details={details}>We are waiting for your call</Card>
+                <div className={`user-list${props.rev?' reverse':''}${store.length<6?' less-req':''}`} width={calWid} style={{animationDuration:'20s'}}>
+                    {store.map((item) => {
+                        i++
+                        //const { title, user, req , img , type } = props.details
+                        details = {req:item.bloodGroup,title:`Required ${item.bloodGroup}ve`,
+                        type:'request',units:item.numberOfUnits,hospital:item.hospitalName,
+                        location:item.location,hosAddr:item.hospitalAddress,date:item.requestDeadline,};
+                        return <Card details={details} i={i} key={item._id} ></Card>
+                    })}
                 </div>
             </div>
 

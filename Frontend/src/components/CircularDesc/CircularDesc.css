@@ -6,6 +6,7 @@
     flex-wrap: wrap;
     justify-content: space-around;
     grid-template-columns: 1fr 1fr;
+    width: 100%;
 
 }
 .circ-cont {
@@ -13,8 +14,8 @@
     /* grid-template-areas: stack; */
   /*   animation: animation 8s linear infinite;  */
   border:1px solid var(--doubt);
-  width:370px;
-  height: 370px;
+  min-width:370px;
+  min-height: 370px;
     border-radius: 50%;
     margin-left: 50px ;
     position: relative;

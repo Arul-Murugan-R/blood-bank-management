@@ -21,7 +21,6 @@ body {
   align-items: center;
   justify-content: center;
   color:#F8F8F8 !important;
-  width: 400vw;
   animation:move-around 60s linear infinite;
 }
 .user-list:hover{
@@ -30,6 +29,16 @@ body {
 }
 .user-list.reverse{
     animation-direction:reverse ;
+}
+.user-list.less-req{
+  animation: none;
+  flex-wrap: wrap;
+  gap:5px;
+}
+.user-list.less-req .user-item{
+  display: grid;
+    place-items: center;
+    
 }
 .user-list.no-animation{
     animation:none ;
@@ -52,10 +61,9 @@ body {
     justify-content:center ;
 }
 .user-item {
-  background-color: #303030;
+  background-color: rgb(48, 48, 48);
   border-radius: 10px !important;
   transition: all 0.5s ease-in-out;
-  width: 25vw;
 }
 .user-item-card {
   display: flex;
@@ -120,7 +128,7 @@ transform: scale(1.0.5);
 }
 .media-top label{
     text-align: center;
-    font-size: 30px;
+    font-size: 18px;
     
 }
 .user-item-request{

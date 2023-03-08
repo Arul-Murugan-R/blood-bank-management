@@ -1,21 +1,39 @@
 import './Cards.css'
 import { Link } from 'react-router-dom'
 const Cards = (props) =>{
-    const { title, user, req , img , type } = props.details
+    const { title, user, req , img , type,hospital,location,date,hosAddr,units } = props.details
     return (
         <>
         <div className="user-item">
                         <div className="user-item-card">
                             <div className="content">
                                 <label>{title?title:'Request For Blood'}</label>
-                                {/* <span>
-                                    Username:<span className="content-title">blueleopard527 </span>
-                                </span> */}
                                 {user&&<span
                                 >Email:
                                     <span className="content-title"
                                     >{user}</span>
                                 </span>}
+                                {hospital&&<span
+                                >Hospital:
+                                    <span className="content-title"
+                                    >{" ".concat(...hospital.split(" ",2))}</span>
+                                </span>}
+                                {date&&<span
+                                >Deadline:
+                                    <span className="content-title"
+                                    >{" "+date.split('T')[0]}</span>
+                                </span>}
+                                {units&&<span
+                                >Units:
+                                    <span className="content-title"
+                                    >{' '+units+(' '+props.i)}</span>
+                                </span>}
+                                {/* {location&&<span
+                                >Location:
+                                    <span className="content-title"
+                                    >{location}</span>
+                                </span>} */}
+
                                 <span><small>{props.children}</small></span>
                             </div>
                             <div className="user-item-media">
@@ -26,15 +44,12 @@ const Cards = (props) =>{
                                     />}
                                     <label ><b>{req?req:'B'}</b></label>
                                 </div>
-                                {/* <div className="media-name">
-                                    <p>Olaí Monteiro</p>
-                                </div> */}
                             </div>
                         </div>
                         {type=='request'&&<div className="user-item-request">
-                                <Link to="/more" className="link">
+                                {/* <Link to="/more" className="link">
                                     Accept
-                                </Link>
+                                </Link> */}
                                 <Link to="/more" className="link">
                                     View Details
                                 </Link>
