@@ -11,7 +11,7 @@ import { Button } from "@mui/material";
 import TextField from '@mui/material/TextField';
 import MenuItem from '@mui/material/MenuItem';
 
-const doubt = 'red';
+const doubt = 'white';
 
 const Blood = [
 	{
@@ -138,10 +138,11 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
 	},
 	// hide last border
 	"th,td ": {
-		border: "1px solid rgba(223, 64, 90, 1)",
+		// border: "1px solid rgba(223, 64, 90, 1)",
+		border:'1px solid white'
 	},
 	"&:last-child td, &:last-child th": {
-		border: "1px solid rgba(223, 64, 90, 1)",
+		border: "1px solid white",
 	},
 }));
 
@@ -224,8 +225,8 @@ export default function TableFilterCus() {
 			</TableContainer>
 			<center>
 				<Button  sx={{width:'200px',
-					mt: 2, mb: 2, ml: 2, color: doubt, border: '1px solid rgb(181, 30, 35)',
-					background: 'transparent', transition: 'all 0.5 linear',cursor:'pointer', "&:hover": { backgroundColor: doubt, color: 'white',
+					mt: 2, mb: 2, ml: 2, color: doubt, border: '1px solid white',
+					background: 'transparent', transition: 'all 0.5 linear',cursor:'pointer', "&:hover": { backgroundColor: doubt, color: 'black',
 			
 				}
 				}}>Filter</Button>

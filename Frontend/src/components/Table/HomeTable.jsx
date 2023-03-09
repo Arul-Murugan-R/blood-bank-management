@@ -9,7 +9,7 @@ import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import TablePagination from "@mui/material/TablePagination";
 import TableFilterCus from "./TableFilter";
-
+const themeCol = 'white'
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
 	[`&.${tableCellClasses.head}`]: {
 		backgroundColor: '#2a3338',
@@ -18,7 +18,7 @@ const StyledTableCell = styled(TableCell)(({ theme }) => ({
 		letterSpacing: 1,
 		textAlign:'center',
 		fontFamily: 'Salsa',
-		color:'rgb(181, 30, 35)',
+		color:themeCol,
 		border:0
 	},
 	[`&.${tableCellClasses.body}`]: {
@@ -39,10 +39,10 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
 	},
 	// hide last border
 	"th,td ":{
-		border: "1px solid rgb(181, 30, 35)",
+		border: "1px solid "+themeCol,
 	},
 	"&:last-child td, &:last-child th": {
-		border: "1px solid rgb(181, 30, 35)",
+		border: "1px solid "+themeCol,
 	},
 }));
 

@@ -11,6 +11,7 @@ body {
 	/* --doubt:rgba(223, 64, 90, 1); */
 	--doubt: rgb(181, 30, 35);
 	background: var(--bg-color);
+	--reqCardWid:24vw;
 }
 ::-webkit-scrollbar {
     display: none;

@@ -3,8 +3,8 @@ import './Cards.css'
 import Card from './Card'
 import { useSelector } from 'react-redux'
 const Cards = (props) => {
-    const donRef = useRef();
-    const store = useSelector(state => state.requestData.slice(0,6));
+    const myRef = useRef();
+    const store = useSelector(state => state.requestData.slice(0,16));
     const [count,setCount] = useState({donor:0,req:0});
     const counter = (minimum, maximum,set,title) => {
         for (let i = minimum; i <= maximum; i++) {
@@ -35,6 +35,7 @@ const Cards = (props) => {
             }
         });
         observer.observe(document.querySelector('.user-list'));
+        console.log(myRef.current)
     },[])
     var details = {}
     if (props.avail == '1') {
@@ -51,18 +52,33 @@ const Cards = (props) => {
         )
     }
     var i = 0 
-    var calWid = store.length*25+'vw'
+    var calWid = store.length*24+'vw'
+    var trans = (((store.length-3)*24)-15)+'vw'
+    const keyframe = {
+        '@keyframes move-around': {
+          '0%': {
+            transform: `translateX(-${trans})`,
+          },
+          '100%': {
+            transform: `translateX(${trans})`,
+          },
+        },
+        animation: 'move-around 60s linear infinite',
+        // animationDirection: `${props.rev?'reverse':''}`,
+      };
     return (
         <>
             <div className="container">
-                <div className={`user-list${props.rev?' reverse':''}${store.length<6?' less-req':''}`} width={calWid} style={{animationDuration:'20s'}}>
+                <div className={`user-list${props.rev?' reverse':''}${store.length<6?' less-req':''}`} width={calWid} 
+                    style={{'--transWid':trans}}
+                >
                     {store.map((item) => {
                         i++
                         //const { title, user, req , img , type } = props.details
                         details = {req:item.bloodGroup,title:`Required ${item.bloodGroup}ve`,
                         type:'request',units:item.numberOfUnits,hospital:item.hospitalName,
                         location:item.location,hosAddr:item.hospitalAddress,date:item.requestDeadline,};
-                        return <Card details={details} i={i} key={item._id} ></Card>
+                        return <Card details={details} i={i} key={item._id} ref={myRef} ></Card>
                     })}
                 </div>
             </div>
