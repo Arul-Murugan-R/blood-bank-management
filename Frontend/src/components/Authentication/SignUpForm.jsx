@@ -25,6 +25,7 @@ import Error from "../UI/Typography/Error";
 import { Link, redirect, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { authActions } from "../../store/AuthStore";
+import { SnackActions } from "../../store/SnackStore";
 
 const backendUrl = import.meta.env.VITE_BACKEND_URL;
 
@@ -80,15 +81,15 @@ const SignUpForm = () => {
 	const handleMouseDownPassword = (event) => event.preventDefault();
 
 	const registerUser = async () => {
-		// if (!dobField.validities.isValid && role == "donor") {
-		// 	dobField.validities.reset();
-		// 	return setRegistrationerror(
-		// 		"Only people between 18 and 60 years of age can donate blood"
-		// 	);
-		// }
+		if (!dobField.validities.isValid && role == "donor") {
+			dobField.validities.reset();
+			return setRegistrationerror(
+				"Only people between 18 and 60 years of age can donate blood"
+			);
+		}
 
-		// if (!formIsValid)
-		// 	return setRegistrationerror("Please fill all the fields");
+		if (!formIsValid)
+			return setRegistrationerror("Please fill all the fields");
 
 		try {
 			const response = await axios.post(backendUrl + "/user/register", {
@@ -106,6 +107,12 @@ const SignUpForm = () => {
 			emailField.validities.reset();
 			passwordField.validities.reset();
 			role === "donor" ? navigate("/donor-info") : navigate("/");
+			dispatch(
+				SnackActions.setSnack({
+					message: "Registration Successful",
+					severity: "success",
+				})
+			);
 		} catch (error) {
 			setRegistrationerror(error.response.data.message);
 		}

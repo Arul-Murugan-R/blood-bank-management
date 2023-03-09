@@ -19,6 +19,7 @@ import Error from "../UI/Typography/Error";
 import { useDispatch } from "react-redux";
 import { authActions } from "../../store/AuthStore";
 import CustomFormControl from "../UI/FormControl/CustomFormControl";
+import { SnackActions } from "../../store/SnackStore";
 
 const backendUrl = import.meta.env.VITE_BACKEND_URL;
 
@@ -63,6 +64,12 @@ const LoginForm = () => {
 			});
 			const user = response.data.user;
 			await dispatch(authActions.loginHandler({ user: user }));
+			await dispatch(
+				SnackActions.setSnack({
+					message: "Login Successful",
+					type: "success",
+				})
+			);
 			userField.validities.reset();
 			passwordField.validities.reset();
 			return navigate(-1);

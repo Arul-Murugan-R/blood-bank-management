@@ -17,6 +17,7 @@ import CustomFormControl from "../UI/FormControl/CustomFormControl";
 import Error from "../UI/Typography/Error";
 import axios from "axios";
 import { RequestDataActions } from "../../store/RequestStore";
+import { SnackActions } from "../../store/SnackStore";
 
 const allBloodGroups = ["A+", "A-", "B+", "B-", "AB+", "AB-", "O+", "O-"];
 const numberOfUnitsArr = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
@@ -76,14 +77,21 @@ const RequestBloodForm = () => {
 				data: requestData,
 			});
 			if (response.status === 200) {
-				console.log(response.data.data);
-				await dispatch(
-					RequestDataActions.addRequestData(response.data.data)
+				dispatch(
+					RequestDataActions.addRequestData({
+						requestData: response.data.requestData,
+					})
+				);
+				dispatch(
+					SnackActions.setSnack({
+						message: "Request added successfully",
+						severity: "success",
+					})
 				);
 				return navigate("/");
 			}
 		} catch (error) {
-			setError(error.response.data.message);
+			setError(error.response.data.message || error);
 		}
 	};
 
@@ -192,19 +200,19 @@ const RequestBloodForm = () => {
 						</Select>
 					</FormControl>
 					<CustomFormControl field={requiredBefore} />
-					<Button
-						sx={{
-							my: 2,
-							left: "50%",
-							transform: "translateX(-50%)",
-						}}
-						variant="contained"
-						color="error"
-						onClick={submitRequestHandler}
-					>
-						Request
-					</Button>
 				</form>
+				<Button
+					sx={{
+						my: 2,
+						left: "50%",
+						transform: "translateX(-50%)",
+					}}
+					variant="contained"
+					color="error"
+					onClick={submitRequestHandler}
+				>
+					Request
+				</Button>
 			</div>
 		</Container>
 	);

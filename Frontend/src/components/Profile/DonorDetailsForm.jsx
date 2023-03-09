@@ -21,6 +21,7 @@ import classes from "./Profile.module.css";
 import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
 import { DonorDataActions } from "../../store/DonorData";
+import { SnackActions } from "../../store/SnackStore";
 
 /* 
 phone
@@ -173,6 +174,12 @@ const UserDetailsForm = (props) => {
 			if (response.status === 200) {
 				await dispatch(
 					DonorDataActions.setDonorData({ donorData: data })
+				);
+				await dispatch(
+					SnackActions.setSnack({
+						message: "Details updated successfully!",
+						severity: "success",
+					})
 				);
 				navigate("/");
 			}
