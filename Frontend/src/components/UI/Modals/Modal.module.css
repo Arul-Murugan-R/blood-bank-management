@@ -1,0 +1,79 @@
+.backdrop {
+	position: fixed;
+	background-color: rgb(1, 1, 1, 0.5);
+	height: 100vh;
+	width: 100%;
+	top: 0;
+	left: 0;
+	z-index: 10;
+}
+
+.modalOverlay {
+	position: fixed;
+	top: 50vh;
+	left: 50vw;
+	transform: translateY(-50%);
+	z-index: 100;
+	/* overflow: hidden; */
+	left: 25%;
+	width: 50%;
+	background-color: #f5e8e4;
+	padding-top: 1rem;
+	padding-bottom: 2%;
+	border-radius: 10px;
+	color: #e63946;
+}
+
+.modalContent {
+	display: flex;
+	justify-content: space-evenly;
+	flex-wrap: wrap;
+}
+
+.modalOverlay .serviceBox {
+	padding-top: 5%;
+	padding-bottom: 5%;
+}
+
+.closeBtn {
+	position: absolute;
+	right: -95%;
+	top: 0;
+}
+
+@media (max-width: 1550px) {
+	.modalOverlay {
+		width: 70%;
+		left: 15%;
+		padding: 1rem;
+	}
+}
+
+@media (max-width: 987px) {
+	.modalOverlay {
+		width: 80%;
+		left: 10%;
+		padding-bottom: 2rem;
+	}
+}
+
+@media (max-width: 720px) {
+	.modalOverlay {
+		/* width: 85%; */
+		left: 7.5%;
+	}
+
+	.closeBtn {
+		right: -90%;
+	}
+}
+
+@media (max-width: 420px) {
+	.serviceBox {
+		display: none;
+	}
+
+	.modalOverlay {
+		padding-top: 2rem;
+	}
+}

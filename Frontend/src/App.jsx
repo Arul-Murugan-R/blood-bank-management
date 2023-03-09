@@ -60,7 +60,6 @@ import DonorsMap from "./components/Map/DonorsMap";
 import CircularCarousel from "./components/Home/CircularCarousel";
 import RequestBloodForm from "./components/Profile/RequestBloodForm";
 import CircularDesc from "./components/CircularDesc/CircularDesc";
-import CustomSnackbar from "./components/UI/CustomSnackbar";
 
 let initial = true;
 
@@ -69,7 +68,6 @@ let initial = true;
 function App() {
 	const dispatch = useDispatch();
 	const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
-	const snackOpen = useSelector((state) => state.snack.open);
 
 	useEffect(() => {
 		if (initial) {
@@ -97,7 +95,14 @@ function App() {
 						</Wrapper>
 					}
 				/>
-				<Route path="/donor-info" element={<DonorDetailsForm />} />
+				<Route
+					path="/donor-info"
+					element={
+						<Wrapper>
+							<DonorDetailsForm />
+						</Wrapper>
+					}
+				/>
 				<Route
 					path="/rest"
 					element={
@@ -123,9 +128,15 @@ function App() {
 						</ProtectedRoute>
 					}
 				/>
-				<Route path="/request-blood" element={<RequestBloodForm />} />
+				<Route
+					path="/request-blood"
+					element={
+						<Wrapper>
+							<RequestBloodForm />
+						</Wrapper>
+					}
+				/>
 			</Routes>
-			{snackOpen && <CustomSnackbar />}
 		</>
 	);
 }
