@@ -77,6 +77,7 @@ const ViewRequest = () => {
 					variant="contained"
 					color="error"
 					onClick={updateRequestHandler}
+					sx={{ my: 2 }}
 				>
 					Accept
 				</Button>
