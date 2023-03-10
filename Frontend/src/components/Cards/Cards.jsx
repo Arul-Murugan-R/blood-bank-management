@@ -5,7 +5,7 @@ import { useSelector } from 'react-redux'
 import Modal from '../UI/Modals/Modal'
 const Cards = (props) => {
     const myRef = useRef();
-    const store = useSelector(state => state.requestData.slice(0,35));
+    const store = useSelector(state => state.requestData.slice(0,30));
     const [modalDet,setModalDet] = useState({});
     const [modal, setModal] = useState(false);
     const [count,setCount] = useState({donor:0,req:0});
@@ -64,8 +64,8 @@ const Cards = (props) => {
             </div>
         )
     }
-    var calWid = store.length*24+'vw'
-    var trans = (((store.length)*24)-87)+'vw'
+    var calWid = store.length*22+'vw'
+    var trans = (((store.length)*22)-100)+'vw'
 
     return (
         <>

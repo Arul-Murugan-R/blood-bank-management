@@ -12,7 +12,7 @@ const Cards = (props) =>{
         <div className={classes.userItem} ref={myRef}>
                         <div className={classes.userItemCard}>
                             <div className={classes.content}>
-                                <label>{title?title:'Request For Blood'}</label>
+                                <label><b>{title?title:'Request For Blood'}</b></label>
                                 {user&&<span
                                 >Email:
                                     <span className={classes.contentTitle}
@@ -33,12 +33,6 @@ const Cards = (props) =>{
                                     <span className={classes.contentTitle}
                                     >{' '+units}</span>
                                 </span>}
-                                {/* {location&&<span
-                                >Location:
-                                    <span className={classes.contentTitle}
-                                    >{location}</span>
-                                </span>} */}
-
                                 <span><small>{props.children}</small></span>
                             </div>
                             <div className={classes.userItemMedia}>

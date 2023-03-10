@@ -28,9 +28,8 @@ const ModalOverlay = (props) => {
     "date": "2023-03-13T00:00:00.000Z"
 }
 	*/ 
-	const pins = ()=>{
-		console.log(location.latitude)
-		return (
+	const pins = 
+		 (
 			<Marker
 				key={`marker-${location._id}`}
 				longitude={location.longitude}
@@ -47,7 +46,6 @@ const ModalOverlay = (props) => {
 				<Pin/>
 			</Marker>
 		);
-	}
 
 	return (
 		<div className={classes.modalOverlay}>
