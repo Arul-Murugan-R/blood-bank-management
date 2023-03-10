@@ -7,7 +7,6 @@
 	left: 0;
 	z-index: 10;
 }
-
 .modalOverlay {
 	position: fixed;
 	top: 50vh;
@@ -16,17 +15,18 @@
 	z-index: 100;
 	/* overflow: hidden; */
 	left: 25%;
-	width: 50%;
 	background-color: #f5e8e4;
 	padding-top: 1rem;
 	padding-bottom: 2%;
 	border-radius: 10px;
 	color: #e63946;
+	overflow: auto;
 }
 
 .modalContent {
 	display: flex;
-	justify-content: space-evenly;
+	justify-content: center;
+	/* padding:30px; */
 	flex-wrap: wrap;
 }
 
@@ -77,3 +77,16 @@
 		padding-top: 2rem;
 	}
 }
+
+
+.modalMap{
+	min-height:600px;
+	width:300px;
+}
+
+/* .modalDescription{
+	display: flex;
+	justify-content: space-around;
+	width:100%;
+
+} */

@@ -1,11 +1,24 @@
 import {useState,useRef,useEffect} from 'react'
-import './Cards.css'
+import classes from './Cards.module.css'
 import Card from './Card'
 import { useSelector } from 'react-redux'
+import Modal from '../UI/Modals/Modal'
 const Cards = (props) => {
     const myRef = useRef();
-    const store = useSelector(state => state.requestData.slice(0,16));
+    const store = useSelector(state => state.requestData.slice(0,35));
+    const [modalDet,setModalDet] = useState({});
+    const [modal, setModal] = useState(false);
     const [count,setCount] = useState({donor:0,req:0});
+    const modalHandler = (desc) => {
+        setModal(true);
+        if(desc)
+        setModalDet(desc);
+    }
+    const closeHandler = () => {
+        setModal(false);
+        setModalDet({});
+    }
+
     const counter = (minimum, maximum,set,title) => {
         for (let i = minimum; i <= maximum; i++) {
             setTimeout(() => {
@@ -25,18 +38,18 @@ const Cards = (props) => {
             }, 100);
         }
     }
-    useEffect(() => {
-        const observer = new IntersectionObserver((entries) => {
-            if (entries[0].isIntersecting) {
-                counter(0, 12000,setCount,'donor');
-                counter(0, 2000,setCount,'req');
-            }else{
-                setCount({donor:0,req:0});
-            }
-        });
-        observer.observe(document.querySelector('.user-list'));
-        console.log(myRef.current)
-    },[])
+    // useEffect(() => {
+    //     const observer = new IntersectionObserver((entries) => {
+    //         if (entries[0].isIntersecting) {
+    //             counter(0, 12000,setCount,'donor');
+    //             counter(0, 2000,setCount,'req');
+    //         }else{
+    //             setCount({donor:0,req:0});
+    //         }
+    //     });
+    //     observer.observe(document.querySelector('.userList'));
+    //     console.log(myRef.current)
+    // },[])
     var details = {}
     if (props.avail == '1') {
         details = {
@@ -45,41 +58,33 @@ const Cards = (props) => {
             type: 'availability',
         }
         return (
-            <div className="user-list no-animation">
+            <div className={`${classes.userList} ${classes.noAnimation}`}>
                 <Card details={details} >{count.donor}+</Card>
                 <Card details={details}>{count.req}+</Card>
             </div>
         )
     }
-    var i = 0 
     var calWid = store.length*24+'vw'
-    var trans = (((store.length-3)*24)-15)+'vw'
-    const keyframe = {
-        '@keyframes move-around': {
-          '0%': {
-            transform: `translateX(-${trans})`,
-          },
-          '100%': {
-            transform: `translateX(${trans})`,
-          },
-        },
-        animation: 'move-around 60s linear infinite',
-        // animationDirection: `${props.rev?'reverse':''}`,
-      };
+    var trans = (((store.length)*24)-87)+'vw'
+
     return (
         <>
-            <div className="container">
-                <div className={`user-list${props.rev?' reverse':''}${store.length<6?' less-req':''}`} width={calWid} 
-                    style={{'--transWid':trans}}
+            <div className={classes.container}>
+                <div className={`${classes.userList} ${props.rev?classes.reverse:''} ${store.length<5?classes.lessReq:''}`} width={calWid} 
+                    style={{'--transWid':trans,'--transDur':(store.length*4)+'s',animationPlayState:modal?'paused':'',
+                }}
                 >
                     {store.map((item) => {
-                        i++
                         //const { title, user, req , img , type } = props.details
                         details = {req:item.bloodGroup,title:`Required ${item.bloodGroup}ve`,
                         type:'request',units:item.numberOfUnits,hospital:item.hospitalName,
                         location:item.location,hosAddr:item.hospitalAddress,date:item.requestDeadline,};
-                        return <Card details={details} i={i} key={item._id} ref={myRef} ></Card>
+                        return <Card details={details}  key={item._id} ref={myRef} 
+                            openHandler={modalHandler}
+                            >
+                            </Card>
                     })}
+                    {modal&&<Modal closeModal={closeHandler} data={modalDet} />}
                 </div>
             </div>
 
