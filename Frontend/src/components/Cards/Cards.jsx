@@ -3,8 +3,9 @@ import classes from './Cards.module.css'
 import Card from './Card'
 import { useSelector } from 'react-redux'
 import Modal from '../UI/Modals/Modal'
+import { useInView } from 'react-intersection-observer';
 const Cards = (props) => {
-    const myRef = useRef();
+    const { ref, inView, entry } = useInView({})
     const store = useSelector(state => state.requestData.slice(0,30));
     const [modalDet,setModalDet] = useState({});
     const [modal, setModal] = useState(false);
@@ -35,21 +36,17 @@ const Cards = (props) => {
                         }
                     }
                 })
-            }, 100);
+            },1000);
         }
     }
-    // useEffect(() => {
-    //     const observer = new IntersectionObserver((entries) => {
-    //         if (entries[0].isIntersecting) {
-    //             counter(0, 12000,setCount,'donor');
-    //             counter(0, 2000,setCount,'req');
-    //         }else{
-    //             setCount({donor:0,req:0});
-    //         }
-    //     });
-    //     observer.observe(document.querySelector('.userList'));
-    //     console.log(myRef.current)
-    // },[])
+    useEffect(() => {
+        if(inView){
+            counter(0, 12000,setCount,'donor');
+            counter(0, 2000,setCount,'req');
+        }else{
+            setCount({donor:0,req:0});
+        }
+    },[inView])
     var details = {}
     if (props.avail == '1') {
         details = {
@@ -58,7 +55,7 @@ const Cards = (props) => {
             type: 'availability',
         }
         return (
-            <div className={`${classes.userList} ${classes.noAnimation}`}>
+            <div className={`${classes.userList} ${classes.noAnimation}`} ref={ref} >
                 <Card details={details} >{count.donor}+</Card>
                 <Card details={details}>{count.req}+</Card>
             </div>
@@ -79,7 +76,7 @@ const Cards = (props) => {
                         details = {req:item.bloodGroup,title:`Required ${item.bloodGroup}ve`,
                         type:'request',units:item.numberOfUnits,hospital:item.hospitalName,
                         location:item.location,hosAddr:item.hospitalAddress,date:item.requestDeadline,};
-                        return <Card details={details}  key={item._id} ref={myRef} 
+                        return <Card details={details}  key={item._id}  
                             openHandler={modalHandler}
                             >
                             </Card>
