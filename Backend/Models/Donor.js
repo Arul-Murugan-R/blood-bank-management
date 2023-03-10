@@ -11,11 +11,6 @@ const Schema = mongoose.Schema;
 // tattoos: null,
 
 const DonorInfoSchema = new Schema({
-	mobilenumber: {
-		type: String,
-		required: true,
-		unique: true,
-	},
 	tattoo: {
 		type: Boolean,
 		required: true,

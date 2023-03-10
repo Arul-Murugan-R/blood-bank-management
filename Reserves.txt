@@ -199,3 +199,8 @@ cursor: pointer;
 } */
 
 ///////////////////////////
+
+///
+Closest lats finding
+https://stackoverflow.com/questions/18170131/comparing-two-locations-using-their-longitude-and-latitude
+///

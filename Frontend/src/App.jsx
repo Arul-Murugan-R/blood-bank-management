@@ -60,6 +60,8 @@ import DonorsMap from "./components/Map/DonorsMap";
 import CircularCarousel from "./components/Home/CircularCarousel";
 import RequestBloodForm from "./components/Profile/RequestBloodForm";
 import CircularDesc from "./components/CircularDesc/CircularDesc";
+import MyRequests from "./components/Profile/MyRequests";
+import ViewRequest from "./components/Requests/ViewRequest";
 
 let initial = true;
 
@@ -68,6 +70,7 @@ let initial = true;
 function App() {
 	const dispatch = useDispatch();
 	const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
+	const role = useSelector((state) => state.auth.role);
 
 	useEffect(() => {
 		if (initial) {
@@ -98,9 +101,14 @@ function App() {
 				<Route
 					path="/donor-info"
 					element={
-						<Wrapper>
-							<DonorDetailsForm />
-						</Wrapper>
+						<ProtectedRoute
+							condition={isLoggedIn && role == "donor"}
+							redirect="/"
+						>
+							<Wrapper>
+								<DonorDetailsForm />
+							</Wrapper>
+						</ProtectedRoute>
 					}
 				/>
 				<Route
@@ -131,9 +139,31 @@ function App() {
 				<Route
 					path="/request-blood"
 					element={
-						<Wrapper>
-							<RequestBloodForm />
-						</Wrapper>
+						<ProtectedRoute condition={isLoggedIn} redirect="/">
+							<Wrapper>
+								<RequestBloodForm />
+							</Wrapper>
+						</ProtectedRoute>
+					}
+				/>
+				<Route
+					path="/my-requests"
+					element={
+						<ProtectedRoute condition={isLoggedIn} redirect="/">
+							<Wrapper>
+								<MyRequests />
+							</Wrapper>
+						</ProtectedRoute>
+					}
+				/>
+				<Route
+					path="/view-request/:id"
+					element={
+						<ProtectedRoute condition={isLoggedIn} redirect="/">
+							<Wrapper>
+								<ViewRequest />
+							</Wrapper>
+						</ProtectedRoute>
 					}
 				/>
 			</Routes>

@@ -16,6 +16,7 @@ import {
 	validateAge,
 	validateEmail,
 	validatePassword,
+	validatePhoneNumber,
 	validateText,
 } from "../../Utilities/FormValidationFunctions";
 import useInput from "../../Hooks/use-input";
@@ -62,6 +63,15 @@ const SignUpForm = () => {
 		validateAge
 	);
 
+	const phone = useInput(
+		{
+			type: "tel",
+			label: "Phone Number",
+			name: "phone",
+		},
+		validatePhoneNumber
+	);
+
 	const [showPassword, setShowPassword] = useState(false);
 	const [registrationError, setRegistrationerror] = useState(null);
 	const [role, setRole] = useState(null);
@@ -72,7 +82,7 @@ const SignUpForm = () => {
 		role &&
 		role == "donor"
 			? dobField.validities.isValid
-			: true;
+			: true && phone.validities.isValid;
 
 	const handleClickShowPassword = () => {
 		setShowPassword((prev) => !prev);
@@ -98,6 +108,7 @@ const SignUpForm = () => {
 				password: passwordField.properties.value,
 				role,
 				dob: role == "donor" ? dobField.properties.value : null,
+				mobileNumber: phone.properties.value,
 			});
 			navigate("/rest");
 
@@ -160,7 +171,11 @@ const SignUpForm = () => {
 							IconBtnProps={{ disabled: true }}
 							icon="Email"
 						/>
-
+						<CustomFormControl
+							field={phone}
+							IconBtnProps={{ disabled: true }}
+							icon="LocalPhone"
+						/>
 						<CustomFormControl
 							field={passwordField}
 							IconBtnProps={{

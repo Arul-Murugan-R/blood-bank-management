@@ -22,6 +22,13 @@ const UserSchema = new Schema({
 		required: true,
 		enum: ["recipient", "donor"],
 	},
+	dob: {
+		type: Date,
+	},
+	mobileNumber: {
+		type: Number,
+		required: true,
+	},
 	isProfileComplete: {
 		type: Boolean,
 		default: false,

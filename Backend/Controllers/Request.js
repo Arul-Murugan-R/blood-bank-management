@@ -101,6 +101,37 @@ module.exports.updateRequest = async (req, res, next) => {
 	}
 };
 
+module.exports.updateDonationInfo = async (req, res, next) => {
+	try {
+		const reqID = req.params.requestId;
+		const request = await Request.findById(reqID);
+		console.log(reqID);
+
+		if (request === null) {
+			return res.status(404).json({
+				message: "Request not found",
+			});
+		}
+		if (request.numberOfUnits === 0) {
+			await request.delete();
+			return res.status(401).json({
+				message: "No units left",
+			});
+		}
+		request.numberOfUnits = request.numberOfUnits - 1;
+		await request.save();
+		return res.status(200).json({
+			message: "Donation info updated successfully",
+			request: request,
+		});
+	} catch (e) {
+		return res.status(401).json({
+			message: "Donation info update failed",
+			err: e,
+		});
+	}
+};
+
 module.exports.deleteRequest = async (req, res, next) => {
 	try {
 		const reqID = req.body.requestId;

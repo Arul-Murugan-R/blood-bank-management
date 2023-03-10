@@ -123,15 +123,6 @@ const UserDetailsForm = (props) => {
 		validateLastDonationDate
 	);
 
-	const phone = useInput(
-		{
-			type: "tel",
-			label: "Phone Number",
-			name: "phone",
-		},
-		validatePhoneNumber
-	);
-
 	const formIsValid =
 		bloodGroup &&
 		antibiotics.validities.isValid &&
@@ -140,8 +131,7 @@ const UserDetailsForm = (props) => {
 		diseases.validities.isValid &&
 		previousDonation.validities.isValid &&
 		(!+previousDonation.properties.value ||
-			lastDonation.validities.isValid) &&
-		phone.validities.isValid;
+			lastDonation.validities.isValid);
 
 	const SubmitDetails = async () => {
 		try {
@@ -164,7 +154,6 @@ const UserDetailsForm = (props) => {
 				lastDonation: Boolean(+previousDonation.properties.value)
 					? lastDonation.properties.value
 					: null,
-				mobilenumber: phone.properties.value,
 				location,
 			};
 
@@ -226,7 +215,6 @@ const UserDetailsForm = (props) => {
 							))}
 						</Select>
 					</FormControl>
-					<CustomFormControl field={phone} />
 					<CustomRadioControl field={antibiotics} />
 					<CustomRadioControl field={tattoos} />
 					<CustomRadioControl field={recentTravel} />
@@ -238,7 +226,11 @@ const UserDetailsForm = (props) => {
 					<Button
 						variant="contained"
 						color={"error"}
-						sx={{ my: 2 }}
+						sx={{
+							my: 2,
+							left: "50%",
+							transform: "translateX(-50%)",
+						}}
 						onClick={SubmitDetails}
 					>
 						Submit

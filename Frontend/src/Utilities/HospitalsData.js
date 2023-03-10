@@ -81,15 +81,14 @@ const HospitalData = [
 		address:
 			"No. 11, Annai Indira Nagar Main Road, Mugalivakkam, Porur, Chennai - 600125",
 		phone: "+91-44-4741 1000",
-		latitude: 13.0145,
-		longitude: 80.1585,
+		latitude: 13.0190377,
+		longitude: 80.1615265,
 	},
 	{
 		name: "Sri Balaji Hospital",
-		address:
-			"1, 2nd Cross St, Sastri Nagar, Kolathur, Chennai, Tamil Nadu 600099",
-		latitude: 13.1227259,
-		longitude: 80.2040092,
+		address: "1, Lawyer Jaganathan St, Guindy, Chennai, Tamil Nadu 600032",
+		latitude: 13.0216227,
+		longitude: 80.1416628,
 	},
 	{
 		name: "SIMS Hospital",

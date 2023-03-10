@@ -2,21 +2,40 @@ const User = require("../Models/User");
 const ExpressError = require("../utilities/ExpressError");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
+const nodemailer = require("nodemailer");
 require("dotenv").config();
 const secret = process.env.SECRET;
 const options = {
 	expiresIn: process.env.EXPIRESIN,
 };
+const Request = require("../Models/Request");
+
+const transporter = nodemailer.createTransport({
+	host: "smtp.gmail.com",
+	port: 465,
+	service: "gmail",
+	secure: false,
+	auth: {
+		user: "18balagurus@gmail.com",
+		pass: "daxyuenuzvqubpbo",
+	},
+	debug: false,
+	tls: {
+		rejectUnauthorized: false,
+	},
+});
 
 module.exports.registerUser = async (req, res, next) => {
 	try {
-		const { email, username, password, role } = req.body;
+		const { email, username, password, role, mobileNumber, dob } = req.body;
 		const hashedPassword = await bcrypt.hash(password, 12);
 		const user = new User({
 			email,
 			username,
 			password: hashedPassword,
 			role,
+			dob,
+			mobileNumber,
 		});
 		await user.save();
 		const token = jwt.sign({ id: user._id.toString() }, secret, options);
@@ -34,6 +53,7 @@ module.exports.registerUser = async (req, res, next) => {
 			},
 		});
 	} catch (e) {
+		console.log(e);
 		const existingField =
 			Object.keys(e.keyPattern)[0][0].toUpperCase() +
 			Object.keys(e.keyPattern)[0].slice(1);
@@ -88,6 +108,74 @@ module.exports.verifyUser = async (req, res, next) => {
 		res.status(401).json({
 			message: "Unauthorized user",
 			error: error,
+		});
+	}
+};
+
+module.exports.getUserInfo = async (req, res, next) => {
+	const { userId } = req.params;
+	try {
+		const user = await User.findById(userId);
+		if (user) {
+			return res.status(200).json({
+				message: "User found",
+				user: {
+					username: user.username,
+					email: user.email,
+					role: user.role,
+				},
+			});
+		}
+	} catch (e) {
+		return res.status(404).json({
+			message: "User not found",
+			error: e,
+		});
+	}
+};
+
+module.exports.notifyDonor = async (req, res, next) => {
+	const { donorId, reqId } = req.body;
+	try {
+		const user = await User.findById(donorId);
+		const request = await Request.findById(reqId);
+		const recipient = await User.findById(request.userId);
+		if (user.role == "donor") {
+			const mailOptions = {
+				from: "bloodbank@email.com",
+				to: user.email,
+				subject: "Blood Donation",
+				html: `<h3>Urgent Blood required: ${
+					request.numberOfUnits
+				}units of ${request.bloodGroup} at ${request.hospitalName}, ${
+					request.hospitalAddress
+				}</h3>
+                <p>Kindly contact ${recipient.username} at ${
+					recipient.mobileNumber || recipient.email
+				} for further details.</p>
+                <a href='https://www.google.com/maps/search/${
+					request.location.latitude
+				},${request.location.longitude}/@${request.location.latitude},${
+					request.location.longitude
+				},13z'>Location `,
+			};
+			transporter.sendMail(mailOptions, (err, info) => {
+				if (err) {
+					return res.status(500).json({
+						message: "Notification failure! Please try again.",
+						error: err,
+					});
+				} else {
+					return res.status(200).json({
+						message: "Notification sent successfully!",
+					});
+				}
+			});
+		}
+	} catch (e) {
+		return res.status(404).json({
+			message: "User not found",
+			error: e,
 		});
 	}
 };

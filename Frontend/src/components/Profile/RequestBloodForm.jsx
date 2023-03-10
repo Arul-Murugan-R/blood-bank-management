@@ -96,9 +96,12 @@ const RequestBloodForm = () => {
 	};
 
 	return (
-		<Container sx={{ backgroundColor: "white" }} maxWidth="lg">
+		<Container
+			sx={{ backgroundColor: "white", my: 5, borderRadius: "10px" }}
+			maxWidth="lg"
+		>
 			<div>
-				<Typography variant="h3" textAlign={"center"}>
+				<Typography variant="h4" textAlign={"center"} sx={{ py: 2 }}>
 					Request Blood
 				</Typography>
 				<form>

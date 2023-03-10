@@ -32,7 +32,7 @@ const Navbar = () => {
 	const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
 	const userRole = useSelector((state) => state.auth.role);
 
-	const pages = ["Search", "Donate", "About", "Contact"];
+	const pages = ["Search", "Donate", "About"];
 	const settings = [
 		{
 			name: "Profile",
@@ -161,6 +161,19 @@ const Navbar = () => {
 									Request Blood
 								</Button>
 							)}
+							{isLoggedIn && (
+								<Button
+									key="My Requests"
+									onClick={() => navigate("/my-requests")}
+									sx={{
+										my: 2,
+										color: "black",
+										display: "block",
+									}}
+								>
+									My Requests
+								</Button>
+							)}
 						</Menu>
 					</Box>
 					<AdbIcon
@@ -210,6 +223,19 @@ const Navbar = () => {
 								}}
 							>
 								Request Blood
+							</Button>
+						)}
+						{isLoggedIn && (
+							<Button
+								key="My Requests"
+								onClick={() => navigate("/my-requests")}
+								sx={{
+									my: 2,
+									color: "white",
+									display: "block",
+								}}
+							>
+								My Requests
 							</Button>
 						)}
 					</Box>
