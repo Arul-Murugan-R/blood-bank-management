@@ -19,11 +19,12 @@ import classes from "./Profile.module.css";
 import HospitalData from "../../Utilities/HospitalsData";
 import { RequestDataActions } from "../../store/RequestStore";
 import { SnackActions } from "../../store/SnackStore";
-import { Edit } from "@mui/icons-material";
+import { Delete, Edit } from "@mui/icons-material";
 import { useNavigate } from "react-router-dom";
 import { validateRequestDate } from "../../Utilities/FormValidationFunctions";
 import CustomFormControl from "../UI/FormControl/CustomFormControl";
 import moment from "moment";
+import axios from "axios";
 
 const allBloodGroups = ["A+", "A-", "B+", "B-", "AB+", "AB-", "O+", "O-"];
 const numberOfUnitsArr = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
@@ -42,12 +43,8 @@ const MyRequestCard = (props) => {
 	);
 	const [numberOfUnits, setNumberOfUnits] = useState(request.numberOfUnits);
 
-	const navigate = useNavigate();
-
 	const userId = useSelector((state) => state.auth.userId);
 	const dispatch = useDispatch();
-
-	console.log(request.requestDeadline);
 
 	const requiredBefore = useInput(
 		{
@@ -65,7 +62,34 @@ const MyRequestCard = (props) => {
 		bloodGroup &&
 		numberOfUnits;
 
-	const submitRequestHandler = async () => {
+	const deleteRequestHandler = async () => {
+		try {
+			const response = await axios.post(`${backendUrl}/request/delete`, {
+				requestId: request._id,
+				userId,
+			});
+			if (response.status === 200) {
+				dispatch(
+					RequestDataActions.deleteRequestData({
+						requestId: request._id,
+					})
+				);
+				dispatch(
+					SnackActions.setSnack({
+						message: "Request deleted successfully",
+						severity: "success",
+					})
+				);
+			}
+		} catch (error) {
+			SnackActions.setSnack({
+				message: "Request deletion failed",
+				severity: "error",
+			});
+		}
+	};
+
+	const updateRequestHandler = async () => {
 		if (!formIsValid) {
 			return setError("Please fill all the fields");
 		}
@@ -99,9 +123,10 @@ const MyRequestCard = (props) => {
 						severity: "success",
 					})
 				);
-				return navigate("/");
+				setEditMode(false);
 			}
 		} catch (error) {
+			// console.log(error);
 			setError(error.response.data.message || error);
 		}
 	};
@@ -117,14 +142,24 @@ const MyRequestCard = (props) => {
 					{request.hospitalAddress}
 				</Typography>
 				<Typography variant="body2">
-					{request.requestDeadline}
+					{moment(request.requestDeadline).format("DD MMMM YYYY")}
 				</Typography>
 			</CardContent>
 			<IconButton
 				onClick={() => setEditMode(true)}
 				className={classes.editButton}
+				sx={{ position: "absolute", border: "1px solid #000", p: 1 }}
+				size="small"
 			>
-				<Edit />
+				<Edit fontSize="inherit" />
+			</IconButton>
+			<IconButton
+				onClick={deleteRequestHandler}
+				className={classes.deleteButton}
+				sx={{ position: "absolute", border: "1px solid #000", p: 1 }}
+				size="small"
+			>
+				<Delete fontSize="inherit" />
 			</IconButton>
 		</Card>
 	);
@@ -228,7 +263,7 @@ const MyRequestCard = (props) => {
 				variant="contained"
 				color="error"
 				sx={{ mx: "50%", transform: "translateX(-50%)" }}
-				onClick={() => setEditMode(false)}
+				onClick={updateRequestHandler}
 			>
 				Update
 			</Button>

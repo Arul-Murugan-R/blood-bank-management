@@ -6,10 +6,23 @@
 	/* transform: translateX(-150%); */
 	position: absolute;
 	left: 100%;
-	transform: translate(-100%, -100%);
+	transform: translate(-270%, -120%);
 	visibility: hidden;
 }
 
-.viewCard:hover .editButton {
+.deleteButton {
+	/* transform: translateX(-150%); */
+	position: absolute;
+	left: 100%;
+	transform: translate(-150%, -120%);
+	visibility: hidden;
+}
+
+.viewCard:hover {
+	background-color: rgba(255, 255, 255, 0.9);
+}
+
+.viewCard:hover .editButton,
+.viewCard:hover .deleteButton {
 	visibility: visible;
 }

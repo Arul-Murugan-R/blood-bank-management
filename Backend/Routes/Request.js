@@ -14,6 +14,6 @@ router
 	.route("/update-status/:requestId")
 	.get(CatchAsync(request.updateDonationInfo));
 
-router.route("/delete/:id").delete(CatchAsync(request.deleteRequest));
+router.route("/delete").post(CatchAsync(request.deleteRequest));
 
 module.exports = router;

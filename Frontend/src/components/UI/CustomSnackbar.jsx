@@ -15,7 +15,6 @@ const CustomSnackbar = (props) => {
 	const dispatch = useDispatch();
 
 	const handleClose = () => {
-		console.log("close");
 		setOpen(false);
 		dispatch(SnackActions.closeSnack());
 	};
@@ -35,7 +34,7 @@ const CustomSnackbar = (props) => {
 			{createPortal(
 				<Snackbar
 					open={open}
-					autoHideDuration={850}
+					autoHideDuration={1000}
 					onClose={handleClose}
 					action={action}
 				>

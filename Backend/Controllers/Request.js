@@ -79,19 +79,20 @@ module.exports.updateRequest = async (req, res, next) => {
 				message: "Request not found",
 			});
 		}
-		if (request.userId !== req.body.userId) {
-			return res.status(401).json({
-				message: "Unauthorized",
+		console.log(request.userId.equals(req.body.request.userId));
+		if (request.userId.equals(req.body.request.userId)) {
+			const updatedRequest = await Request.findByIdAndUpdate(
+				reqID,
+				req.body.request,
+				{ new: true }
+			);
+			return res.status(200).json({
+				message: "Request updated successfully",
+				request: updatedRequest,
 			});
 		}
-		const updatedRequest = await Request.findByIdAndUpdate(
-			reqID,
-			req.body.request,
-			{ new: true }
-		);
-		return res.status(200).json({
-			message: "Request updated successfully",
-			request: updatedRequest,
+		return res.status(401).json({
+			message: "Unauthorized",
 		});
 	} catch (e) {
 		return res.status(401).json({
@@ -141,14 +142,14 @@ module.exports.deleteRequest = async (req, res, next) => {
 				message: "Request not found",
 			});
 		}
-		if (request.userId !== req.body.userId) {
-			return res.status(401).json({
-				message: "Unauthorized",
+		if (request.userId.equals(req.body.userId)) {
+			await Request.findByIdAndDelete(reqID);
+			return res.status(200).json({
+				message: "Request deleted successfully",
 			});
 		}
-		await Request.findByIdAndDelete(reqID);
-		return res.status(200).json({
-			message: "Request deleted successfully",
+		return res.status(401).json({
+			message: "Unauthorized",
 		});
 	} catch (e) {
 		return res.status(401).json({
