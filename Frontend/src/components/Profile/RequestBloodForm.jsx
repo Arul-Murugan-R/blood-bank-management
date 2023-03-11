@@ -31,7 +31,6 @@ const RequestBloodForm = () => {
 	});
 
 	const userId = useSelector((state) => state.auth.userId);
-	console.log("user Id", userId);
 	const [bloodGroup, setBloodGroup] = useState(null);
 	const [error, setError] = useState(null);
 	const [requestedFrom, setRequestedFrom] = useState(null);

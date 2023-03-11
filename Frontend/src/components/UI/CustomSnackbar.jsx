@@ -30,28 +30,12 @@ const CustomSnackbar = (props) => {
 		</IconButton>
 	);
 
-	const Snack = (
-		<Snackbar
-			open={open}
-			autoHideDuration={1500}
-			onClose={handleClose}
-			action={action}
-		>
-			<Alert
-				onClose={handleClose}
-				severity={severity}
-				sx={{ width: "100%" }}
-			>
-				{message}
-			</Alert>
-		</Snackbar>
-	);
 	return (
 		<>
 			{createPortal(
 				<Snackbar
 					open={open}
-					autoHideDuration={4000}
+					autoHideDuration={850}
 					onClose={handleClose}
 					action={action}
 				>

@@ -1,0 +1,15 @@
+.viewCard {
+	position: relative;
+}
+
+.editButton {
+	/* transform: translateX(-150%); */
+	position: absolute;
+	left: 100%;
+	transform: translate(-100%, -100%);
+	visibility: hidden;
+}
+
+.viewCard:hover .editButton {
+	visibility: visible;
+}

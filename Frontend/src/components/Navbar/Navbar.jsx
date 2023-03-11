@@ -18,6 +18,7 @@ import { useEffect, useState } from "react";
 import classes from "./Navbar.module.css";
 import { RequestDataActions } from "../../store/RequestStore";
 import { DonorDataActions } from "../../store/DonorData";
+import { SnackActions } from "../../store/SnackStore";
 
 const Navbar = () => {
 	const dispatch = useDispatch();
@@ -26,6 +27,12 @@ const Navbar = () => {
 	const logoutUser = () => {
 		dispatch(authActions.logoutHandler());
 		dispatch(DonorDataActions.clearDonorData());
+		dispatch(
+			SnackActions.setSnack({
+				message: "Logged out successfully!",
+				severity: "success",
+			})
+		);
 		return <Navigate to="/" replace />;
 	};
 

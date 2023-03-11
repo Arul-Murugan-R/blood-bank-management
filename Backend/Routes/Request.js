@@ -8,7 +8,7 @@ router.route("/all").get(CatchAsync(request.getAllRequests));
 
 router.route("/get/:id").get(CatchAsync(request.getRequestDetails));
 
-router.route("/update/:id").post(CatchAsync(request.updateRequest));
+router.route("/update").post(CatchAsync(request.updateRequest));
 
 router
 	.route("/update-status/:requestId")
