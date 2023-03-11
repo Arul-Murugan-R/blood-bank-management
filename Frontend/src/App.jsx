@@ -111,6 +111,7 @@ function App() {
 						</ProtectedRoute>
 					}
 				/>
+				<Route path="/about" element={<Wrapper></Wrapper>} />
 				<Route
 					path="/rest"
 					element={
@@ -120,22 +121,8 @@ function App() {
 						</Wrapper>
 					}
 				/>
-				<Route
-					path="/register"
-					element={
-						<ProtectedRoute condition={!isLoggedIn} redirect="/">
-							<SignUpForm />
-						</ProtectedRoute>
-					}
-				/>
-				<Route
-					path="/login"
-					element={
-						<ProtectedRoute condition={!isLoggedIn} redirect="/">
-							<LoginForm />
-						</ProtectedRoute>
-					}
-				/>
+				<Route path="/register" element={<SignUpForm />} />
+				<Route path="/login" element={<LoginForm />} />
 				<Route
 					path="/request-blood"
 					element={
@@ -159,7 +146,10 @@ function App() {
 				<Route
 					path="/view-request/:id"
 					element={
-						<ProtectedRoute condition={isLoggedIn} redirect="/">
+						<ProtectedRoute
+							condition={isLoggedIn}
+							redirect="/login"
+						>
 							<Wrapper>
 								<ViewRequest />
 							</Wrapper>

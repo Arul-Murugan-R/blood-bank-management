@@ -7,7 +7,7 @@ import {
 	CardActions,
 	Typography,
 } from "@mui/material";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
 	validatePassword,
 	validateText,
@@ -16,7 +16,7 @@ import useInput from "../../Hooks/use-input";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import Error from "../UI/Typography/Error";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { authActions } from "../../store/AuthStore";
 import CustomFormControl from "../UI/FormControl/CustomFormControl";
 import { SnackActions } from "../../store/SnackStore";
@@ -26,6 +26,20 @@ const backendUrl = import.meta.env.VITE_BACKEND_URL;
 const LoginForm = () => {
 	const navigate = useNavigate();
 	const dispatch = useDispatch();
+	const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
+
+	useEffect(() => {
+		if (isLoggedIn) {
+			dispatch(
+				SnackActions.setSnack({
+					message: "You need to logout first!",
+					severity: "error",
+				})
+			);
+			return navigate("/");
+		}
+	}, []);
+
 	const userField = useInput(
 		{ type: "text", label: "Username", name: "username" },
 		validateText
@@ -63,8 +77,8 @@ const LoginForm = () => {
 				password: passwordField.properties.value,
 			});
 			const user = response.data.user;
-			await dispatch(authActions.loginHandler({ user: user }));
-			await dispatch(
+			dispatch(authActions.loginHandler({ user: user }));
+			dispatch(
 				SnackActions.setSnack({
 					message: "Login Successful",
 					type: "success",

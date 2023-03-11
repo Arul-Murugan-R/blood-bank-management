@@ -40,7 +40,6 @@ const ViewRequest = () => {
 				}
 			}
 		} catch (error) {
-			console.log(error);
 			dispatch(
 				SnackActions.setSnack({
 					message: "Request update failed",

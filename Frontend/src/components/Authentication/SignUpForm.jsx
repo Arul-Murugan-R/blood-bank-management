@@ -33,6 +33,19 @@ const backendUrl = import.meta.env.VITE_BACKEND_URL;
 const SignUpForm = () => {
 	const navigate = useNavigate();
 	const dispatch = useDispatch();
+
+	useEffect(() => {
+		if (isLoggedIn) {
+			dispatch(
+				SnackActions.setSnack({
+					message: "You need to logout first!",
+					severity: "error",
+				})
+			);
+			return navigate("/");
+		}
+	}, []);
+
 	const userField = useInput(
 		{ type: "text", label: "Username", name: "username" },
 		validateText
@@ -110,22 +123,23 @@ const SignUpForm = () => {
 				dob: role == "donor" ? dobField.properties.value : null,
 				mobileNumber: phone.properties.value,
 			});
-			navigate("/rest");
 
 			const user = response.data.user;
-			await dispatch(authActions.loginHandler({ user: user }));
+			dispatch(authActions.loginHandler({ user: user }));
 			userField.validities.reset();
 			emailField.validities.reset();
 			passwordField.validities.reset();
-			role === "donor" ? navigate("/donor-info") : navigate("/");
 			dispatch(
 				SnackActions.setSnack({
 					message: "Registration Successful",
 					severity: "success",
 				})
 			);
+			return role === "donor" ? navigate("/donor-info") : navigate("/");
 		} catch (error) {
-			setRegistrationerror(error.response.data.message);
+			setRegistrationerror(
+				error.response.data.message || "Something went wrong. Try again"
+			);
 		}
 	};
 

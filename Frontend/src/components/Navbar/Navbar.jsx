@@ -32,7 +32,16 @@ const Navbar = () => {
 	const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
 	const userRole = useSelector((state) => state.auth.role);
 
-	const pages = ["Search", "Donate", "About"];
+	const pages = [
+		{
+			name: "Search",
+			onClick: () => navigate("/search"),
+		},
+		{
+			name: "About",
+			onClick: () => navigate("/about"),
+		},
+	];
 	const settings = [
 		{
 			name: "Profile",
@@ -88,7 +97,7 @@ const Navbar = () => {
 						variant="h6"
 						noWrap
 						component="a"
-						href="/"
+						onClick={() => navigate("/")}
 						sx={{
 							mr: 2,
 							display: { xs: "none", md: "flex" },
@@ -138,14 +147,14 @@ const Navbar = () => {
 						>
 							{pages.map((page) => (
 								<Button
-									key={page}
-									onClick={handleCloseNavMenu}
+									key={page.name}
+									onClick={page.onClick}
 									sx={{
 										color: "black",
 										display: "block",
 									}}
 								>
-									{page}
+									{page.name}
 								</Button>
 							))}
 							{isLoggedIn && (
@@ -183,7 +192,7 @@ const Navbar = () => {
 						variant="h5"
 						noWrap
 						component="a"
-						href=""
+						onClick={() => navigate("/")}
 						sx={{
 							mr: 2,
 							display: { xs: "flex", md: "none" },
@@ -205,11 +214,11 @@ const Navbar = () => {
 					>
 						{pages.map((page) => (
 							<Button
-								key={page}
-								onClick={handleCloseNavMenu}
+								key={page.name}
+								onClick={page.onClick}
 								sx={{ my: 2, color: "white", display: "block" }}
 							>
-								{page}
+								{page.name}
 							</Button>
 						))}
 						{isLoggedIn && (
