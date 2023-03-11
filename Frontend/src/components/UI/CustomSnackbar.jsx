@@ -15,8 +15,9 @@ const CustomSnackbar = (props) => {
 	const dispatch = useDispatch();
 
 	const handleClose = () => {
+		console.log("close");
 		setOpen(false);
-		dispatch((state) => SnackActions.closeSnack());
+		dispatch(SnackActions.closeSnack());
 	};
 	const action = (
 		<IconButton
@@ -32,7 +33,7 @@ const CustomSnackbar = (props) => {
 	const Snack = (
 		<Snackbar
 			open={open}
-			autoHideDuration={4000}
+			autoHideDuration={1500}
 			onClose={handleClose}
 			action={action}
 		>

@@ -1,6 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
 import { DonorDataActions } from "./DonorData";
+import { donorInfoActions } from "./DonorInfoData";
 import { RequestDataActions } from "./RequestStore";
 
 const initialAuthState = {
@@ -61,9 +62,7 @@ export const verifyToken = () => {
 		const verifier = async () => {
 			const token = localStorage.getItem("token");
 			const expiresAt = localStorage.getItem("expiresAt");
-			const requestData = await axios.get(
-				base_url + "/request/all"
-			);
+			const requestData = await axios.get(base_url + "/request/all");
 			if (
 				requestData.status === 200 &&
 				requestData.data.requests.length > 0
@@ -71,6 +70,15 @@ export const verifyToken = () => {
 				dispatch(
 					RequestDataActions.setRequestsData({
 						requestsData: requestData.data.requests,
+					})
+				);
+
+			const donorData = await axios.get(base_url + "/donor/all-donors");
+			console.log(donorData);
+			if (donorData.status === 200 && donorData.data.donorData.length > 0)
+				dispatch(
+					donorInfoActions.setDonorInfo({
+						donorInfo: donorData.data.donorData,
 					})
 				);
 			if (+expiresAt > Date.now()) {
@@ -94,7 +102,6 @@ export const verifyToken = () => {
 							})
 						);
 					}
-					
 
 					return {
 						userId: response.data.user.userId,

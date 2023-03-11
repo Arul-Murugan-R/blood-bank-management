@@ -86,7 +86,7 @@ const LoginForm = () => {
 			);
 			userField.validities.reset();
 			passwordField.validities.reset();
-			return navigate(-1);
+			return navigate(-2);
 		} catch (error) {
 			setLoginError(error.response.data.message);
 		}

@@ -10,4 +10,6 @@ router
 	.route("/update-last-donation/:userId")
 	.get(CatchAsync(donors.updateLastDonation));
 
+router.route("/all-donors").get(CatchAsync(donors.getAllDonors));
+
 module.exports = router;
