@@ -8,6 +8,7 @@ const secret = process.env.SECRET;
 const options = {
 	expiresIn: process.env.EXPIRESIN,
 };
+const ClientUrl = process.env.FRONT_END_URL;
 const Request = require("../Models/Request");
 
 const transporter = nodemailer.createTransport({
@@ -140,24 +141,18 @@ module.exports.notifyDonor = async (req, res, next) => {
 		const user = await User.findById(donorId);
 		const request = await Request.findById(reqId);
 		const recipient = await User.findById(request.userId);
+		const token = jwt.sign({ id: user._id }, secret, options);
+		const expiry =
+			Date.now() + +options.expiresIn.slice(0, 2) * 60 * 60 * 100;
+		const href = `${ClientUrl}email-login/${reqId}/BEARER ${token}/${expiry}/${user._id}`;
 		if (user.role == "donor") {
 			const mailOptions = {
 				from: "bloodbank@email.com",
 				to: user.email,
 				subject: "Blood Donation",
-				html: `<h3>Urgent Blood required: ${
-					request.numberOfUnits
-				}units of ${request.bloodGroup} at ${request.hospitalName}, ${
-					request.hospitalAddress
-				}</h3>
-                <p>Kindly contact ${recipient.username} at ${
-					recipient.mobileNumber || recipient.email
-				} for further details.</p>
-                <a href='https://www.google.com/maps/search/${
-					request.location.latitude
-				},${request.location.longitude}/@${request.location.latitude},${
-					request.location.longitude
-				},13z'>Location `,
+				html: `<h3>Urgent Blood required: ${request.numberOfUnits}units of ${request.bloodGroup} at ${request.hospitalName}, ${request.hospitalAddress}</h3>
+                <a href='${href}'>Click here to view more</a>
+                <a href='https://www.google.com/maps/search/${request.location.latitude},${request.location.longitude}/@${request.location.latitude},${request.location.longitude},13z'>Location `,
 			};
 			transporter.sendMail(mailOptions, (err, info) => {
 				if (err) {

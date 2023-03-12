@@ -62,6 +62,7 @@ import RequestBloodForm from "./components/Profile/RequestBloodForm";
 import CircularDesc from "./components/CircularDesc/CircularDesc";
 import MyRequests from "./components/Profile/MyRequests";
 import ViewRequest from "./components/Requests/ViewRequest";
+import EmailVerification from "./components/Authentication/EmailVerification";
 
 let initial = true;
 
@@ -155,6 +156,10 @@ function App() {
 							</Wrapper>
 						</ProtectedRoute>
 					}
+				/>
+				<Route
+					path="/email-login/:reqId/:token/:expiresAt/:userId"
+					element={<EmailVerification />}
 				/>
 			</Routes>
 		</>

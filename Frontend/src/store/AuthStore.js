@@ -35,12 +35,7 @@ const AuthSlice = createSlice({
 		checkToken(state, action) {
 			const { userId, username, token, role } = action.payload;
 			const storedUserId = localStorage.getItem("userId");
-			const storedUsername = localStorage.getItem("username");
-			if (
-				(userId !== storedUserId && username !== storedUsername) ||
-				userId === null ||
-				username === null
-			)
+			if (userId !== storedUserId || userId === null)
 				return { ...initialAuthState };
 			return {
 				isLoggedIn: true,

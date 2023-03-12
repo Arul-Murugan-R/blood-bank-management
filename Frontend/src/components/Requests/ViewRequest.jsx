@@ -51,6 +51,7 @@ const ViewRequest = () => {
 
 	useEffect(() => {
 		if (request == null) {
+			console.log(id);
 			dispatch(
 				SnackActions.setSnack({
 					message: "Request not found",
