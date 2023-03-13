@@ -15,36 +15,36 @@ const doubt = 'white';
 
 const Blood = [
 	{
-		value: 'A+',
-		label: 'A+',
+		value: 'A+ve',
+		label: 'A+ve',
 	},
 	{
-		value: 'A-',
-		label: 'A-',
+		value: 'A-ve',
+		label: 'A-ve',
 	},
 	{
-		value: 'B+',
-		label: 'B+',
+		value: 'B+ve',
+		label: 'B+ve',
 	},
 	{	
-		value: 'B-',
-		label: 'B-',
+		value: 'B-ve',
+		label: 'B-ve',
 	},
 	{
-		value: 'AB+',
-		label: 'AB+',
+		value: 'AB+ve',
+		label: 'AB+ve',
 	},
 	{
-		value: 'AB-',
-		label: 'AB-',
+		value: 'AB-ve',
+		label: 'AB-ve',
 	},
 	{
-		value: 'O+',
-		label: 'O+',
+		value: 'O+ve',
+		label: 'O+ve',
 	},
 	{
-		value: 'O-',
-		label: 'O-',
+		value: 'O-ve',
+		label: 'O-ve',
 	},
 ]
 
@@ -147,7 +147,26 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
 }));
 
 
-export default function TableFilterCus() {
+export default function TableFilterCus(props) {
+	const [filterData, setFilterData] = React.useState({
+		blood: 'AB+ve',
+		state: 'Tamil Nadu',
+		age: '18-25',
+	})
+	const selectHandler = (e) => {
+		setFilterData({ ...filterData, [e.target.name]: e.target.value })
+	}
+
+	const submitHandler = (e) => {
+		e.preventDefault()
+		console.log(filterData)
+		props.filter(filterData)
+	}
+	const resetHandler = (e) => {
+		e.preventDefault()
+		window.location = '/search'
+	}
+
 	return (
 		<>
 			<TableContainer
@@ -164,9 +183,9 @@ export default function TableFilterCus() {
 							<StyledTableCell >
 								Filter By Blood Group
 							</StyledTableCell>
-							<StyledTableCell >
+							{/* <StyledTableCell >
 								Fiter By State
-							</StyledTableCell>
+							</StyledTableCell> */}
 							<StyledTableCell >
 								Filter By Age
 							</StyledTableCell>
@@ -179,8 +198,10 @@ export default function TableFilterCus() {
 									id="outlined-select-blood"
 									select
 									label="Select"
-									defaultValue="AB+"
+									defaultValue="AB+ve"
 									helperText="Please select your Blood Group"
+									onChange={selectHandler}
+									name="blood"
 								>
 									{Blood.map((option) => (
 										<MenuItem key={option.value} value={option.value}>
@@ -189,13 +210,15 @@ export default function TableFilterCus() {
 									))}
 								</SelectCus>
 							</StyledTableCell>
-							<StyledTableCell >
+							{/* <StyledTableCell >
 							<SelectCus
 									id="outlined-select-state"
 									select
 									label="Select"
 									defaultValue="Andhra Pradesh"
 									helperText="Please select your State"
+									name="state"
+									onChange={selectHandler}
 								>
 									{States.map((option) => (
 										<MenuItem key={option.value} value={option.value}>
@@ -203,7 +226,7 @@ export default function TableFilterCus() {
 										</MenuItem>
 									))}
 								</SelectCus>
-							</StyledTableCell>
+							</StyledTableCell> */}
 							<StyledTableCell >
 							<SelectCus
 									id="outlined-select-age"
@@ -211,6 +234,8 @@ export default function TableFilterCus() {
 									label="Select"
 									defaultValue="18-25"
 									helperText="Please select your Age"
+									name="age"
+									onChange={selectHandler}
 								>
 									{Age.map((option) => (
 										<MenuItem key={option.value} value={option.value}>
@@ -229,7 +254,19 @@ export default function TableFilterCus() {
 					background: 'transparent', transition: 'all 0.5 linear',cursor:'pointer', "&:hover": { backgroundColor: doubt, color: 'black',
 			
 				}
-				}}>Filter</Button>
+				}} 
+				onClick={submitHandler}  
+				
+				>Filter</Button>
+				<Button  sx={{width:'200px',
+					mt: 2, mb: 2, ml: 2, color: doubt, border: '1px solid white',
+					background: 'transparent', transition: 'all 0.5 linear',cursor:'pointer', "&:hover": { backgroundColor: doubt, color: 'black',
+			
+				}
+				}} 
+				onClick={resetHandler}  
+				
+				>Reset</Button>
 			</center>
 		</>
 	);

@@ -259,16 +259,16 @@ const Navbar = () => {
 					{!isLoggedIn && (
 						<Box>
 							<Button>
+								<Link to="/login" className={classes.authLinks}>
+									Login
+								</Link>
+							</Button>
+							<Button>
 								<Link
 									to="/register"
 									className={classes.authLinks}
 								>
 									Sign Up
-								</Link>
-							</Button>
-							<Button>
-								<Link to="/login" className={classes.authLinks}>
-									Login
 								</Link>
 							</Button>
 						</Box>

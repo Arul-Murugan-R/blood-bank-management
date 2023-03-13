@@ -1,4 +1,5 @@
 import * as React from "react";
+import { useState } from "react";
 import { styled } from "@mui/material/styles";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
@@ -9,6 +10,7 @@ import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import TablePagination from "@mui/material/TablePagination";
 import TableFilterCus from "./TableFilter";
+import DonorData from "./TableData";
 const themeCol = 'white'
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
 	[`&.${tableCellClasses.head}`]: {
@@ -45,7 +47,7 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
 		border: "1px solid "+themeCol,
 	},
 }));
-
+/*
 function createData(name, group, age, number, state, email) {
 	return { name, group, age, number, state, email };
 }
@@ -74,11 +76,23 @@ const rows = [
 	createData("ronaldo", "O-ve", 45, 9876543210, "Tamil Nadu", ""),
 	createData("neymar", "AB-ve", 45, 9876543210, "Tamil Nadu", ""),
 ].sort((a, b) => (a.name < b.name ? -1 : 1));
-
+*/
+// console.log(rows)
 export default function HomeTable() {
-	const [page, setPage] = React.useState(0);
-	const [rowsPerPage, setRowsPerPage] = React.useState(10);
-
+	const [page, setPage] = useState(0);
+	const [rowsPerPage, setRowsPerPage] = useState(10);
+	const [rows, setRows] = useState(DonorData);
+	const filterData = (data) => {
+		console.log(data.age)
+		var gt = data.age.split('-')[0]
+		var lt = data.age.split('-')[1]
+		setRows((prev)=>{
+			return prev.filter((item)=>{  if(item.group == data.blood && item.state == data.state && item.age >= gt && item.age <= lt)
+				return item})
+		});
+		console.log(rows)
+	}
+	// const rows = DonorData;
 	const handleChangePage = (event, newPage) => {
 		setPage(newPage);
 	};
@@ -90,7 +104,7 @@ export default function HomeTable() {
 
 	return (
 		<>
-			<TableFilterCus />
+			<TableFilterCus filter={filterData} />
 			<TableContainer
 				component={Paper}
 				sx={{
