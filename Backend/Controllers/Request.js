@@ -79,7 +79,6 @@ module.exports.updateRequest = async (req, res, next) => {
 				message: "Request not found",
 			});
 		}
-		console.log(request.userId.equals(req.body.request.userId));
 		if (request.userId.equals(req.body.request.userId)) {
 			const updatedRequest = await Request.findByIdAndUpdate(
 				reqID,
