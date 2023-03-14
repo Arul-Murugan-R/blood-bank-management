@@ -83,6 +83,7 @@ export default function HomeTable() {
 	const [rowsPerPage, setRowsPerPage] = useState(10);
 	const [rows, setRows] = useState(DonorData);
 	const filterData = (data) => {
+		setRows(DonorData)
 		console.log(data.age)
 		var gt = data.age.split('-')[0]
 		var lt = data.age.split('-')[1]
