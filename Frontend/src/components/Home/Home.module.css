@@ -160,7 +160,7 @@
 .donationInfo {
 	position: relative;
 	overflow-y: hidden;
-	background: #f7f7f7;
+	background: transparent;
 	font-family: "Montserrat", sans-serif;
 	margin-bottom: 2rem;
 	filter: invert(1);

@@ -1,3 +1,4 @@
+import { Typography } from "@mui/material";
 import { useEffect } from "react";
 import classes from "./Home.module.css";
 
@@ -82,6 +83,14 @@ const DonationInfo = () => {
 
 	return (
 		<div className={classes.donationInfo}>
+			<Typography
+				textAlign={"center"}
+				variant="h4"
+				component="h2"
+				gutterBottom
+			>
+				Who can get my Blood?
+			</Typography>
 			<div id={classes["content"]}>
 				<h3>Select the donor blood type:</h3>
 				<div id={classes["blood_selector"]}>
