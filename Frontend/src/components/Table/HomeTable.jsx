@@ -11,7 +11,10 @@ import Paper from "@mui/material/Paper";
 import TablePagination from "@mui/material/TablePagination";
 import TableFilterCus from "./TableFilter";
 import DonorData from "./TableData";
+import { SnackActions } from "../../store/SnackStore";
+import { useDispatch, useSelector } from "react-redux";
 const themeCol = 'white'
+
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
 	[`&.${tableCellClasses.head}`]: {
 		backgroundColor: '#2a3338',
@@ -79,6 +82,7 @@ const rows = [
 */
 // console.log(rows)
 export default function HomeTable() {
+	const dispatch = useDispatch();
 	const [page, setPage] = useState(0);
 	const [rowsPerPage, setRowsPerPage] = useState(10);
 	const [rows, setRows] = useState(DonorData);
@@ -88,12 +92,22 @@ export default function HomeTable() {
 		var gt = data.age.split('-')[0]
 		var lt = data.age.split('-')[1]
 		setRows((prev)=>{
-			return prev.filter((item)=>{  if(item.group == data.blood && item.state == data.state && item.age >= gt && item.age <= lt)
+			return prev.filter((item)=>{  if(((item.group == data.blood )|| data.blood == 'All') 
+			&& ((item.state == data.state) || data.state == 'All')
+			
+			&& ((item.age >= gt && item.age <= lt) || data.age == 'All'))
 				return item})
 		});
-		console.log(rows)
+		// console.log(rows)
+		dispatch(
+			SnackActions.setSnack({
+				message: "Filter Applied",
+				type: "success",
+			})
+		);
 	}
 	// const rows = DonorData;
+	// rows = rows.sort((a, b) => (a.name < b.name ? -1 : 1));
 	const handleChangePage = (event, newPage) => {
 		setPage(newPage);
 	};

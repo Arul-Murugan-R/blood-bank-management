@@ -15,6 +15,10 @@ const doubt = 'white';
 
 const Blood = [
 	{
+		value: 'All',
+		label: 'All',
+	},
+	{
 		value: 'A+ve',
 		label: 'A+ve',
 	},
@@ -50,6 +54,10 @@ const Blood = [
 
 const States = [
 	{
+		value: 'All',
+		label: 'All',
+	},
+	{
 		value: 'Andhra Pradesh',
 		label: 'Andhra Pradesh',
 	},
@@ -65,8 +73,16 @@ const States = [
 		value: 'Bihar',
 		label: 'Bihar',
 	},
+	{
+		value:"Tamil Nadu",
+		label:"Tamil Nadu"
+	},
 ]
 const Age = [
+	{
+		value: 'All',
+		label: 'All',
+	},
 	{
 		value: '18-25',
 		label: '18-25',
@@ -118,7 +134,6 @@ const StyledTableCell = styled(TableCell)(({ theme }) => ({
 		textAlign: 'center',
 		fontFamily: 'Salsa',
 		color: doubt,
-		border: 0
 	},
 	[`&.${tableCellClasses.body}`]: {
 		// backgroundColor: 'rgb(48, 48, 48)',
@@ -149,9 +164,9 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
 
 export default function TableFilterCus(props) {
 	const [filterData, setFilterData] = React.useState({
-		blood: 'AB+ve',
-		state: 'Tamil Nadu',
-		age: '18-25',
+		blood: 'All',
+		state: 'All',
+		age: 'All',
 	})
 	const selectHandler = (e) => {
 		setFilterData({ ...filterData, [e.target.name]: e.target.value })
@@ -183,9 +198,9 @@ export default function TableFilterCus(props) {
 							<StyledTableCell >
 								Filter By Blood Group
 							</StyledTableCell>
-							{/* <StyledTableCell >
+							<StyledTableCell >
 								Fiter By State
-							</StyledTableCell> */}
+							</StyledTableCell>
 							<StyledTableCell >
 								Filter By Age
 							</StyledTableCell>
@@ -198,8 +213,8 @@ export default function TableFilterCus(props) {
 									id="outlined-select-blood"
 									select
 									label="Select"
-									defaultValue="AB+ve"
-									helperText="Please select your Blood Group"
+									defaultValue="All"
+									// helperText="Please select your Blood Group"
 									onChange={selectHandler}
 									name="blood"
 								>
@@ -210,13 +225,13 @@ export default function TableFilterCus(props) {
 									))}
 								</SelectCus>
 							</StyledTableCell>
-							{/* <StyledTableCell >
+							<StyledTableCell >
 							<SelectCus
 									id="outlined-select-state"
 									select
 									label="Select"
-									defaultValue="Andhra Pradesh"
-									helperText="Please select your State"
+									defaultValue="All"
+									// helperText="Please select your State"
 									name="state"
 									onChange={selectHandler}
 								>
@@ -226,14 +241,14 @@ export default function TableFilterCus(props) {
 										</MenuItem>
 									))}
 								</SelectCus>
-							</StyledTableCell> */}
+							</StyledTableCell>
 							<StyledTableCell >
 							<SelectCus
 									id="outlined-select-age"
 									select
 									label="Select"
-									defaultValue="18-25"
-									helperText="Please select your Age"
+									defaultValue="All"
+									// helperText="Please select your Age"
 									name="age"
 									onChange={selectHandler}
 								>
