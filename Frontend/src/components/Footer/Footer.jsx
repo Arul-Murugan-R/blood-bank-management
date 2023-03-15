@@ -28,7 +28,7 @@ const Footer = () => {
 						}
 					>
 						<h3>Want to Donate</h3>
-						<a href="/request">Requests</a>
+						<a onClick={() => navigate("/requests")}>Requests</a>
 						<a onClick={() => navigate("/my-requests")}>My Requests</a>
 						<a href="/register">Donor Login</a>
 					</section>

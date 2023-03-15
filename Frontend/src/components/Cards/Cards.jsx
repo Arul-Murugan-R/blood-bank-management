@@ -54,13 +54,14 @@ const Cards = (props) => {
 			type: "availability",
 		};
 		return (
+			<center>
 			<div
 				className={`${classes.userList} ${classes.noAnimation}`}
 				ref={ref}
 			>
 				<Card details={details}>{count.donor}+</Card>
 				<Card details={details}>{count.req}+</Card>
-			</div>
+			</div></center>
 		);
 	}
 	var calWid = store.length * 22 + "vw";

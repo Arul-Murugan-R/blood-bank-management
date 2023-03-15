@@ -11,12 +11,12 @@ const HomePage = () => {
 	return (
 		<>
 			<div className="intro">
-				<video
-					src="homepagegif.mp4"
+				<img
+					src="/assets/dweet.gif"
 					autoPlay
 					loop
 					muted
-					style={{ position: "absolute", bottom: "0", right: "0" }}
+					style={{objectFit: "cover", width: "100%", height: "100%",zIndex:'-10',position:'absolute',top:"0",height:'100vh'}}
 				/>
 				<div className="intro-text">
 					<h1>
@@ -27,7 +27,7 @@ const HomePage = () => {
 						someone else's life. Be a hero, donate blood!
 					</label>
 				</div>
-			</div>
+			</div><br/>
 			<DonationInfo />
 			<Cards avail="1" />
 			<CircularDesc />

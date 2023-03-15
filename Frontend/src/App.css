@@ -7,21 +7,20 @@
 .intro-text{
 	padding: 5% 10%;
 	width: 900px;
+	z-index: 10;
 }
 .intro .intro-text h1 {
 	font-family: "Times New Roman", Times, serif;
-	font-size: 65px;
+	font-size: 4rem;
 	letter-spacing: 5px;
 	word-spacing: 0.2px;
 	color: var(--doubt);
-	font-weight: 700;
 	text-decoration: none solid rgb(68, 68, 68);
 	text-align: center;
-	margin-bottom: 10px;
 }
 
 
-.intro video {
+.intro img {
 	z-index: -1;
 }
 
