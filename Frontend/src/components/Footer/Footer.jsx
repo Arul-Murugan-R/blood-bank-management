@@ -1,7 +1,9 @@
 import { Link } from "react-router-dom";
 import classes from "./Footer.module.css";
+import { useNavigate } from "react-router-dom";
 
 const Footer = () => {
+	const navigate = useNavigate();
 	return (
 		<>
 			<footer className={classes["padding_4x"]}>
@@ -13,11 +15,10 @@ const Footer = () => {
 							classes["padding_1x"]
 						}
 					>
-						<h3>Top Products</h3>
-						<a href="#">Managed Website</a>
-						<a href="#">Manage Reputation</a>
-						<a href="#">Power Tools</a>
-						<a href="#">Marketing Service</a>
+						<h3>Looking For Blood</h3>
+						<a href="/search">Donor Availability</a>
+						<a href="#">Blood Banks</a>
+						<a href="/register">Recipent Login</a>
 					</section>
 					<section
 						className={
@@ -26,11 +27,10 @@ const Footer = () => {
 							classes["padding_1x"]
 						}
 					>
-						<h3>Quick Links</h3>
-						<a href="#">Jobs</a>
-						<a href="#">Brand Assets</a>
-						<a href="#">Investor Relations</a>
-						<a href="#">Terms of Service</a>
+						<h3>Want to Donate</h3>
+						<a href="/request">Requests</a>
+						<a onClick={() => navigate("/my-requests")}>My Requests</a>
+						<a href="/register">Donor Login</a>
 					</section>
 					<section
 						className={
@@ -40,23 +40,8 @@ const Footer = () => {
 						}
 					>
 						<h3>Features</h3>
-						<a href="#">Jobs</a>
-						<a href="#">Brand Assets</a>
-						<a href="#">Investor Relations</a>
-						<a href="#">Terms of Service</a>
-					</section>
-					<section
-						className={
-							classes["flex-content"] +
-							" " +
-							classes["padding_1x"]
-						}
-					>
-						<h3>Resources</h3>
-						<a href="#">Guides</a>
-						<a href="#">Research</a>
-						<a href="#">Experts</a>
-						<a href="#">Agencies</a>
+						<a href="#who">Who can donate</a>
+						<a href="#">Blood Stats</a>
 					</section>
 					<section
 						className={
@@ -66,8 +51,8 @@ const Footer = () => {
 						}
 					>
 						<h3>Newsletter</h3>
-						<p>You can trust us. we only send promo offers,</p>
-						<fieldset className={classes["fixed_flex"]}>
+						<p>You can trust us. we only send promo offers,</p><br/>
+						<fieldset className={classes["fixed_flex"]} >
 							<input
 								type="email"
 								name="newsletter"

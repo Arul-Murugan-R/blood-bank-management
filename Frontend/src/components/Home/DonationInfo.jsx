@@ -82,7 +82,7 @@ const DonationInfo = () => {
 	}, []);
 
 	return (
-		<div className={classes.donationInfo}>
+		<div className={classes.donationInfo} id="who">
 			<Typography
 				textAlign={"center"}
 				variant="h4"

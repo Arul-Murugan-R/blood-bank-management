@@ -31,6 +31,7 @@ const numberOfUnitsArr = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 const backendUrl = import.meta.env.VITE_BACKEND_URL;
 
 const MyRequestCard = (props) => {
+	const { type } = props;
 	const { request } = props;
 	const [editMode, setEditMode] = useState(false);
 	const [bloodGroup, setBloodGroup] = useState(request.bloodGroup);
@@ -145,22 +146,22 @@ const MyRequestCard = (props) => {
 					{moment(request.requestDeadline).format("DD MMMM YYYY")}
 				</Typography>
 			</CardContent>
-			<IconButton
+			{type!='all'&&<IconButton
 				onClick={() => setEditMode(true)}
 				className={classes.editButton}
 				sx={{ position: "absolute", border: "1px solid #000", p: 1 }}
 				size="small"
 			>
 				<Edit fontSize="inherit" />
-			</IconButton>
-			<IconButton
+			</IconButton>}
+			{type!='all'&&<IconButton
 				onClick={deleteRequestHandler}
 				className={classes.deleteButton}
 				sx={{ position: "absolute", border: "1px solid #000", p: 1 }}
 				size="small"
 			>
 				<Delete fontSize="inherit" />
-			</IconButton>
+			</IconButton>}
 		</Card>
 	);
 
@@ -259,14 +260,23 @@ const MyRequestCard = (props) => {
 				</Select>
 			</FormControl>
 			<CustomFormControl field={requiredBefore} />
+			<center>
 			<Button
 				variant="contained"
 				color="error"
-				sx={{ mx: "50%", transform: "translateX(-50%)" }}
 				onClick={updateRequestHandler}
+				sx={{ mr: 2 }}
 			>
 				Update
 			</Button>
+			<Button
+				variant="contained"
+				color="error"
+				onClick={() => setEditMode(false)}
+			>
+				Cancel
+			</Button>
+			</center>
 		</Paper>
 	);
 	return <Box sx={{ my: 2 }}>{editMode ? EditContent : ViewContent}</Box>;

@@ -6,7 +6,7 @@ import Modal from "../UI/Modals/Modal";
 import { useInView } from "react-intersection-observer";
 const Cards = (props) => {
 	const { ref, inView, entry } = useInView({});
-	const store = useSelector((state) => state.requestData.slice(0, 30));
+	const store = useSelector((state) => state.requestData.filter((item)=>item.numberOfUnits!=0)).slice(0, 30);
 	const [modalDet, setModalDet] = useState({});
 	const [modal, setModal] = useState(false);
 	const [count, setCount] = useState({ donor: 0, req: 0 });
@@ -65,6 +65,7 @@ const Cards = (props) => {
 	}
 	var calWid = store.length * 22 + "vw";
 	var trans = store.length * 22 - 100 + "vw";
+	console.log(store)
 
 	return (
 		<>

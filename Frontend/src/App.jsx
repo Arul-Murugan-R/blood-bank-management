@@ -60,7 +60,7 @@ import DonorsMap from "./components/Map/DonorsMap";
 import CircularCarousel from "./components/Home/CircularCarousel";
 import RequestBloodForm from "./components/Profile/RequestBloodForm";
 import CircularDesc from "./components/CircularDesc/CircularDesc";
-import MyRequests from "./components/Profile/MyRequests";
+import Requests from "./components/Profile/Requests";
 import ViewRequest from "./components/Requests/ViewRequest";
 import EmailVerification from "./components/Authentication/EmailVerification";
 
@@ -149,11 +149,21 @@ function App() {
 					}
 				/>
 				<Route
+					path="/requests"
+					element={
+						<ProtectedRoute condition={isLoggedIn} redirect='/'>
+							<Wrapper>
+								<Requests type='all' />
+							</Wrapper>
+						</ProtectedRoute>
+					}
+				/>
+				<Route
 					path="/my-requests"
 					element={
-						<ProtectedRoute condition={isLoggedIn} redirect="/">
+						<ProtectedRoute condition={isLoggedIn} redirect='/'>
 							<Wrapper>
-								<MyRequests />
+								<Requests type='my'/>
 							</Wrapper>
 						</ProtectedRoute>
 					}

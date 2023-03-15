@@ -51,6 +51,12 @@ const Navbar = () => {
 	];
 	const settings = [
 		{
+			name: "My Requests",
+			onClick: () => {
+				navigate("/my-requests");
+			},
+		},
+		{
 			name: "Profile",
 			onClick: () => {
 				navigate("/");
@@ -182,15 +188,15 @@ const Navbar = () => {
 							)}
 							{isLoggedIn && (
 								<Button
-									key="My Requests"
-									onClick={() => navigate("/my-requests")}
+									key="Requests"
+									onClick={() => navigate("/requests")}
 									sx={{
 										my: 2,
 										color: "black",
 										display: "block",
 									}}
 								>
-									My Requests
+									Requests
 								</Button>
 							)}
 						</Menu>
@@ -246,15 +252,15 @@ const Navbar = () => {
 						)}
 						{isLoggedIn && (
 							<Button
-								key="My Requests"
-								onClick={() => navigate("/my-requests")}
+								key="Requests"
+								onClick={() => navigate("/requests")}
 								sx={{
 									my: 2,
 									color: "white",
 									display: "block",
 								}}
 							>
-								My Requests
+								Requests
 							</Button>
 						)}
 					</Box>

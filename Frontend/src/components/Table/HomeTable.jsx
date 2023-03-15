@@ -13,7 +13,7 @@ import TableFilterCus from "./TableFilter";
 import DonorData from "./TableData";
 import { SnackActions } from "../../store/SnackStore";
 import { useDispatch, useSelector } from "react-redux";
-const themeCol = 'white'
+const themeCol = '#ccc'
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
 	[`&.${tableCellClasses.head}`]: {

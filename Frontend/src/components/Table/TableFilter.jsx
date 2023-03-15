@@ -11,7 +11,7 @@ import { Button } from "@mui/material";
 import TextField from '@mui/material/TextField';
 import MenuItem from '@mui/material/MenuItem';
 
-const doubt = 'white';
+const doubt = '#ccc';
 
 const Blood = [
 	{

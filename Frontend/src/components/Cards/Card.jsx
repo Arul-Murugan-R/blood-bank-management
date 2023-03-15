@@ -3,10 +3,6 @@ import { Link, useNavigate } from "react-router-dom";
 import { useRef, useEffect } from "react";
 const Cards = (props) => {
 	const navigate = useNavigate();
-	const myRef = useRef();
-	useEffect(() => {
-		console.log(myRef.current.offsetWidth);
-	}, []);
 	const {
 		title,
 		user,
@@ -22,7 +18,7 @@ const Cards = (props) => {
 	} = props.details;
 	return (
 		<>
-			<div className={classes.userItem} ref={myRef}>
+			<div className={classes.userItem}>
 				<div className={classes.userItemCard}>
 					<div className={classes.content}>
 						<label>
