@@ -28,7 +28,7 @@ const HomePage = () => {
 					</label>
 				</div>
 			</div>
-			{/* <DonationInfo /> */}
+			<DonationInfo />
 			<Cards avail="1" />
 			<CircularDesc />
 			<Cards rev="1" />

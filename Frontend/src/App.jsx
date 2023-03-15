@@ -122,8 +122,22 @@ function App() {
 						</Wrapper>
 					}
 				/>
-				<Route path="/register" element={<SignUpForm />} />
-				<Route path="/login" element={<LoginForm />} />
+				<Route
+					path="/register"
+					element={
+						<Wrapper>
+							<SignUpForm />
+						</Wrapper>
+					}
+				/>
+				<Route
+					path="/login"
+					element={
+						<Wrapper>
+							<LoginForm />
+						</Wrapper>
+					}
+				/>
 				<Route
 					path="/request-blood"
 					element={

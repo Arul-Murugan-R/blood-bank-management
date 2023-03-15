@@ -6,6 +6,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import { SnackActions } from "../../store/SnackStore";
 import RequestMap from "../Map/RequestMap";
 import axios from "axios";
+import { RequestDataActions } from "../../store/RequestStore";
 
 const backendUrl = import.meta.env.VITE_BACKEND_URL;
 
@@ -34,6 +35,11 @@ const ViewRequest = () => {
 						SnackActions.setSnack({
 							message: "Request accepted",
 							severity: "success",
+						})
+					);
+					dispatch(
+						RequestDataActions.updateRequestData({
+							requestData: response.data.request,
 						})
 					);
 					navigate("/");

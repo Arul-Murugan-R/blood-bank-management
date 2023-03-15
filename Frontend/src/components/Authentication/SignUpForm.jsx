@@ -11,7 +11,7 @@ import {
 	FormControl,
 	Typography,
 } from "@mui/material";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
 	validateAge,
 	validateEmail,
@@ -24,7 +24,7 @@ import CustomFormControl from "../UI/FormControl/CustomFormControl";
 import axios from "axios";
 import Error from "../UI/Typography/Error";
 import { Link, redirect, useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { authActions } from "../../store/AuthStore";
 import { SnackActions } from "../../store/SnackStore";
 
@@ -33,6 +33,7 @@ const backendUrl = import.meta.env.VITE_BACKEND_URL;
 const SignUpForm = () => {
 	const navigate = useNavigate();
 	const dispatch = useDispatch();
+	const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
 
 	useEffect(() => {
 		if (isLoggedIn) {

@@ -14,28 +14,31 @@ const DonationInfo = () => {
 			"AB-": ["AB-", "AB+"],
 			"AB+": ["AB+"],
 		};
+		let lastCalled = null;
 		const reset_button = document.getElementById(classes["reset"]);
 		const selector = document.getElementById(classes["blood_selector"]);
 		const blood_vias = document.querySelectorAll(
-			`${classes["humans"]} ${classes.human} ${classes["blood_via"]}`
+			`#${classes["humans"]} .${classes.human} .${classes["blood_via"]}`
 		);
 		const blood_bag = document.querySelector(
-			`${classes["blood_content"]} > div.${classes["main_bag"]} > div`
+			`#${classes["blood_content"]} > div.${classes["main_bag"]} > div`
 		);
 		const center_via = document.querySelector(
-			`${classes["center_via"]} > ${classes["blood_via"]}`
+			`.${classes["center_via"]} > .${classes["blood_via"]}`
 		);
-		const blood_types = document.querySelectorAll(classes["blood_type"]);
+		const blood_types = document.querySelectorAll(
+			`.${classes["blood_type"]}`
+		);
+
+		console.log(classes["blood_types"]);
 
 		function callIfChildren(e) {
 			if (lastCalled) change();
 			if (e.target !== this) setRecipents(e);
 		}
 
-		function addListeners() {
-			selector.addEventListener("click", callIfChildren);
-			reset.addEventListener("click", reset);
-		}
+		selector.addEventListener("click", callIfChildren);
+		// reset.addEventListener("click", reset);
 
 		function reset() {
 			change();

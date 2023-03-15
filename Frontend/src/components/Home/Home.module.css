@@ -162,6 +162,8 @@
 	overflow-y: hidden;
 	background: #f7f7f7;
 	font-family: "Montserrat", sans-serif;
+	margin-bottom: 2rem;
+	filter: invert(1);
 }
 
 .donationInfo #content {
@@ -173,7 +175,7 @@
 
 .donationInfo h3 {
 	position: absolute;
-	top: 0px;
+	top: 25px;
 	left: 0px;
 }
 
@@ -186,7 +188,7 @@
 	height: 100px;
 	position: absolute;
 	left: 10px;
-	top: 45px;
+	top: 65px;
 	z-index: 2;
 }
 .donationInfo #blood_selector div {
@@ -198,7 +200,7 @@
 	align-items: center;
 	justify-content: center;
 	background-color: #f7f7f7;
-	border: 1px solid #b51e23;
+	border: 1px solid #4ae1dc;
 	border-radius: 25%;
 }
 .donationInfo #blood_selector div:hover {
@@ -230,7 +232,7 @@
 }
 .donationInfo #center_via_c .blood_via {
 	height: 0;
-	background-color: #b51e23;
+	background-color: #4ae1dc;
 	right: 50%;
 	width: 8px;
 	transition: height 0.25s;
@@ -239,8 +241,8 @@
 .donationInfo .bar {
 	position: absolute;
 	right: -150%;
-	top: -6.5%;
-	width: 200%;
+	top: -6.7%;
+	width: 250%;
 	height: 8px;
 	border-radius: 2px 0 0 2px;
 	background-color: #ccc;
@@ -250,20 +252,21 @@
 	position: absolute;
 	width: 100px;
 	height: 140px;
-	top: 70px;
-	left: 250px;
+	top: 86px;
+	left: 260px;
 	border-radius: 30px;
 	opacity: 0.8;
-	background-color: rgba(154, 207, 234, 0.9);
-	border: 8px solid rgba(154, 207, 234, 0.9);
+	background-color: rgba(101, 48, 21, 0.9);
+	border: 8px solid rgba(101, 48, 21, 0.9);
 }
+
 .donationInfo .main_bag .blood {
 	position: absolute;
 	left: 0;
 	bottom: 0;
 	width: 100%;
 	height: 100px;
-	background-color: #b51e23;
+	background-color: #4ae1dc;
 	border-radius: 0 0 35px 35px;
 	transition: height 1s;
 }
@@ -273,16 +276,16 @@
 	top: -6px;
 	width: 100%;
 	height: 10px;
-	background-color: #92191b;
+	background-color: #6de6e4;
 	border-radius: 100%;
 }
 .donationInfo .main_bag::before {
 	content: "";
 	position: absolute;
-	top: -118px;
+	top: -128px;
 	left: 45%;
 	width: 10%;
-	height: 110px;
+	height: 120px;
 	background-color: #ccc;
 }
 
@@ -310,7 +313,7 @@
 .donationInfo #humans .human .blood_via {
 	position: absolute;
 	height: 8px;
-	background-color: #b51e23;
+	background-color: #4ae1dc;
 	width: 0;
 	bottom: 0;
 	transition: width 1s;
@@ -381,12 +384,15 @@
 }
 
 .donationInfo .highlight {
-	border: 2px solid #b51e23 !important;
+	border: 2px solid #4ae1dc !important;
 	font-weight: bold;
 }
 
 .donationInfo .highlightText {
 	font-weight: bold;
+}
+
+.blood_type {
 }
 
 @media only screen and (max-width: 400px) {
