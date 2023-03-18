@@ -1,0 +1,138 @@
+const donors = [
+    {
+        user_id:'640b581e96d2489975acd4f2',
+        latitude:12.8996,
+        longitude:80.2209,
+        bloodGroup:'A-',
+        age:23,
+    },
+    {
+        user_id:'640b581e96635gsbt5acd4f2',
+        latitude:45.6796,
+        longitude:-10.4229,
+        bloodGroup:'AB+',
+        age:25,
+    },
+    {
+        //generate a random user_id
+        //by calculating 
+        user_id:'465675vbhjgfj35353hvghfgj',
+        latitude:11.8796,
+        longitude:40.4209,
+        bloodGroup:'B+',
+        age:27,
+    },
+    {
+        user_id:'345346ghgxf45354565bvbv54',
+        latitude:32.3926,
+        longitude:-67.2409,
+        bloodGroup:'O+',
+        age:29,
+    },
+    {
+        user_id:'34ahfg6ghgxf45354565bhv54',
+        latitude:52.2926,
+        longitude:-17.2509,
+        bloodGroup:'O-',
+        age:31,
+    },
+    {
+        user_id:'34ahfg6ghgxf453545ddghv54',
+        latitude:22.2926,
+        longitude:56.3549,
+        bloodGroup:'AB-',
+        age:33,
+    },
+    {
+        user_id:'34ahfg6ghgxfddsedqq5bhv54',
+        latitude:12.2926,
+        longitude:16.3421,
+        bloodGroup:'B-',
+        age:35,
+    },
+    {
+        user_id:'34saxsaghgxf45354565bhv54',
+        latitude:24.1234,
+        longitude:56.3421,
+        bloodGroup:'A+',
+        age:37,
+    },
+    {
+        user_id:'12ssaee3xhgyftvhrytrhgvtb',
+        latitude:11.1121,
+        longitude:-16.3421,
+        bloodGroup:'A-',
+        age:39,
+    },
+    {
+		user_id:'5765hvfg5454vghgh56464vvg',
+		latitude: 28.70406,
+		longitude: 77.102493,
+        bloodGroup: 'A+',
+        age: 41,
+	},
+	{
+        user_id:'5765hvfwss5vghfh56464vvg',
+		latitude: -19.015438,
+		longitude: 29.154858,
+        bloodGroup: 'A-',
+        age: 23,
+	},
+	{
+        user_id:'12335hswwdassahgh56464vvg',
+		latitude: 40.712776,
+		longitude: -74.005974,
+        bloodGroup: 'O+',
+        age: 25,
+	},
+	{
+        user_id:'5765fsghjf765674cgr6tf6vg',
+		latitude: 28.70406,
+		longitude: 77.102493,
+        bloodGroup: 'AB-',
+	},
+	{
+        user_id:'576hgfytjt76rhhgh5646jfhg',
+		latitude: 12.879721,
+		longitude: 121.774017,
+        bloodGroup: 'AB+',
+	},
+	{
+        user_id:'5765hjgjgjgjgjgjgjgjgjgjg',
+		latitude: 13.08268,
+		longitude: 80.270718,
+        bloodGroup: 'B+',
+	},
+	{
+        user_id:'57gcgfgv545yt77jgjgjgjkjg',
+		latitude: 13.08268,
+		longitude: 80.270718,
+        bloodGroup: 'B-',
+	},
+	{
+        user_id:'5765hjyt09vbhgbgjggghgjgs',
+		latitude: 12.879721,
+		longitude: 121.774017,
+        bloodGroup: 'O-',
+	},
+	{
+		user_id:'5765hjyt0923d3e3dsssjgs',
+		latitude: 6.927079,
+		longitude: 79.861243,
+        bloodGroup: 'O+',
+	},
+	{
+		user_id:'3425bvcc34ercrdc5ec5dce',
+		latitude: 45.42153,
+		longitude: -75.697193,
+        bloodGroup: 'A+',
+	},
+	{
+        user_id:'5765hggrfyghbgjggghgjgs',
+		latitude: 22.572646,
+		longitude: 88.363895,
+        bloodGroup: 'A-',
+	},
+]
+
+export default donors
