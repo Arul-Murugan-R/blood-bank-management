@@ -4,7 +4,7 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
 import { SnackActions } from "../../store/SnackStore";
-import RequestMap from "../Map/RequestMap";
+import RequestMap from "../Donors/Map/RequestMap";
 import axios from "axios";
 import { RequestDataActions } from "../../store/RequestStore";
 

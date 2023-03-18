@@ -51,18 +51,19 @@ import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { verifyToken } from "./store/AuthStore";
 import ProtectedRoute from "./ProtectedRoute";
-import DonorDetailsForm from "./components/Profile/DonorDetailsForm";
+import DonorDetailsForm from "./components/Donors/DonorDetailsForm";
 import Wrapper from "./components/Layout/Wrapper";
 import HomeTable from "./components/Table/HomeTable";
 import Cards from "./components/Cards/Cards";
 import Bank from "./components/Home/Bank";
-import DonorsMap from "./components/Map/DonorsMap";
+import DonorsMap from "./components/Donors/Map/DonorsMap";
 import CircularCarousel from "./components/Home/CircularCarousel";
-import RequestBloodForm from "./components/Profile/RequestBloodForm";
+import RequestBloodForm from "./components/Requests/RequestBloodForm";
 import CircularDesc from "./components/CircularDesc/CircularDesc";
-import Requests from "./components/Profile/Requests";
+import Requests from "./components/Requests/Requests";
 import ViewRequest from "./components/Requests/ViewRequest";
 import EmailVerification from "./components/Authentication/EmailVerification";
+import ViewDonors from "./components/Donors/ViewDonors";
 
 let initial = true;
 
@@ -151,9 +152,19 @@ function App() {
 				<Route
 					path="/requests"
 					element={
-						<ProtectedRoute condition={isLoggedIn} redirect='/'>
+						<ProtectedRoute condition={isLoggedIn} redirect="/">
 							<Wrapper>
-								<Requests type='all' />
+								<Requests type="all" />
+							</Wrapper>
+						</ProtectedRoute>
+					}
+				/>
+				<Route
+					path="/donors/:reqId"
+					element={
+						<ProtectedRoute condition={isLoggedIn} redirect="/">
+							<Wrapper>
+								<ViewDonors />
 							</Wrapper>
 						</ProtectedRoute>
 					}
@@ -161,9 +172,9 @@ function App() {
 				<Route
 					path="/my-requests"
 					element={
-						<ProtectedRoute condition={isLoggedIn} redirect='/'>
+						<ProtectedRoute condition={isLoggedIn} redirect="/">
 							<Wrapper>
-								<Requests type='my'/>
+								<Requests type="my" />
 							</Wrapper>
 						</ProtectedRoute>
 					}

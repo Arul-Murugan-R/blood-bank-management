@@ -1,7 +1,7 @@
 import Navbar from "../Navbar/Navbar";
 import Bank from "./Bank";
 import HomeTable from "../Table/HomeTable";
-import DonorsMap from "../Map/DonorsMap";
+import DonorsMap from "../Donors/Map/DonorsMap";
 import CircularCarousel from "./CircularCarousel";
 import Cards from "../Cards/Cards";
 import CircularDesc from "../CircularDesc/CircularDesc";
@@ -16,7 +16,14 @@ const HomePage = () => {
 					autoPlay
 					loop
 					muted
-					style={{objectFit: "cover", width: "100%", height: "100%",zIndex:'-10',position:'absolute',top:"0",height:'100vh'}}
+					style={{
+						objectFit: "cover",
+						width: "100%",
+						zIndex: "-10",
+						position: "absolute",
+						top: "0",
+						height: "100vh",
+					}}
 				/>
 				<div className="intro-text">
 					<h1>
@@ -27,7 +34,8 @@ const HomePage = () => {
 						someone else's life. Be a hero, donate blood!
 					</label>
 				</div>
-			</div><br/>
+			</div>
+			<br />
 			<DonationInfo />
 			<Cards avail="1" />
 			<CircularDesc />

@@ -17,7 +17,7 @@ import {
 import CustomFormControl from "../UI/FormControl/CustomFormControl";
 import CustomRadioControl from "../UI/FormControl/CustomRadioControl";
 import Error from "../UI/Typography/Error";
-import classes from "./Profile.module.css";
+import classes from "../Profile/Profile.module.css";
 import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
 import { DonorDataActions } from "../../store/DonorData";
@@ -161,10 +161,8 @@ const UserDetailsForm = (props) => {
 				data,
 			});
 			if (response.status === 200) {
-				await dispatch(
-					DonorDataActions.setDonorData({ donorData: data })
-				);
-				await dispatch(
+				dispatch(DonorDataActions.setDonorData({ donorData: data }));
+				dispatch(
 					SnackActions.setSnack({
 						message: "Details updated successfully!",
 						severity: "success",

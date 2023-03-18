@@ -15,7 +15,7 @@ import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import useInput from "../../Hooks/use-input";
 import Error from "../UI/Typography/Error";
-import classes from "./Profile.module.css";
+import classes from "../Profile/Profile.module.css";
 import HospitalData from "../../Utilities/HospitalsData";
 import { RequestDataActions } from "../../store/RequestStore";
 import { SnackActions } from "../../store/SnackStore";
@@ -46,6 +46,7 @@ const MyRequestCard = (props) => {
 
 	const userId = useSelector((state) => state.auth.userId);
 	const dispatch = useDispatch();
+	const navigate = useNavigate();
 
 	const requiredBefore = useInput(
 		{
@@ -132,6 +133,10 @@ const MyRequestCard = (props) => {
 		}
 	};
 
+	const viewDonors = () => {
+		navigate(`/donors/${request._id}`);
+	};
+
 	const ViewContent = (
 		<Card className={classes.viewCard}>
 			<CardContent>
@@ -146,22 +151,41 @@ const MyRequestCard = (props) => {
 					{moment(request.requestDeadline).format("DD MMMM YYYY")}
 				</Typography>
 			</CardContent>
-			{type!='all'&&<IconButton
-				onClick={() => setEditMode(true)}
-				className={classes.editButton}
-				sx={{ position: "absolute", border: "1px solid #000", p: 1 }}
-				size="small"
-			>
-				<Edit fontSize="inherit" />
-			</IconButton>}
-			{type!='all'&&<IconButton
-				onClick={deleteRequestHandler}
-				className={classes.deleteButton}
-				sx={{ position: "absolute", border: "1px solid #000", p: 1 }}
-				size="small"
-			>
-				<Delete fontSize="inherit" />
-			</IconButton>}
+			{type != "all" && (
+				<>
+					<IconButton
+						onClick={() => setEditMode(true)}
+						className={classes.editButton}
+						sx={{
+							position: "absolute",
+							border: "1px solid #000",
+							p: 1,
+						}}
+						size="small"
+					>
+						<Edit fontSize="inherit" />
+					</IconButton>
+					<IconButton
+						onClick={deleteRequestHandler}
+						className={classes.deleteButton}
+						sx={{
+							position: "absolute",
+							border: "1px solid #000",
+							p: 1,
+						}}
+						size="small"
+					>
+						<Delete fontSize="inherit" />
+					</IconButton>
+					<Button
+						variant="outlined"
+						color="info"
+						onClick={viewDonors}
+					>
+						View Donors
+					</Button>
+				</>
+			)}
 		</Card>
 	);
 
@@ -261,21 +285,21 @@ const MyRequestCard = (props) => {
 			</FormControl>
 			<CustomFormControl field={requiredBefore} />
 			<center>
-			<Button
-				variant="contained"
-				color="error"
-				onClick={updateRequestHandler}
-				sx={{ mr: 2 }}
-			>
-				Update
-			</Button>
-			<Button
-				variant="contained"
-				color="error"
-				onClick={() => setEditMode(false)}
-			>
-				Cancel
-			</Button>
+				<Button
+					variant="contained"
+					color="error"
+					onClick={updateRequestHandler}
+					sx={{ mr: 2 }}
+				>
+					Update
+				</Button>
+				<Button
+					variant="contained"
+					color="error"
+					onClick={() => setEditMode(false)}
+				>
+					Cancel
+				</Button>
 			</center>
 		</Paper>
 	);
