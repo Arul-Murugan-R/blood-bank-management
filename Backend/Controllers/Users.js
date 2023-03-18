@@ -136,7 +136,11 @@ module.exports.getUserInfo = async (req, res, next) => {
 };
 
 module.exports.notifyDonor = async (req, res, next) => {
-	const { donorId, reqId } = req.body;
+	const { donorId, reqId, fake } = req.body;
+	if (fake)
+		return res.status(200).json({
+			message: "Notification sent successfully!",
+		});
 	try {
 		const user = await User.findById(donorId);
 		const request = await Request.findById(reqId);
