@@ -14,6 +14,8 @@ import ManIcon from "@mui/icons-material/Man";
 import { Box, Typography } from "@mui/material";
 import { useSelector } from "react-redux";
 import NearDonorTable from "./NearDonorTable";
+import { Card,CardContent } from "@mui/material";
+import moment from "moment";
 
 const TOKEN = import.meta.env.VITE_MAPBOX_TOKEN;
 
@@ -59,11 +61,33 @@ const sortedList = sortByDistance(donors, {
 	longitude: 80.13573450000001,
 });
 
+
+
 const DonorsMap = (props) => {
 	const [popupInfo, setPopupInfo] = useState(null);
 	const [currentUser, setCurrentUser] = useState(null);
 	const request = useSelector((state) =>
 		state.requestData.find((data) => data._id === props.reqId)
+	);
+	const ViewContent = (
+		<Card style={{position:'relative',background:'#2a3338',color:'#ccc'}}>
+			<CardContent>
+				<Typography variant="h5" component="div">
+					My Request (
+					{request.numberOfUnits} units of {request.bloodGroup})
+				</Typography>
+				<Typography variant="body2">From {request.hospitalName}</Typography>
+				<Typography variant="body2">
+					{request.hospitalAddress}
+				</Typography>
+				<Typography variant="body2">
+					Located Latitude : {request.location.latitude} &nbsp; Longitude :{request.location.longitude}
+				</Typography>
+				<Typography variant="body2">
+					{moment(request.requestDeadline).format("DD MMMM YYYY")}
+				</Typography>
+			</CardContent>
+		</Card>
 	);
 	const mapRef = useRef(null);
 	let TableData = sortedList.filter((data) => data.bloodGroup === request.bloodGroup);
@@ -94,7 +118,8 @@ const DonorsMap = (props) => {
 	});
 
 	return (
-		<Container sx={{ height: "600px" }}>
+		<Container sx={{ height: "600px",p:2, }}>
+			{ViewContent}
 			<NearDonorTable data={TableData}/>
 			<Map
 				initialViewState={{

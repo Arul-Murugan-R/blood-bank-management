@@ -28,7 +28,7 @@ const StyledTableCell = styled(TableCell)(({ theme }) => ({
 	[`&.${tableCellClasses.body}`]: {
 		// backgroundColor: 'rgb(48, 48, 48)',
 		backgroundColor: '#2a3338',
-		color: 'white',
+		color: themeCol,
 		fontSize: 14,
 		textAlign:'center',
 	},
@@ -124,7 +124,7 @@ export default function NearDonorTable(props) {
 					style={{
 						margin:'0',
 						padding:'5px',
-						color: 'white',
+						color: themeCol,
 						border: "1px solid white",
 						background: "transparent",
 						transition: "all 0.5 linear",
