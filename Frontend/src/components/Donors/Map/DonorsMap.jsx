@@ -13,6 +13,7 @@ import donors from "./JunkDonorInfo";
 import ManIcon from "@mui/icons-material/Man";
 import { Box, Typography } from "@mui/material";
 import { useSelector } from "react-redux";
+import NearDonorTable from "./NearDonorTable";
 
 const TOKEN = import.meta.env.VITE_MAPBOX_TOKEN;
 
@@ -65,10 +66,12 @@ const DonorsMap = (props) => {
 		state.requestData.find((data) => data._id === props.reqId)
 	);
 	const mapRef = useRef(null);
-
+	let TableData = sortedList.filter((data) => data.bloodGroup === request.bloodGroup);
+	
 	const pins = sortedList.map((data, index) => {
 		if (data.bloodGroup === request.bloodGroup)
-			return (
+		{
+		return (
 				<Marker
 					key={`marker-${index}`}
 					longitude={data.location.longitude}
@@ -87,11 +90,12 @@ const DonorsMap = (props) => {
 				>
 					<Pin />
 				</Marker>
-			);
+			);}
 	});
 
 	return (
 		<Container sx={{ height: "600px" }}>
+			<NearDonorTable data={TableData}/>
 			<Map
 				initialViewState={{
 					latitude: 13.03701126158853,

@@ -3,17 +3,15 @@ import { useState } from "react";
 import { styled } from "@mui/material/styles";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
+import { Button } from "@mui/material";
 import TableCell, { tableCellClasses } from "@mui/material/TableCell";
 import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import TablePagination from "@mui/material/TablePagination";
-import TableFilterCus from "./TableFilter";
-import DonorData from "./TableData";
-import { SnackActions } from "../../store/SnackStore";
+import { SnackActions } from "../../../store/SnackStore";
 import { useDispatch, useSelector } from "react-redux";
-import { Container } from "@mui/material";
 const themeCol = '#ccc'
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
@@ -51,64 +49,13 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
 		border: "1px solid "+themeCol,
 	},
 }));
-/*
-function createData(name, group, age, number, state, email) {
-	return { name, group, age, number, state, email };
-}
 
-const rows = [
-	createData("Ajay", "AB+ve", 25, 9876543210, "Tamil Nadu", "ajay123@gmail.com"),
-	createData("Rahul", "O+ve", 23, 9876543210, "Tamil Nadu", "rahul23@email.com"),
-	createData("Raj", "B+ve", 21, 9876543210, "Tamil Nadu", "rajkumar@yahoo.com"),
-	createData(
-		"Ravi",
-		"A+ve",
-		22,
-		9876543210,
-		"Tamil Nadu",
-		"raviprasth2541@gmail.com"
-	),
-	createData("Rajesh", "AB+ve", 24, 9876543210, "Tamil Nadu", "rajesh@co.in"),
-	createData("Rajat", "O+ve", 25, 9876543210, "Tamil Nadu", ""),
-	createData("Rajeev", "B+ve", 23, 9876543210, "Tamil Nadu", ""),
-	createData("Rajkumar", "A+ve", 22, 9876543210, "Tamil Nadu", ""),
-	createData("lalit", "O+ve", 25, 9876543210, "Tamil Nadu", ""),
-	createData("monu", "B+ve", 23, 9876543210, "Tamil Nadu", ""),
-	createData("lucky", "A+ve", 22, 9876543210, "Tamil Nadu", ""),
-	createData("cr7", "A-ve", 45, 9876543210, "Tamil Nadu", ""),
-	createData("messi", "B-ve", 45, 9876543210, "Tamil Nadu", ""),
-	createData("ronaldo", "O-ve", 45, 9876543210, "Tamil Nadu", ""),
-	createData("neymar", "AB-ve", 45, 9876543210, "Tamil Nadu", ""),
-].sort((a, b) => (a.name < b.name ? -1 : 1));
-*/
-// console.log(rows)
-export default function HomeTable() {
+export default function NearDonorTable(props) {
 	const dispatch = useDispatch();
 	const [page, setPage] = useState(0);
 	const [rowsPerPage, setRowsPerPage] = useState(10);
-	const [rows, setRows] = useState(DonorData);
-	const filterData = (data) => {
-		setRows(DonorData)
-		console.log(data.age)
-		var gt = data.age.split('-')[0]
-		var lt = data.age.split('-')[1]
-		setRows((prev)=>{
-			return prev.filter((item)=>{  if(((item.group == data.blood )|| data.blood == 'All') 
-			&& ((item.state == data.state) || data.state == 'All')
-			
-			&& ((item.age >= gt && item.age <= lt) || data.age == 'All'))
-				return item})
-		});
-		// console.log(rows)
-		dispatch(
-			SnackActions.setSnack({
-				message: "Filter Applied",
-				type: "success",
-			})
-		);
-	}
-	// const rows = DonorData;
-	// rows = rows.sort((a, b) => (a.name < b.name ? -1 : 1));
+    const [rows, setRows] = useState(props.data);
+    console.log(rows)
 	const handleChangePage = (event, newPage) => {
 		setPage(newPage);
 	};
@@ -119,8 +66,7 @@ export default function HomeTable() {
 	};
 
 	return (
-		<Container >
-			<TableFilterCus filter={filterData} />
+		<>
 			<TableContainer
 				component={Paper}
 				sx={{
@@ -134,19 +80,19 @@ export default function HomeTable() {
 						<TableRow>
 							<StyledTableCell>Donor Name</StyledTableCell>
 							<StyledTableCell >
-								Blood Group
+								Latitude
 							</StyledTableCell>
 							<StyledTableCell >
-								State&nbsp;
+								Longitude&nbsp;
 							</StyledTableCell>
-							<StyledTableCell >
-								Age&nbsp;
-							</StyledTableCell>
-							<StyledTableCell >
+							{/* <StyledTableCell >
 								Phone No&nbsp;
 							</StyledTableCell>
 							<StyledTableCell >
 								Email Id&nbsp;
+							</StyledTableCell> */}
+                            <StyledTableCell >
+								Make Request&nbsp;
 							</StyledTableCell>
 						</TableRow>
 					</TableHead>
@@ -157,24 +103,37 @@ export default function HomeTable() {
 								page * rowsPerPage + rowsPerPage
 							)
 							.map((row) => (
-								<StyledTableRow key={row.name}>
+								<StyledTableRow key={row.id}>
 									<StyledTableCell component="th" scope="row">
 										{row.name}
 									</StyledTableCell>
 									<StyledTableCell >
-										{row.group}
+										{row.location.latitude}
 									</StyledTableCell>
 									<StyledTableCell >
-										{row.state}
+										{row.location.longitude}
 									</StyledTableCell>
-									<StyledTableCell >
-										{row.age}
-									</StyledTableCell>
-									<StyledTableCell >
+									{/* <StyledTableCell >
 										{row.number}
 									</StyledTableCell>
 									<StyledTableCell >
 										{row.email}&nbsp;
+									</StyledTableCell> */}
+                                    <StyledTableCell >
+									<button
+					style={{
+						margin:'0',
+						padding:'5px',
+						color: 'white',
+						border: "1px solid white",
+						background: "transparent",
+						transition: "all 0.5 linear",
+						cursor: "pointer",
+						"&:hover": { backgroundColor: 'white', color: "black" },
+					}}
+				>
+					Request
+				</button>
 									</StyledTableCell>
 								</StyledTableRow>
 							))}
@@ -190,6 +149,6 @@ export default function HomeTable() {
 					onRowsPerPageChange={handleChangeRowsPerPage}
 				/>
 			</TableContainer>
-		</Container>
+		</>
 	);
 }

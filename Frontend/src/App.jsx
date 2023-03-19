@@ -64,6 +64,8 @@ import Requests from "./components/Requests/Requests";
 import ViewRequest from "./components/Requests/ViewRequest";
 import EmailVerification from "./components/Authentication/EmailVerification";
 import ViewDonors from "./components/Donors/ViewDonors";
+import Navbar from "./components/Navbar/Navbar";
+import Footer from "./components/Footer/Footer";
 
 let initial = true;
 
@@ -163,9 +165,8 @@ function App() {
 					path="/donors/:reqId"
 					element={
 						<ProtectedRoute condition={isLoggedIn} redirect="/">
-							<Wrapper>
+							<Navbar />
 								<ViewDonors />
-							</Wrapper>
 						</ProtectedRoute>
 					}
 				/>
