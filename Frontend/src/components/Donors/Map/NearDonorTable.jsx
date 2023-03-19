@@ -91,6 +91,9 @@ export default function NearDonorTable(props) {
 							<StyledTableCell >
 								Email Id&nbsp;
 							</StyledTableCell> */}
+							<StyledTableCell >
+								BloodGroup&nbsp;
+							</StyledTableCell>
 							<StyledTableCell>
 								Make Request&nbsp;
 							</StyledTableCell>
@@ -112,6 +115,9 @@ export default function NearDonorTable(props) {
 									</StyledTableCell>
 									<StyledTableCell>
 										{row.location.longitude}
+									</StyledTableCell>
+									<StyledTableCell>
+										<big>{row.bloodGroup}ve</big>
 									</StyledTableCell>
 									{/* <StyledTableCell >
 										{row.number}

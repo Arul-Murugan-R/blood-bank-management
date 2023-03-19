@@ -107,9 +107,10 @@ const DonorsMap = (props) => {
 	let TableData = sortedList.filter(
 		(data) => data.bloodGroup === request.bloodGroup
 	);
-
+	var short = 0;
 	const pins = sortedList.map((data, index) => {
 		if (data.bloodGroup === request.bloodGroup) {
+			short++;
 			return (
 				<Marker
 					key={`marker-${index}`}
@@ -126,8 +127,10 @@ const DonorsMap = (props) => {
 							],
 						});
 					}}
+
 				>
-					<Pin />
+					{short==1 ? (<ManIcon style={{ color: "yellow" }} />):
+					<Pin />}
 				</Marker>
 			);
 		}
