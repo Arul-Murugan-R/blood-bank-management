@@ -11,6 +11,8 @@ router.route("/verify").post(CatchAsync(users.verifyUser));
 
 router.route("/notify-donor").post(CatchAsync(users.notifyDonor));
 
+router.route("/get-user/:userId").get(CatchAsync(users.getUserInfo));
+
 router.get("/logout", users.logoutUser);
 
 module.exports = router;

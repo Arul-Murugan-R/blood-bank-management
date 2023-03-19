@@ -12,6 +12,12 @@ const Requests = (props) => {
 			(request) => request.userId === userId
 		);
 	}
+	if(type == "others"){
+		allRequests = allRequests.filter(
+			(request) => request.userId !== userId
+		);
+	}
+
 	return (
 		<Container sx={{ my: 5 }}>
 			{allRequests.map((request, index) => {

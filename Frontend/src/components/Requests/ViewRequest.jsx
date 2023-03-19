@@ -7,6 +7,8 @@ import { SnackActions } from "../../store/SnackStore";
 import RequestMap from "../Donors/Map/RequestMap";
 import axios from "axios";
 import { RequestDataActions } from "../../store/RequestStore";
+import { Card, CardContent, Typography } from "@mui/material";
+import moment from "moment";
 
 const backendUrl = import.meta.env.VITE_BACKEND_URL;
 
@@ -20,6 +22,48 @@ const ViewRequest = () => {
 	const role = useSelector((state) => state.auth.role);
 	const navigate = useNavigate();
 	const dispatch = useDispatch();
+	console.log(request);
+	const fetchUser = async () => {
+		try {
+			const response = await axios.get(
+				`${backendUrl}/user/get-request/${id}`
+			);
+			if (response.status === 200) {
+				dispatch(
+					RequestDataActions.updateRequestData({
+						requestData: response.data.request,
+					})
+				);
+			}
+		} catch (error) {
+			dispatch(
+				SnackActions.setSnack({
+					message: "Something went wrong",
+					severity: "error",
+				})
+			);
+		}
+	};	
+	const ViewContent = (
+		<Card style={{position:'relative',background:'#2a3338',color:'#ccc'}}>
+			<CardContent>
+				<Typography variant="h5" component="div">
+					Request For (
+					{request.numberOfUnits} units of {request.bloodGroup})
+				</Typography>
+				<Typography variant="body2">From {request.hospitalName}</Typography>
+				<Typography variant="body2">
+					{request.hospitalAddress}
+				</Typography>
+				<Typography variant="body2">
+					Located Latitude : {request.location.latitude} &nbsp; Longitude :{request.location.longitude}
+				</Typography>
+				<Typography variant="body2">
+					{moment(request.requestDeadline).format("DD MMMM YYYY")}
+				</Typography>
+			</CardContent>
+		</Card>
+	);
 
 	const updateRequestHandler = async () => {
 		try {
@@ -70,8 +114,9 @@ const ViewRequest = () => {
 
 	return (
 		<Container sx={{ my: 5 }}>
+			{request &&(ViewContent)}
 			{request && (
-				<Box sx={{ maxWidth: "300px", aspectRatio: "1" }}>
+				<Box sx={{ maxWidth: "300px", aspectRatio: "1" ,m:2}}>
 					<RequestMap
 						latitude={request.location.latitude}
 						longitude={request.location.longitude}

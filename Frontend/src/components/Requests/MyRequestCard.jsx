@@ -20,7 +20,7 @@ import HospitalData from "../../Utilities/HospitalsData";
 import { RequestDataActions } from "../../store/RequestStore";
 import { SnackActions } from "../../store/SnackStore";
 import { Delete, Edit } from "@mui/icons-material";
-import { useNavigate } from "react-router-dom";
+import { useNavigate,Link } from "react-router-dom";
 import { validateRequestDate } from "../../Utilities/FormValidationFunctions";
 import CustomFormControl from "../UI/FormControl/CustomFormControl";
 import moment from "moment";
@@ -136,6 +136,9 @@ const MyRequestCard = (props) => {
 	const viewDonors = () => {
 		navigate(`/donors/${request._id}`);
 	};
+	const viewRequest = () => {
+		navigate(`/view-request/${request._id}`);
+	};
 
 	const ViewContent = (
 		<Card className={classes.viewCard}>
@@ -151,7 +154,7 @@ const MyRequestCard = (props) => {
 					{moment(request.requestDeadline).format("DD MMMM YYYY")}
 				</Typography>
 			</CardContent>
-			{type != "all" && (
+			{type != "others" && (
 				<>
 					<IconButton
 						onClick={() => setEditMode(true)}
@@ -185,6 +188,15 @@ const MyRequestCard = (props) => {
 						View Donors
 					</Button>
 				</>
+			)}
+			{type=="others"&&(
+				<Button
+						variant="outlined"
+						color="info"
+						onClick={viewRequest}
+					>
+						View Request
+					</Button>
 			)}
 		</Card>
 	);

@@ -156,7 +156,7 @@ function App() {
 					element={
 						<ProtectedRoute condition={isLoggedIn} redirect="/">
 							<Wrapper>
-								<Requests type="all" />
+								<Requests type="others" />
 							</Wrapper>
 						</ProtectedRoute>
 					}

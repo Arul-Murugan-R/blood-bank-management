@@ -11,7 +11,7 @@ import DonorsCards from "./DonorsCards";
 import { Container } from "@mui/system";
 import donors from "./JunkDonorInfo";
 import ManIcon from "@mui/icons-material/Man";
-import { Box, Typography } from "@mui/material";
+import { Box, Typography,Button } from "@mui/material";
 import { useSelector } from "react-redux";
 import NearDonorTable from "./NearDonorTable";
 import { Card,CardContent } from "@mui/material";
@@ -70,7 +70,7 @@ const DonorsMap = (props) => {
 		state.requestData.find((data) => data._id === props.reqId)
 	);
 	const ViewContent = (
-		<Card style={{position:'relative',background:'#2a3338',color:'#ccc'}}>
+		<Card style={{position:'relative',background:'#2a3338',color:'#ccc',marginBottom:'20px'}}>
 			<CardContent>
 				<Typography variant="h5" component="div">
 					My Request (
@@ -86,6 +86,20 @@ const DonorsMap = (props) => {
 				<Typography variant="body2">
 					{moment(request.requestDeadline).format("DD MMMM YYYY")}
 				</Typography>
+				<Button
+						variant="outlined"
+						color="info"
+						href="#donorMap"
+					>
+						Map
+					</Button>
+					<Button
+						variant="outlined"
+						color="info"
+						href="#table"
+					>
+						Table View
+					</Button>
 			</CardContent>
 		</Card>
 	);
@@ -120,7 +134,7 @@ const DonorsMap = (props) => {
 	return (
 		<Container sx={{ height: "600px",p:2, }}>
 			{ViewContent}
-			<NearDonorTable data={TableData}/>
+			<NearDonorTable data={TableData} />
 			<Map
 				initialViewState={{
 					latitude: 13.03701126158853,
@@ -186,6 +200,7 @@ const DonorsMap = (props) => {
 					/>
 				)}
 			</Map>
+			
 		</Container>
 	);
 };

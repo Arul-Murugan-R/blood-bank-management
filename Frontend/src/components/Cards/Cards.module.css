@@ -39,18 +39,20 @@ body {
 }
 .userList.noAnimation{
     animation:none ;
-    width:95vw;
     text-align: center;
     justify-content: center;
-    font-size: 50px;
+    font-size: 3rem !important;
 }
 
 .userList.noAnimation .userItem{
   display: grid;
     place-items: center;
     height:120px;
-    width: 250px;
+    width: 20rem;
 } 
+.userList.noAnimation .userItem .content{
+  font-size: 3rem;
+}
 .userList.noAnimation .userItemMedia{
     display: none;
 }
@@ -202,5 +204,13 @@ transform: scale(1.05);
   }
   .userItemRequest{
     margin:0px;
+  }
+  .userList.noAnimation {
+    justify-content: center;
+    flex-wrap: wrap
+  }
+  .userList.noAnimation .userItem {
+    width: 200px;
+    height: 100px;
   }
 }

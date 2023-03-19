@@ -66,7 +66,7 @@ export default function NearDonorTable(props) {
 	};
 
 	return (
-		<>
+		< div id="table">
 			<TableContainer
 				component={Paper}
 				sx={{
@@ -149,6 +149,6 @@ export default function NearDonorTable(props) {
 					onRowsPerPageChange={handleChangeRowsPerPage}
 				/>
 			</TableContainer>
-		</>
+		</div>
 	);
 }
