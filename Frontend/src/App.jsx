@@ -165,8 +165,9 @@ function App() {
 					path="/donors/:reqId"
 					element={
 						<ProtectedRoute condition={isLoggedIn} redirect="/">
-							<Navbar />
+							<Wrapper>
 								<ViewDonors />
+							</Wrapper>
 						</ProtectedRoute>
 					}
 				/>

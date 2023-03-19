@@ -11,10 +11,10 @@ import DonorsCards from "./DonorsCards";
 import { Container } from "@mui/system";
 import donors from "./JunkDonorInfo";
 import ManIcon from "@mui/icons-material/Man";
-import { Box, Typography,Button } from "@mui/material";
+import { Box, Typography, Button } from "@mui/material";
 import { useSelector } from "react-redux";
 import NearDonorTable from "./NearDonorTable";
-import { Card,CardContent } from "@mui/material";
+import { Card, CardContent } from "@mui/material";
 import moment from "moment";
 
 const TOKEN = import.meta.env.VITE_MAPBOX_TOKEN;
@@ -61,8 +61,6 @@ const sortedList = sortByDistance(donors, {
 	longitude: 80.13573450000001,
 });
 
-
-
 const DonorsMap = (props) => {
 	const [popupInfo, setPopupInfo] = useState(null);
 	const [currentUser, setCurrentUser] = useState(null);
@@ -70,46 +68,49 @@ const DonorsMap = (props) => {
 		state.requestData.find((data) => data._id === props.reqId)
 	);
 	const ViewContent = (
-		<Card style={{position:'relative',background:'#2a3338',color:'#ccc',marginBottom:'20px'}}>
+		<Card
+			style={{
+				position: "relative",
+				background: "#2a3338",
+				color: "#ccc",
+				marginBottom: "20px",
+			}}
+		>
 			<CardContent>
 				<Typography variant="h5" component="div">
-					My Request (
-					{request.numberOfUnits} units of {request.bloodGroup})
+					My Request ({request.numberOfUnits} units of{" "}
+					{request.bloodGroup})
 				</Typography>
-				<Typography variant="body2">From {request.hospitalName}</Typography>
+				<Typography variant="body2">
+					From {request.hospitalName}
+				</Typography>
 				<Typography variant="body2">
 					{request.hospitalAddress}
 				</Typography>
 				<Typography variant="body2">
-					Located Latitude : {request.location.latitude} &nbsp; Longitude :{request.location.longitude}
+					Located Latitude : {request.location.latitude} &nbsp;
+					Longitude :{request.location.longitude}
 				</Typography>
 				<Typography variant="body2">
 					{moment(request.requestDeadline).format("DD MMMM YYYY")}
 				</Typography>
-				<Button
-						variant="outlined"
-						color="info"
-						href="#donorMap"
-					>
-						Map
-					</Button>
-					<Button
-						variant="outlined"
-						color="info"
-						href="#table"
-					>
-						Table View
-					</Button>
+				<Button variant="outlined" color="info" href="#donorMap">
+					Map
+				</Button>
+				<Button variant="outlined" color="info" href="#table">
+					Table View
+				</Button>
 			</CardContent>
 		</Card>
 	);
 	const mapRef = useRef(null);
-	let TableData = sortedList.filter((data) => data.bloodGroup === request.bloodGroup);
-	
+	let TableData = sortedList.filter(
+		(data) => data.bloodGroup === request.bloodGroup
+	);
+
 	const pins = sortedList.map((data, index) => {
-		if (data.bloodGroup === request.bloodGroup)
-		{
-		return (
+		if (data.bloodGroup === request.bloodGroup) {
+			return (
 				<Marker
 					key={`marker-${index}`}
 					longitude={data.location.longitude}
@@ -128,80 +129,82 @@ const DonorsMap = (props) => {
 				>
 					<Pin />
 				</Marker>
-			);}
+			);
+		}
 	});
 
 	return (
-		<Container sx={{ height: "600px",p:2, }}>
+		<>
 			{ViewContent}
 			<NearDonorTable data={TableData} />
-			<Map
-				initialViewState={{
-					latitude: 13.03701126158853,
-					longitude: 80.13573450000001,
-					zoom: 9,
-					bearing: 0,
-					pitch: 0,
-				}}
-				id="donorMap"
-				mapStyle="mapbox://styles/mapbox/dark-v9"
-				mapboxAccessToken={TOKEN}
-				renderWorldCopies={false}
-				ref={mapRef}
-				classname={classes.donorMap}
-			>
-				{/* <GeolocateControl position="top-left" /> */}
-				{/* <FullscreenControl position="top-left" /> */}
-				<NavigationControl position="top-left" />
-				<ScaleControl />
-
-				{pins}
-				<Marker
-					latitude={13.03701126158853}
-					longitude={80.13573450000001}
-					anchor="center"
-					onClick={(e) => {
-						e.originalEvent.stopPropagation();
-						setCurrentUser("You are here");
-						mapRef.current.flyTo({
-							center: [80.13573450000001, 13.03701126158853],
-						});
+			<Container sx={{ p: 2, height: "600px" }}>
+				<Map
+					initialViewState={{
+						latitude: 13.03701126158853,
+						longitude: 80.13573450000001,
+						zoom: 9,
+						bearing: 0,
+						pitch: 0,
 					}}
+					id="donorMap"
+					mapStyle="mapbox://styles/mapbox/dark-v9"
+					mapboxAccessToken={TOKEN}
+					renderWorldCopies={false}
+					ref={mapRef}
+					classname={classes.donorMap}
 				>
-					<ManIcon
-						sx={{
-							cursor: "pointer",
-							color: "blue",
-						}}
-					/>
-				</Marker>
+					{/* <GeolocateControl position="top-left" /> */}
+					{/* <FullscreenControl position="top-left" /> */}
+					<NavigationControl position="top-left" />
+					<ScaleControl />
 
-				{currentUser && (
-					<Popup
-						focusAfterOpen={false}
-						anchor="bottom"
+					{pins}
+					<Marker
 						latitude={13.03701126158853}
 						longitude={80.13573450000001}
-						onClose={() => setCurrentUser(null)}
+						anchor="center"
+						onClick={(e) => {
+							e.originalEvent.stopPropagation();
+							setCurrentUser("You are here");
+							mapRef.current.flyTo({
+								center: [80.13573450000001, 13.03701126158853],
+							});
+						}}
 					>
-						<Box>
-							<Typography variant="body1" fontWeight={"bold"}>
-								{currentUser}
-							</Typography>
-						</Box>
-					</Popup>
-				)}
+						<ManIcon
+							sx={{
+								cursor: "pointer",
+								color: "blue",
+							}}
+						/>
+					</Marker>
 
-				{popupInfo && (
-					<DonorsCards
-						popupInfo={popupInfo}
-						setPopupInfo={setPopupInfo}
-						reqId={props.reqId}
-					/>
-				)}
-			</Map>
-			
-		</Container>
+					{currentUser && (
+						<Popup
+							focusAfterOpen={false}
+							anchor="bottom"
+							latitude={13.03701126158853}
+							longitude={80.13573450000001}
+							onClose={() => setCurrentUser(null)}
+						>
+							<Box>
+								<Typography variant="body1" fontWeight={"bold"}>
+									{currentUser}
+								</Typography>
+							</Box>
+						</Popup>
+					)}
+
+					{popupInfo && (
+						<DonorsCards
+							popupInfo={popupInfo}
+							setPopupInfo={setPopupInfo}
+							reqId={props.reqId}
+						/>
+					)}
+				</Map>
+			</Container>
+		</>
 	);
 };
 

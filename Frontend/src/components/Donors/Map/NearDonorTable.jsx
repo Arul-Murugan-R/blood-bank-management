@@ -12,25 +12,25 @@ import Paper from "@mui/material/Paper";
 import TablePagination from "@mui/material/TablePagination";
 import { SnackActions } from "../../../store/SnackStore";
 import { useDispatch, useSelector } from "react-redux";
-const themeCol = '#ccc'
+const themeCol = "#ccc";
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
 	[`&.${tableCellClasses.head}`]: {
-		backgroundColor: '#2a3338',
-		fontWeight: 'bold',
+		backgroundColor: "#2a3338",
+		fontWeight: "bold",
 		fontSize: 16,
 		letterSpacing: 1,
-		textAlign:'center',
-		fontFamily: 'Salsa',
-		color:themeCol,
-		border:0
+		textAlign: "center",
+		fontFamily: "Salsa",
+		color: themeCol,
+		border: 0,
 	},
 	[`&.${tableCellClasses.body}`]: {
 		// backgroundColor: 'rgb(48, 48, 48)',
-		backgroundColor: '#2a3338',
+		backgroundColor: "#2a3338",
 		color: themeCol,
 		fontSize: 14,
-		textAlign:'center',
+		textAlign: "center",
 	},
 }));
 
@@ -42,11 +42,11 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
 		backgroundColor: theme.palette.action.hover,
 	},
 	// hide last border
-	"th,td ":{
-		border: "1px solid "+themeCol,
+	"th,td ": {
+		border: "1px solid " + themeCol,
 	},
 	"&:last-child td, &:last-child th": {
-		border: "1px solid "+themeCol,
+		border: "1px solid " + themeCol,
 	},
 }));
 
@@ -54,8 +54,8 @@ export default function NearDonorTable(props) {
 	const dispatch = useDispatch();
 	const [page, setPage] = useState(0);
 	const [rowsPerPage, setRowsPerPage] = useState(10);
-    const [rows, setRows] = useState(props.data);
-    console.log(rows)
+	const [rows, setRows] = useState(props.data);
+	console.log(rows);
 	const handleChangePage = (event, newPage) => {
 		setPage(newPage);
 	};
@@ -66,32 +66,32 @@ export default function NearDonorTable(props) {
 	};
 
 	return (
-		< div id="table">
+		<div id="table">
 			<TableContainer
 				component={Paper}
 				sx={{
-					mt:2,
-					mb:2,
-					maxHeight:'660px',
+					mt: 2,
+					mb: 2,
+					maxHeight: "720px",
 				}}
 			>
-				<Table aria-label="customized table" stickyHeader style={{borderRadius:'10px'}}>
+				<Table
+					aria-label="customized table"
+					stickyHeader
+					style={{ borderRadius: "10px" }}
+				>
 					<TableHead>
 						<TableRow>
 							<StyledTableCell>Donor Name</StyledTableCell>
-							<StyledTableCell >
-								Latitude
-							</StyledTableCell>
-							<StyledTableCell >
-								Longitude&nbsp;
-							</StyledTableCell>
+							<StyledTableCell>Latitude</StyledTableCell>
+							<StyledTableCell>Longitude&nbsp;</StyledTableCell>
 							{/* <StyledTableCell >
 								Phone No&nbsp;
 							</StyledTableCell>
 							<StyledTableCell >
 								Email Id&nbsp;
 							</StyledTableCell> */}
-                            <StyledTableCell >
+							<StyledTableCell>
 								Make Request&nbsp;
 							</StyledTableCell>
 						</TableRow>
@@ -107,10 +107,10 @@ export default function NearDonorTable(props) {
 									<StyledTableCell component="th" scope="row">
 										{row.name}
 									</StyledTableCell>
-									<StyledTableCell >
+									<StyledTableCell>
 										{row.location.latitude}
 									</StyledTableCell>
-									<StyledTableCell >
+									<StyledTableCell>
 										{row.location.longitude}
 									</StyledTableCell>
 									{/* <StyledTableCell >
@@ -119,27 +119,31 @@ export default function NearDonorTable(props) {
 									<StyledTableCell >
 										{row.email}&nbsp;
 									</StyledTableCell> */}
-                                    <StyledTableCell >
-									<button
-					style={{
-						margin:'0',
-						padding:'5px',
-						color: themeCol,
-						border: "1px solid white",
-						background: "transparent",
-						transition: "all 0.5 linear",
-						cursor: "pointer",
-						"&:hover": { backgroundColor: 'white', color: "black" },
-					}}
-				>
-					Request
-				</button>
+									<StyledTableCell>
+										<button
+											style={{
+												margin: "0",
+												padding: "5px",
+												color: themeCol,
+												border: "1px solid white",
+												background: "transparent",
+												transition: "all 0.5 linear",
+												cursor: "pointer",
+												"&:hover": {
+													backgroundColor: "white",
+													color: "black",
+												},
+											}}
+										>
+											Request
+										</button>
 									</StyledTableCell>
 								</StyledTableRow>
 							))}
 					</TableBody>
 				</Table>
-				<TablePagination style={{backgroundColor:'#2a3338',color:'white'}}
+				<TablePagination
+					style={{ backgroundColor: "#2a3338", color: "white" }}
 					rowsPerPageOptions={[10, 25, 100]}
 					component="div"
 					count={rows.length}

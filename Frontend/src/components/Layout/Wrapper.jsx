@@ -5,6 +5,7 @@ import CustomSnackbar from "../UI/CustomSnackbar";
 
 const Wrapper = (props) => {
 	const snackOpen = useSelector((state) => state.snack.open);
+	console.log(props);
 	return (
 		<>
 			<Navbar />
