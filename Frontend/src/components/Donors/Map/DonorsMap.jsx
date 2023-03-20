@@ -129,8 +129,8 @@ const DonorsMap = (props) => {
 					}}
 
 				>
-					{short==1 ? (<ManIcon style={{ color: "yellow" }} />):
-					<Pin />}
+					{short==1 ? (<ManIcon style={{ color:data.name=='Arul'||data.name=='bala'?'green':'yellow' }} />):
+					data.name=='Arul'||data.name=='bala'?<ManIcon style={{ color:'green' }} />:<Pin/> }
 				</Marker>
 			);
 		}
@@ -139,7 +139,7 @@ const DonorsMap = (props) => {
 	return (
 		<>
 			{ViewContent}
-			<NearDonorTable data={TableData} />
+			<NearDonorTable data={TableData} modal={setPopupInfo} />
 			<Container sx={{ p: 2, height: "600px" }}>
 				<Map
 					initialViewState={{

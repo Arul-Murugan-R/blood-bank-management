@@ -108,7 +108,7 @@ export default function NearDonorTable(props) {
 							.map((row) => (
 								<StyledTableRow key={row.id}>
 									<StyledTableCell component="th" scope="row">
-										{row.name}
+										{row.name}{(row.name=='Arul' || row.name=='bala')&&'(verified)'}
 									</StyledTableCell>
 									<StyledTableCell>
 										{row.location.latitude}
@@ -126,6 +126,33 @@ export default function NearDonorTable(props) {
 										{row.email}&nbsp;
 									</StyledTableCell> */}
 									<StyledTableCell>
+									<button
+											style={{
+												margin: "0",
+												padding: "5px",
+												color: themeCol,
+												border: "1px solid white",
+												background: "transparent",
+												transition: "all 0.5 linear",
+												cursor: "pointer",
+												"&:hover": {
+													backgroundColor: "white",
+													color: "black",
+												},
+											}}
+											onClick={() => {
+												props.modal(row)
+												dispatch(
+												SnackActions.setSnack({
+													open: true,
+													message: "Opened Description Scroll Down",
+													severity: "success",
+												})
+												)
+											}}
+										>
+											Locate
+										</button>
 										<button
 											style={{
 												margin: "0",
