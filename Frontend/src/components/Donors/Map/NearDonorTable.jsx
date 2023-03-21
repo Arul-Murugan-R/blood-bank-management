@@ -12,6 +12,8 @@ import Paper from "@mui/material/Paper";
 import TablePagination from "@mui/material/TablePagination";
 import { SnackActions } from "../../../store/SnackStore";
 import { useDispatch, useSelector } from "react-redux";
+import axios from "axios";
+const backendUrl = import.meta.env.VITE_BACKEND_URL;
 const themeCol = "#ccc";
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
@@ -55,7 +57,37 @@ export default function NearDonorTable(props) {
 	const [page, setPage] = useState(0);
 	const [rowsPerPage, setRowsPerPage] = useState(10);
 	const [rows, setRows] = useState(props.data);
-	console.log(rows);
+
+	const notifyDonor = async (row) => {
+		try {
+			console.log(props.reqId)
+			const response = await axios.post(
+				backendUrl + "/user/notify-donor",
+				{
+					donorId: row.id,
+					requestId: props.reqId,
+					fake: (row.name === "bala" || row.name==="Arul") ? false : true,
+				}
+			);
+			if (response.status === 200) {
+				dispatch(
+					SnackActions.setSnack({
+						message: response.data.message,
+						severity: "success",
+					})
+				);
+			}
+		} catch (error) {
+			dispatch(
+				SnackActions.setSnack({
+					message:
+						error.response.data.message ||
+						"Something went wrong. Try again",
+					severity: "error",
+				})
+			);
+		}
+	};
 	const handleChangePage = (event, newPage) => {
 		setPage(newPage);
 	};
@@ -166,6 +198,9 @@ export default function NearDonorTable(props) {
 													backgroundColor: "white",
 													color: "black",
 												},
+											}}
+											onClick={() => {
+												notifyDonor(row)
 											}}
 										>
 											Request

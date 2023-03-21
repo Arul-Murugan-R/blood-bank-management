@@ -139,7 +139,7 @@ const DonorsMap = (props) => {
 	return (
 		<>
 			{ViewContent}
-			<NearDonorTable data={TableData} modal={setPopupInfo} />
+			<NearDonorTable data={TableData} modal={setPopupInfo} reqId={props.reqId}/>
 			<Container sx={{ p: 2, height: "600px" }}>
 				<Map
 					initialViewState={{

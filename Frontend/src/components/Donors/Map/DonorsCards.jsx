@@ -19,7 +19,7 @@ const DonorsCards = (props) => {
 				{
 					donorId: popupInfo.id,
 					requestId: reqId,
-					fake: true,
+					fake: (popupInfo.name === "bala" || popupInfo.name==="Arul") ? false : true,
 				}
 			);
 			if (response.status === 200) {

@@ -136,19 +136,19 @@ module.exports.getUserInfo = async (req, res, next) => {
 };
 
 module.exports.notifyDonor = async (req, res, next) => {
-	const { donorId, reqId, fake } = req.body;
+	const { donorId, requestId, fake } = req.body;
 	if (fake)
 		return res.status(200).json({
 			message: "Notification sent successfully!",
 		});
 	try {
 		const user = await User.findById(donorId);
-		const request = await Request.findById(reqId);
-		const recipient = await User.findById(request.userId);
+		const request = await Request.findById(requestId);
+		// const recipient = await User.findById(request.userId);
 		const token = jwt.sign({ id: user._id }, secret, options);
 		const expiry =
 			Date.now() + +options.expiresIn.slice(0, 2) * 60 * 60 * 100;
-		const href = `${ClientUrl}email-login/${reqId}/BEARER ${token}/${expiry}/${user._id}`;
+		const href = `${ClientUrl}email-login/${requestId}/BEARER ${token}/${expiry}/${user._id}`;
 		if (user.role == "donor") {
 			const mailOptions = {
 				from: "bloodbank@email.com",
