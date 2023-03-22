@@ -172,10 +172,24 @@ const MyRequestCard = (props) => {
 				<Typography variant="body2">
 					{request.hospitalAddress}
 				</Typography>
-				<Typography variant="body2">
+				<Typography variant="body2"  color={
+					moment(request.requestDeadline).
+					format("DD MMMM YYYY")<moment(new Date().toISOString())
+					.format("YYYY-MM-DD")&&'red'}>
 					{moment(request.requestDeadline).format("DD MMMM YYYY")}
 				</Typography>
-				{acceptedBy && console.log(acceptedBy)}
+				 {/* {acceptedBy && (
+					<Typography variant="body2">
+						<br/> */}
+				{acceptedBy && acceptedBy.length>0 && (acceptedBy.map((donor) => (
+					donor&&<Typography variant="body2">
+						<hr></hr>
+						Accepted By <br/><br/>
+						Donor name : {donor.username}, Email Id : {donor.email}, No Of Units : {donor.password}
+					</Typography>
+				)))}
+				{/* </Typography>)
+				} */}
 			</CardContent>
 			{type == "my" && (
 				<>

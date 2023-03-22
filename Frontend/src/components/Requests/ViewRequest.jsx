@@ -137,9 +137,9 @@ const ViewRequest = () => {
 				</Box>
 			)}
 			{role === "donor" && (
-				// whoCanDonate[bloodGrp].find(
-				// 	(item) => item === request.bloodGroup
-				// ) &&
+				whoCanDonate[bloodGrp].find(
+					(item) => item === request.bloodGroup
+				) &&
 				<Button
 					variant="contained"
 					color="error"

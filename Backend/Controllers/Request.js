@@ -179,10 +179,17 @@ module.exports.getAcceptedBy = async (req, res, next) => {
 				message: "Request not found",
 			});
 		}
-		const acceptedBy = [];
+		let acceptedBy = [];
 		for (let i = 0; i < request.acceptedBy.length; i++) {
-			const user = await User.findById(request.acceptedBy[i]);
+			var index = acceptedBy.findIndex((user) => user._id.toString() == request.acceptedBy[i].toString());
+			if(index!=-1){
+				acceptedBy[index].password++;
+				continue;
+			}
+			let user = await User.findById(request.acceptedBy[i]);
+			if(!user)continue;
 			acceptedBy.push(user);
+			if(user)acceptedBy[i]['password']=1;
 		}
 		return res.status(200).json({
 			message: "Accepted by fetched successfully",

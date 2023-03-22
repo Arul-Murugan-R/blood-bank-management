@@ -16,6 +16,7 @@ import { useSelector } from "react-redux";
 import NearDonorTable from "./NearDonorTable";
 import { Card, CardContent } from "@mui/material";
 import moment from "moment";
+import { whoCanDonate } from "../../../Utilities/WhoCanDonate";
 
 const TOKEN = import.meta.env.VITE_MAPBOX_TOKEN;
 
@@ -67,6 +68,7 @@ const DonorsMap = (props) => {
 	const request = useSelector((state) =>
 		state.requestData.find((data) => data._id === props.reqId)
 	);
+	const bloodGrp = request.bloodGroup
 	const ViewContent = (
 		<Card
 			style={{
@@ -105,11 +107,12 @@ const DonorsMap = (props) => {
 	);
 	const mapRef = useRef(null);
 	let TableData = sortedList.filter(
-		(data) => data.bloodGroup === request.bloodGroup
+		(data) => whoCanDonate[data.bloodGroup].find((i)=>{return i==bloodGrp})
 	);
 	var short = 0;
 	const pins = sortedList.map((data, index) => {
-		if (data.bloodGroup === request.bloodGroup) {
+		// if (data.bloodGroup === request.bloodGroup) {
+			if(whoCanDonate[data.bloodGroup].find((i)=>{return i==bloodGrp})){
 			short++;
 			return (
 				<Marker
@@ -129,7 +132,7 @@ const DonorsMap = (props) => {
 					}}
 
 				>
-					{short==1 ? (<ManIcon style={{ color:data.name=='Arul'||data.name=='bala'?'green':'yellow' }} />):
+					{short==1 ? (<ManIcon style={{ color:data.name=='Arul'||data.name=='bala'?'orange':'yellow' }} />):
 					data.name=='Arul'||data.name=='bala'?<ManIcon style={{ color:'green' }} />:<Pin/> }
 				</Marker>
 			);
