@@ -11,7 +11,7 @@ import {
 	Typography,
 } from "@mui/material";
 import { Box } from "@mui/system";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import useInput from "../../Hooks/use-input";
 import Error from "../UI/Typography/Error";
@@ -20,7 +20,7 @@ import HospitalData from "../../Utilities/HospitalsData";
 import { RequestDataActions } from "../../store/RequestStore";
 import { SnackActions } from "../../store/SnackStore";
 import { Delete, Edit } from "@mui/icons-material";
-import { useNavigate,Link } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import { validateRequestDate } from "../../Utilities/FormValidationFunctions";
 import CustomFormControl from "../UI/FormControl/CustomFormControl";
 import moment from "moment";
@@ -43,6 +43,7 @@ const MyRequestCard = (props) => {
 		HospitalData.findIndex((hosp) => hosp.name === request.hospitalName)
 	);
 	const [numberOfUnits, setNumberOfUnits] = useState(request.numberOfUnits);
+	const [acceptedBy, setAcceptedBy] = useState(null);
 
 	const userId = useSelector((state) => state.auth.userId);
 	const dispatch = useDispatch();
@@ -57,6 +58,27 @@ const MyRequestCard = (props) => {
 		},
 		validateRequestDate
 	);
+
+	const getAcceptedBy = async () => {
+		try {
+			const response = await axios.get(
+				`${backendUrl}/request/acceptedBy/${request._id}`
+			);
+			if (response.status === 200) {
+				setAcceptedBy(response.data.acceptedBy);
+			}
+			console.log(response);
+		} catch (error) {
+			SnackActions.setSnack({
+				message: "Unable to get donors",
+				severity: "error",
+			});
+		}
+	};
+
+	useEffect(() => {
+		if (request.acceptedBy.length > 0) getAcceptedBy();
+	}, []);
 
 	const formIsValid =
 		requiredBefore.validities.isValid &&
@@ -153,8 +175,9 @@ const MyRequestCard = (props) => {
 				<Typography variant="body2">
 					{moment(request.requestDeadline).format("DD MMMM YYYY")}
 				</Typography>
+				{acceptedBy && console.log(acceptedBy)}
 			</CardContent>
-			{type != "others" && (
+			{type == "my" && (
 				<>
 					<IconButton
 						onClick={() => setEditMode(true)}
@@ -189,14 +212,10 @@ const MyRequestCard = (props) => {
 					</Button>
 				</>
 			)}
-			{type=="others"&&(
-				<Button
-						variant="outlined"
-						color="info"
-						onClick={viewRequest}
-					>
-						View Request
-					</Button>
+			{type == "others" && (
+				<Button variant="outlined" color="info" onClick={viewRequest}>
+					View Request
+				</Button>
 			)}
 		</Card>
 	);

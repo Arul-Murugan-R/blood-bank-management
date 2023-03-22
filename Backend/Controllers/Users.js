@@ -42,7 +42,7 @@ module.exports.registerUser = async (req, res, next) => {
 		const token = jwt.sign({ id: user._id.toString() }, secret, options);
 
 		const expiry =
-			Date.now() + +options.expiresIn.slice(0, 2) * 60 * 60 * 100;
+			Date.now() + +options.expiresIn.slice(0, 2) * 60 * 60 * 1000;
 
 		return res.status(200).json({
 			message: "Registration successfull",
@@ -73,7 +73,7 @@ module.exports.loginUser = async (req, res, next) => {
 		if (userIsValid) {
 			const token = jwt.sign({ id: user._id }, secret, options);
 			const expiry =
-				Date.now() + +options.expiresIn.slice(0, 2) * 60 * 60 * 100;
+				Date.now() + +options.expiresIn.slice(0, 2) * 60 * 60 * 1000;
 			return res.status(200).json({
 				message: "Login successfull!",
 				user: {
@@ -146,8 +146,7 @@ module.exports.notifyDonor = async (req, res, next) => {
 		const request = await Request.findById(requestId);
 		// const recipient = await User.findById(request.userId);
 		const token = jwt.sign({ id: user._id }, secret, options);
-		const expiry =
-			Date.now() + +options.expiresIn.slice(0, 2) * 60 * 60 * 100;
+		const expiry = Date.now() + 60 * 60 * 1000;
 		const href = `${ClientUrl}email-login/${requestId}/BEARER ${token}/${expiry}/${user._id}`;
 		if (user.role == "donor") {
 			const mailOptions = {

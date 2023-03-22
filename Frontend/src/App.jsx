@@ -105,14 +105,9 @@ function App() {
 				<Route
 					path="/donor-info"
 					element={
-						<ProtectedRoute
-							condition={isLoggedIn && role == "donor"}
-							redirect="/"
-						>
-							<Wrapper>
-								<DonorDetailsForm />
-							</Wrapper>
-						</ProtectedRoute>
+						<Wrapper>
+							<DonorDetailsForm />
+						</Wrapper>
 					}
 				/>
 				<Route path="/about" element={<Wrapper></Wrapper>} />

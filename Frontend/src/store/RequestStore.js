@@ -9,6 +9,7 @@ const initialRequestState = [
 		location: { latitude: null, longitude: null },
 		hospital: null,
 		address: null,
+		acceptedBy: [],
 	},
 ];
 

@@ -9,6 +9,7 @@ import axios from "axios";
 import { RequestDataActions } from "../../store/RequestStore";
 import { Card, CardContent, Typography } from "@mui/material";
 import moment from "moment";
+import { whoCanDonate } from "../../Utilities/WhoCanDonate";
 
 const backendUrl = import.meta.env.VITE_BACKEND_URL;
 
@@ -20,6 +21,7 @@ const ViewRequest = () => {
 		) || null;
 	const userId = useSelector((state) => state.auth.userId);
 	const role = useSelector((state) => state.auth.role);
+	const bloodGrp = useSelector((state) => state.donorData.bloodGroup);
 	const navigate = useNavigate();
 	const dispatch = useDispatch();
 	console.log(request);
@@ -43,20 +45,30 @@ const ViewRequest = () => {
 				})
 			);
 		}
-	};	
+	};
+
 	const ViewContent = (
-		<Card style={{position:'relative',background:'#2a3338',color:'#ccc'}}>
+		<Card
+			style={{
+				position: "relative",
+				background: "#2a3338",
+				color: "#ccc",
+			}}
+		>
 			<CardContent>
 				<Typography variant="h5" component="div">
-					Request For (
-					{request.numberOfUnits} units of {request.bloodGroup})
+					Request For ({request.numberOfUnits} units of{" "}
+					{request.bloodGroup})
 				</Typography>
-				<Typography variant="body2">From {request.hospitalName}</Typography>
+				<Typography variant="body2">
+					From {request.hospitalName}
+				</Typography>
 				<Typography variant="body2">
 					{request.hospitalAddress}
 				</Typography>
 				<Typography variant="body2">
-					Located Latitude : {request.location.latitude} &nbsp; Longitude :{request.location.longitude}
+					Located Latitude : {request.location.latitude} &nbsp;
+					Longitude :{request.location.longitude}
 				</Typography>
 				<Typography variant="body2">
 					{moment(request.requestDeadline).format("DD MMMM YYYY")}
@@ -68,7 +80,7 @@ const ViewRequest = () => {
 	const updateRequestHandler = async () => {
 		try {
 			const response = await axios.get(
-				`${backendUrl}/request/update-status/` + id
+				`${backendUrl}/request/update-status/` + id + "/" + userId
 			);
 			if (response.status === 200) {
 				const updateDonor = await axios.get(
@@ -90,6 +102,7 @@ const ViewRequest = () => {
 				}
 			}
 		} catch (error) {
+			console.log(error);
 			dispatch(
 				SnackActions.setSnack({
 					message: "Request update failed",
@@ -114,9 +127,9 @@ const ViewRequest = () => {
 
 	return (
 		<Container sx={{ my: 5 }}>
-			{request &&(ViewContent)}
+			{request && ViewContent}
 			{request && (
-				<Box sx={{ maxWidth: "300px", aspectRatio: "1" ,m:2}}>
+				<Box sx={{ maxWidth: "300px", aspectRatio: "1", m: 2 }}>
 					<RequestMap
 						latitude={request.location.latitude}
 						longitude={request.location.longitude}
@@ -124,6 +137,9 @@ const ViewRequest = () => {
 				</Box>
 			)}
 			{role === "donor" && (
+				// whoCanDonate[bloodGrp].find(
+				// 	(item) => item === request.bloodGroup
+				// ) &&
 				<Button
 					variant="contained"
 					color="error"

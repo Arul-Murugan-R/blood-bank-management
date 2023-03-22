@@ -10,8 +10,10 @@ router.route("/get/:id").get(CatchAsync(request.getRequestDetails));
 
 router.route("/update").post(CatchAsync(request.updateRequest));
 
+router.route("/acceptedBy/:id").get(CatchAsync(request.getAcceptedBy));
+
 router
-	.route("/update-status/:requestId")
+	.route("/update-status/:requestId/:userId")
 	.get(CatchAsync(request.updateDonationInfo));
 
 router.route("/delete").post(CatchAsync(request.deleteRequest));
