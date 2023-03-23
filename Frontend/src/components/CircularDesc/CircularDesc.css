@@ -55,7 +55,8 @@
     border-radius: 50%;
     display: grid;
     place-items: center;
-    justify-content: center
+    justify-content: center;
+    cursor: pointer;
     
 }
 .bloods label{
@@ -80,5 +81,22 @@
   @keyframes animation {
     to {
       transform: rotate(360deg);
+    }
+  }
+
+  @media screen and (max-width: 508px) {
+    .wrapper-desc{
+      padding: 5px;
+    }
+    .circ-cont {
+      margin-left: 0;
+      min-height: 250px;
+      min-width: 250px;
+    }
+    .inner-circle{
+      font-size: 20px;
+    }
+    .circ-cont img, .circ-cont .bloods{
+      transform: rotate(var(--angle)) translateX(130px) rotate(var(--n-angle));
     }
   }

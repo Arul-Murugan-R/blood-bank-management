@@ -1,0 +1,44 @@
+const descData = [
+    {
+        label:'A+',
+        count:'5000',
+        color:'#00bfa5'
+    },
+    {
+        label:'A-',
+        count:'3000',
+        color:'#ffff00'
+    },
+    {
+        label:'B+',
+        count:'2000',
+        color:'#ff9800'
+    },
+    {
+        label:'B-',
+        count:'1000',
+        color:'#ff5722'
+    },
+    {
+        label:'O+',
+        count:'6500',
+        color:'#ff1744'
+    },
+    {
+        label:'O-',
+        count:'3500',
+        color:'#d50000'
+    },
+    {
+        label:'AB+',
+        count:'2500',
+        color:'#aa00ff'
+    },
+    {
+        label:'AB-',
+        count:'1500',
+        color:'#6200ea'
+    }
+]
+
+export default descData;
