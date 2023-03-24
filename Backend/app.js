@@ -17,6 +17,12 @@ app.use((req, res, next) => {
 	);
 	next();
 });
+app.use((req,res,next) => {
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    res.setHeader('Access-Control-Allow-Methods', 'POST,GET,PUT,PATCH,DELETE');
+    res.setHeader('Access-Control-Allow-Headers', 'Content-Type,Authorization')
+    next()
+})
 
 const url = process.env.DB_URL || "mongodb://localhost:27017/blood-bank";
 

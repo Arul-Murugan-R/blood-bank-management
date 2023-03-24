@@ -79,8 +79,15 @@ const ViewRequest = () => {
 
 	const updateRequestHandler = async () => {
 		try {
+			console.log(id);
 			const response = await axios.get(
-				`${backendUrl}/request/update-status/` + id + "/" + userId
+				`${backendUrl}/request/update-status/` + id,
+				{
+					headers: {
+						"Content-Type": "application/json",
+						"Authorization":localStorage.getItem("token"),
+					},
+				}
 			);
 			if (response.status === 200) {
 				const updateDonor = await axios.get(
@@ -105,7 +112,7 @@ const ViewRequest = () => {
 			console.log(error);
 			dispatch(
 				SnackActions.setSnack({
-					message: "Request update failed",
+					message: "Request update failed "+error.response.data.message,
 					severity: "error",
 				})
 			);

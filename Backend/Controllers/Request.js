@@ -123,18 +123,28 @@ module.exports.updateRequest = async (req, res, next) => {
 module.exports.updateDonationInfo = async (req, res, next) => {
 	try {
 		const reqID = req.params.requestId;
-		const userId = req.params.userId;
+		// const userId = req.params.userId;
 		const request = await Request.findById(reqID);
-
-		if (request === null || request.status === "Accepted") {
+		if (request === null) {
 			return res.status(404).json({
 				message: "Request not found",
 			});
 		}
+		if(request.status === "Accepted"){
+			return res.status(401).json({
+				message: "Request already accepted",
+			});
+		}
+		console.log(req.userId);
+		if(request.userId.equals(req.userId)){
+			return res.status(401).json({
+				message: "You cannot accept your own request",
+			});
+		}
 		const recipient = await User.findById(request.userId);
-		const donor = await User.findById(userId);
+		const donor = await User.findById(req.userId);
 		request.numberOfUnits = request.numberOfUnits - 1;
-		request.acceptedBy.push(userId);
+		request.acceptedBy.push(req.userId);
 		if (request.numberOfUnits === 0) request.status = "Accepted";
 		await request.save();
 		const mailOptions = {
