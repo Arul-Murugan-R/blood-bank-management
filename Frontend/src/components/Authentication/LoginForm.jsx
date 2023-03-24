@@ -17,7 +17,7 @@ import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import Error from "../UI/Typography/Error";
 import { useDispatch, useSelector } from "react-redux";
-import { authActions } from "../../store/AuthStore";
+import { authActions, verifyToken } from "../../store/AuthStore";
 import CustomFormControl from "../UI/FormControl/CustomFormControl";
 import { SnackActions } from "../../store/SnackStore";
 
@@ -84,9 +84,10 @@ const LoginForm = () => {
 					type: "success",
 				})
 			);
+			dispatch(verifyToken());
 			userField.validities.reset();
 			passwordField.validities.reset();
-			return navigate(-1);
+			return navigate("/");
 		} catch (error) {
 			setLoginError(error.response.data.message);
 		}
