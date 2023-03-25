@@ -17,6 +17,7 @@ router
 	.route("/update-status/:requestId")
 	.get(tokAuth,CatchAsync(request.updateDonationInfo));
 
+router.route("/deleteExpired").post(CatchAsync(request.deleteRequestExpired));
 router.route("/delete").post(CatchAsync(request.deleteRequest));
 
 module.exports = router;

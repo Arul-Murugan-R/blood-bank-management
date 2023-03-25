@@ -238,3 +238,30 @@ module.exports.deleteRequest = async (req, res, next) => {
 		});
 	}
 };
+
+module.exports.deleteRequestExpired = async (req, res, next) => {
+	try {
+		const reqID = await req.body.requestId;
+		const request = await Request.findById(reqID);
+		// console.log(req.body.secret!==process.env.DELETE_SECRET)
+		if(req.body.secret!==process.env.DELETE_SECRET){
+			return res.status(401).json({
+				message: "Unauthorized",
+			});
+		}
+		if (request === null) {
+			return res.status(404).json({
+				message: "Request not found",
+			});
+		}
+		await Request.findByIdAndDelete(reqID);
+		return res.status(200).json({
+			message: "Request deleted successfully",
+		});
+	} catch (e) {
+		return res.status(401).json({
+			message: "Request deletion failed",
+			err: e,
+		});
+	}
+};

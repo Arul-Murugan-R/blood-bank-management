@@ -48,7 +48,40 @@ const MyRequestCard = (props) => {
 	const userId = useSelector((state) => state.auth.userId);
 	const dispatch = useDispatch();
 	const navigate = useNavigate();
-
+	useState(async () => {
+		let date = new Date(request.requestDeadline)
+		const add = date.getDate()+3
+		date.setDate(add)
+		// console.log(moment(date).
+		// format("YYYY-MM-DD"),moment(new Date())
+		// .format("YYYY-MM-DD"),moment(date).
+		// format("YYYY-MM-DD")<moment(new Date())
+		// .format("YYYY-MM-DD"))
+		if(moment(date).
+		format("YYYY-MM-DD")<moment(new Date())
+		.format("YYYY-MM-DD")){
+			// For now it won't work da bcs i didn't set the right url
+			// bcs it might cause us creating more requests 
+			const response = await axios.post(`${backendUrl}/request/deleteExpire`, {
+				requestId: request._id,
+				userId,
+				secret:import.meta.env.VITE_DELETE_SECRET
+			});
+			if (response.status === 200) {
+				dispatch(
+					RequestDataActions.deleteRequestData({
+						requestId: request._id,
+					})
+				);
+				dispatch(
+					SnackActions.setSnack({
+						message: "Request deleted successfully",
+						severity: "success",
+					})
+				);
+			}
+		}
+	},[request])	
 	const requiredBefore = useInput(
 		{
 			type: "date",
@@ -67,7 +100,6 @@ const MyRequestCard = (props) => {
 			if (response.status === 200) {
 				setAcceptedBy(response.data.acceptedBy);
 			}
-			console.log(response);
 		} catch (error) {
 			SnackActions.setSnack({
 				message: "Unable to get donors",
@@ -161,7 +193,9 @@ const MyRequestCard = (props) => {
 	const viewRequest = () => {
 		navigate(`/view-request/${request._id}`);
 	};
-
+	const dateValid = moment(request.requestDeadline).
+					format("YYYY-MM-DD")<moment(new Date().toISOString())
+					.format("YYYY-MM-DD")
 	const ViewContent = (
 		<Card className={classes.viewCard}>
 			<CardContent>
@@ -172,24 +206,22 @@ const MyRequestCard = (props) => {
 				<Typography variant="body2">
 					{request.hospitalAddress}
 				</Typography>
-				<Typography variant="body2"  color={
-					moment(request.requestDeadline).
-					format("DD MMMM YYYY")<moment(new Date().toISOString())
-					.format("YYYY-MM-DD")&&'red'}>
+				<Typography variant="body2"  color={dateValid&&request.userId == userId&&'red'}>
+					{dateValid&& request.userId == userId &&<span>Request Expired (will be deleted within 3days. Pls update if required )<br/> </span>}
 					{moment(request.requestDeadline).format("DD MMMM YYYY")}
 				</Typography>
-				 {/* {acceptedBy && (
-					<Typography variant="body2">
-						<br/> */}
-				{acceptedBy && acceptedBy.length>0 && (acceptedBy.map((donor) => (
-					donor&&<Typography variant="body2">
-						<hr></hr>
-						Accepted By <br/><br/>
-						Donor name : {donor.username}, Email Id : {donor.email}, No Of Units : {donor.password}
+				
+				{acceptedBy && acceptedBy.length>0 && (acceptedBy.map((donor,index) => (
+					donor&&
+					<>
+					{index==0&&<Typography variant="body2" fontWeight="bold" key={index}>
+						Accepted By<br/>
+						</Typography>}
+					<Typography variant="body2" key={index}>
+						Donor name : {donor.username}, Email Id : {donor.email}, No of Units : {donor.password}
 					</Typography>
+					</>
 				)))}
-				{/* </Typography>)
-				} */}
 			</CardContent>
 			{type == "my" && (
 				<>
