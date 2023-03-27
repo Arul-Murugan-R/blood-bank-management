@@ -25,7 +25,7 @@ import axios from "axios";
 import Error from "../UI/Typography/Error";
 import { Link, redirect, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { authActions } from "../../store/AuthStore";
+import { authActions, verifyToken } from "../../store/AuthStore";
 import { SnackActions } from "../../store/SnackStore";
 
 const backendUrl = import.meta.env.VITE_BACKEND_URL;
