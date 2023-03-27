@@ -38,7 +38,7 @@ const LoginForm = () => {
 			);
 			return navigate("/");
 		}
-	}, [isLoggedIn]);
+	}, []);
 
 	const userField = useInput(
 		{ type: "text", label: "Username", name: "username" },
