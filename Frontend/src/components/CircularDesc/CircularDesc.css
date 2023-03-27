@@ -45,6 +45,7 @@
     grid-area: stack;
     --n-angle: calc(-1 * var(--angle));
     transform: rotate(var(--angle)) translateX(180px) rotate(var(--n-angle));
+    transition: all 1s ease;
   }
   .bloods{
     width:50px;

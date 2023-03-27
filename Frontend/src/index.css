@@ -13,9 +13,22 @@ body {
 	background: var(--bg-color);
 	--reqCardWid:24vw;
 }
-::-webkit-scrollbar {
-    display: none;
+
+/* ::-webkit-scrollbar-track
+{
+	background-color: black;
+} */
+
+::-webkit-scrollbar
+{
+	width: 10px;
 }
+
+::-webkit-scrollbar-thumb
+{
+	background-color: #ccc;	
+}
+
 
 /* h1,h2,h3,h4,content label{
     color:rgba(223, 64, 90, 1) !important;
