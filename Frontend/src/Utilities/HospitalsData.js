@@ -1,22 +1,25 @@
 const HospitalData = [
 	{
+		//13.0567125,80.2425332
 		name: "Apollo Hospitals",
 		address: "No. 21, Greams Lane, Off Greams Road, Chennai - 600 006",
-		latitude: 13.0592516,
-		longitude: 80.2424154,
+		latitude: 13.0567125,
+		longitude: 80.2425332,
 	},
 	{
+		//13.0101515,80.2237591
 		name: "Fortis Malar Hospital",
 		address:
 			"No. 52, 1st Main Road, Gandhi Nagar, Adyar, Chennai - 600 020",
-		latitude: 12.9976225,
-		longitude: 80.2567018,
+		latitude: 13.0101515,
+		longitude:80.2237591,
 	},
 	{
+		//13.0226734,80.1513507
 		name: "MIOT International Hospital",
 		address: "4/112, Mount Poonamallee Road, Manapakkam, Chennai - 600 089",
-		latitude: 13.0204133,
-		longitude: 80.1684983,
+		latitude: 13.0226734,
+		longitude: 80.1513507,
 	},
 	{
 		name: "Sri Ramachandra Medical Center",
