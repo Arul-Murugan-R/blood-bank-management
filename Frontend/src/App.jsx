@@ -123,17 +123,21 @@ function App() {
 				<Route
 					path="/register"
 					element={
+						<ProtectedRoute condition={!isLoggedIn} redirect="/">
 						<Wrapper>
 							<SignUpForm />
 						</Wrapper>
+						</ProtectedRoute>
 					}
 				/>
 				<Route
 					path="/login"
 					element={
+						<ProtectedRoute condition={!isLoggedIn} redirect="/">
 						<Wrapper>
 							<LoginForm />
 						</Wrapper>
+						</ProtectedRoute>
 					}
 				/>
 				<Route

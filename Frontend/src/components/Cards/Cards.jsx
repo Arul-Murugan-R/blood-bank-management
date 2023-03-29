@@ -40,8 +40,8 @@ const Cards = (props) => {
 	};
 	useEffect(() => {
 		if (inView) {
-			counter(0, 12000, setCount, "donor");
-			counter(0, 2000, setCount, "req");
+			counter(0, 2000, setCount, "donor");
+			counter(0, 12000, setCount, "req");
 		} else {
 			setCount({ donor: 0, req: 0 });
 		}
@@ -59,8 +59,8 @@ const Cards = (props) => {
 				className={`${classes.userList} ${classes.noAnimation}`}
 				ref={ref}
 			>
-				<Card details={details}>{count.donor}+</Card>
-				<Card details={details}>{count.req}+</Card>
+				<Card details={details} pur="Recipients">{count.req}+</Card>
+				<Card details={details} pur="Donors">{count.donor}+</Card>
 			</div></center>
 		);
 	}

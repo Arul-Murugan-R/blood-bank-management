@@ -153,7 +153,7 @@ const RequestBloodForm = () => {
 							labelId="request-select-label"
 							id="simple-select"
 							defaultValue="Choose an option"
-							value={selectedHospIndex || ""}
+							value={selectedHospIndex>=0?selectedHospIndex:""}
 							label="Requested from"
 							onChange={(event) => {
 								setRequestedFrom(

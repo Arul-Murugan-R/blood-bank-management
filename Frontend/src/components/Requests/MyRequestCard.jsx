@@ -44,7 +44,9 @@ const MyRequestCard = (props) => {
 	);
 	const [numberOfUnits, setNumberOfUnits] = useState(request.numberOfUnits);
 	const [acceptedBy, setAcceptedBy] = useState(null);
-
+	useEffect(() => {
+		setEditMode(false)
+	}, [request])
 	const userId = useSelector((state) => state.auth.userId);
 	const dispatch = useDispatch();
 	const navigate = useNavigate();
@@ -250,7 +252,6 @@ const MyRequestCard = (props) => {
 			</CardContent>
 			{type == "my" && (
 				<>
-					{!dateValid && (
 						<IconButton
 							onClick={() => setEditMode(true)}
 							className={classes.editButton}
@@ -263,7 +264,6 @@ const MyRequestCard = (props) => {
 						>
 							<Edit fontSize="inherit" />
 						</IconButton>
-					)}
 					<IconButton
 						onClick={deleteRequestHandler}
 						className={classes.deleteButton}

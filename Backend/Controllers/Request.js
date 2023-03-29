@@ -144,6 +144,12 @@ module.exports.updateDonationInfo = async (req, res, next) => {
 		const recipient = await User.findById(request.userId);
 		const donor = await User.findById(req.userId);
 		request.numberOfUnits = request.numberOfUnits - 1;
+		let times = request.acceptedBy.filter((id)=>{ return id.toString()==req.userId.toString()}).length;
+		if(times>=2){
+			return res.status(401).json({
+				message: "You cannot accept more than 2 times",
+			});
+		}
 		request.acceptedBy.push(req.userId);
 		if (request.numberOfUnits === 0) request.status = "Accepted";
 		await request.save();

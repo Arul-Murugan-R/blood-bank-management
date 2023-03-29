@@ -3,6 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { useRef, useEffect } from "react";
 const Cards = (props) => {
 	const navigate = useNavigate();
+	const pur = props.pur?props.pur:"";
 	const {
 		title,
 		user,
@@ -22,7 +23,7 @@ const Cards = (props) => {
 				<div className={classes.userItemCard}>
 					<div className={classes.content}>
 						<label>
-							<b>{title ? title : "Request For Blood"}</b>
+							<b>{title ? pur?pur+" Available":title: "Request For Blood"}</b>
 						</label>
 						{user && (
 							<span>
