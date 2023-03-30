@@ -93,7 +93,7 @@ const MyRequestCard = (props) => {
 			type: "date",
 			label: "Required Before",
 			name: "requiredBefore",
-			initialValue: moment(request.requestDeadlinem).format("YYYY-MM-DD"),
+			initialValue: moment(request.requestDeadline).format("YYYY-MM-DD"),
 		},
 		validateRequestDate
 	);
@@ -292,6 +292,8 @@ const MyRequestCard = (props) => {
 			)}
 		</Card>
 	);
+
+	console.log(requiredBefore.properties.value);
 
 	const EditContent = (
 		<Paper sx={{ backgroundColor: "white", p: 3 }}>
