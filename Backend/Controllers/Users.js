@@ -1,5 +1,5 @@
 const User = require("../Models/User");
-const ExpressError = require("../utilities/ExpressError");
+const ExpressError = require("../Utilities/ExpressError");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const nodemailer = require("nodemailer");

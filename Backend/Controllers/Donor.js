@@ -1,7 +1,7 @@
-const ExpressError = require("../utilities/ExpressError");
+const ExpressError = require("../Utilities/ExpressError");
 const Donor = require("../Models/Donor");
 const User = require("../Models/User");
-const { canDonate, calculateAge } = require("../utilities/ValidationFunctions");
+const { canDonate, calculateAge } = require("../Utilities/ValidationFunctions");
 
 module.exports.insertDonorData = async (req, res, next) => {
 	try {
