@@ -81,7 +81,7 @@ function App() {
 			dispatch(verifyToken());
 			initial = false;
 		}
-	}, [dispatch, isLoggedIn]);
+	}, []);
 
 	return (
 		<>
@@ -124,9 +124,9 @@ function App() {
 					path="/register"
 					element={
 						<ProtectedRoute condition={!isLoggedIn} redirect="/">
-						<Wrapper>
-							<SignUpForm />
-						</Wrapper>
+							<Wrapper>
+								<SignUpForm />
+							</Wrapper>
 						</ProtectedRoute>
 					}
 				/>
@@ -134,9 +134,9 @@ function App() {
 					path="/login"
 					element={
 						<ProtectedRoute condition={!isLoggedIn} redirect="/">
-						<Wrapper>
-							<LoginForm />
-						</Wrapper>
+							<Wrapper>
+								<LoginForm />
+							</Wrapper>
 						</ProtectedRoute>
 					}
 				/>

@@ -4,7 +4,6 @@ import classes from "./Home.module.css";
 
 const DonationInfo = () => {
 	useEffect(() => {
-		const humans_parent = document.getElementById(classes["humans"]);
 		const BLOOD_TYPES = {
 			"O-": ["O-", "O+", "A-", "A+", "B-", "B+", "AB-", "AB+"],
 			"O+": ["O+", "A+", "B+", "AB+"],
@@ -16,7 +15,6 @@ const DonationInfo = () => {
 			"AB+": ["AB+"],
 		};
 		let lastCalled = null;
-		const reset_button = document.getElementById(classes["reset"]);
 		const selector = document.getElementById(classes["blood_selector"]);
 		const blood_vias = document.querySelectorAll(
 			`#${classes["humans"]} .${classes.human} .${classes["blood_via"]}`
@@ -39,13 +37,6 @@ const DonationInfo = () => {
 		}
 
 		selector.addEventListener("click", callIfChildren);
-		// reset.addEventListener("click", reset);
-
-		function reset() {
-			change();
-			blood_bag.style.height = "100px";
-			center_via.style.height = "0px";
-		}
 
 		function change() {
 			lastCalled.target.classList.remove(classes.highlight);
