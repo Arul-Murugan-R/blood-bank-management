@@ -39,7 +39,9 @@ mongoose
 app.use("/user", userRoutes);
 app.use("/donor", donorRoutes);
 app.use("/request", requestRoutes);
-
+app.get('/',(req,res)=>{
+	return res.json({text:'hello'})
+})
 app.all("*", (req, res, next) => {
 	next(new ExpressError("Page not found", 404));
 });
