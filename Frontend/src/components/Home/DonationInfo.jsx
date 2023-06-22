@@ -29,8 +29,6 @@ const DonationInfo = () => {
 			`.${classes["blood_type"]}`
 		);
 
-		console.log(classes["blood_types"]);
-
 		function callIfChildren(e) {
 			if (lastCalled) change();
 			if (e.target !== this) setRecipents(e);

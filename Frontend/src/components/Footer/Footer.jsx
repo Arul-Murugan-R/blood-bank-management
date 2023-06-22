@@ -1,9 +1,14 @@
-import { Link } from "react-router-dom";
+import { Link, redirect } from "react-router-dom";
 import classes from "./Footer.module.css";
 import { useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { SnackActions } from "../../store/SnackStore";
 
 const Footer = () => {
 	const navigate = useNavigate();
+	const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
+	console.log(isLoggedIn);
+	const dispatch = useDispatch();
 	return (
 		<>
 			<footer className={classes["padding_4x"]}>
@@ -28,9 +33,39 @@ const Footer = () => {
 						}
 					>
 						<h3>Want to Donate</h3>
-						<a onClick={() => navigate("/requests")}>Requests</a>
-						<a onClick={() => navigate("/my-requests")}>My Requests</a>
-						<a href="/register">Donor Login</a>
+						<Link
+							to={isLoggedIn && "/requests"}
+							onClick={() =>
+								isLoggedIn
+									? navigate("/requests")
+									: dispatch(
+											SnackActions.setSnack({
+												message:
+													"Login to view requests!",
+												severity: "error",
+											})
+									  )
+							}
+						>
+							Requests
+						</Link>
+						<Link
+							to={isLoggedIn && "/my-requests"}
+							onClick={() =>
+								isLoggedIn
+									? navigate("/my-requests")
+									: dispatch(
+											SnackActions.setSnack({
+												message:
+													"Login to view requests!",
+												severity: "error",
+											})
+									  )
+							}
+						>
+							My Requests
+						</Link>
+						<Link to="/login">Donor Login</Link>
 					</section>
 					<section
 						className={
@@ -51,8 +86,9 @@ const Footer = () => {
 						}
 					>
 						<h3>Newsletter</h3>
-						<p>You can trust us. we only send promo offers,</p><br/>
-						<fieldset className={classes["fixed_flex"]} >
+						<p>You can trust us. we only send promo offers,</p>
+						<br />
+						<fieldset className={classes["fixed_flex"]}>
 							<input
 								type="email"
 								name="newsletter"
