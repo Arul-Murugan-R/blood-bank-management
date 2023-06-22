@@ -1,13 +1,14 @@
 const express = require("express");
 const app = express();
 const mongoose = require("mongoose");
+const bodyParser = require('body-parser')
 
 const ExpressError = require("./Utilities/ExpressError");
 const userRoutes = require("./Routes/User");
 const donorRoutes = require("./Routes/Donor");
 const requestRoutes = require("./Routes/Request");
 require("dotenv").config();
-app.use(express.json());
+app.use(bodyParser.json());
 
 app.use((req,res,next) => {
     res.setHeader('Access-Control-Allow-Origin', '*');
@@ -31,7 +32,7 @@ mongoose
 app.use("/user", userRoutes);
 app.use("/donor", donorRoutes);
 app.use("/request", requestRoutes);
-app.use('/',(req,res)=>{
+app.use("/",(req,res)=>{
     res.status(200).json({message:'Success'});
 })
 app.all("*", (req, res, next) => {
