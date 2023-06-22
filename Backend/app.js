@@ -9,14 +9,6 @@ const requestRoutes = require("./Routes/Request");
 require("dotenv").config();
 app.use(express.json());
 
-app.use((req, res, next) => {
-	res.header("Access-Control-Allow-Origin", "*");
-	res.header(
-		"Access-Control-Allow-Headers",
-		"Origin, X-Requested-With, Content-Type, Accept"
-	);
-	next();
-});
 app.use((req,res,next) => {
     res.setHeader('Access-Control-Allow-Origin', '*');
     res.setHeader('Access-Control-Allow-Methods', 'POST,GET,PUT,PATCH,DELETE');
@@ -25,7 +17,7 @@ app.use((req,res,next) => {
 })
 
 const url = process.env.DB_URL || "mongodb://localhost:27017/blood-bank";
-
+console.log('deployed')
 mongoose
 	.connect(url)
 	.then(() => {
