@@ -1,11 +1,8 @@
 :root{
-    --white:#FFF;
     --black:#000;
     --dark:#1E1E1E;
     --gray:rgba(1,1,1,0.6);
     --lite:rgba(255,255,255,0.6);
-    --primary:#303030;
-    --secondary:var(--doubt);
 }
 
 
@@ -35,7 +32,7 @@ a, p{
 }
 
 h1, h2, h3, h4, h5, h6{
-    color:var(--primary);
+    color:var(--secondary);
     font-weight:600;
 }
 
@@ -48,7 +45,7 @@ fieldset{
 }
 
 .title{
-    color:var(--primary);
+    color:var(--secondary);
 }
 
 .flex, .fixed_flex{
@@ -85,26 +82,26 @@ fieldset{
 }
 
 .btn_1{
-    border:1px solid var(--primary);
-    background-color:var(--primary);
-    color:var(--secondary);
+    border:1px solid var(--secondary);
+    background-color:var(--secondary);
+    color:var(--doubt);
 }
 
 .btn_1:hover{
     background-color:transparent;
-    color:var(--primary);
+    color:var(--secondary);
 }
 
 .btn_2{
-    border:1px solid var(--secondary);
-    background-color:var(--secondary);
-    color:var(--primary);
+    border:1px solid var(--doubt);
+    background-color:var(--doubt);
+    color:var(--secondary);
 }
 
 .btn_2:hover{
-    border:1px solid var(--primary);
-    background-color:var(--primary);
-    color:var(--secondary);
+    border:1px solid var(--secondary);
+    background-color:var(--secondary);
+    color:var(--doubt);
 }
 
 @media (max-width:920px){
@@ -131,12 +128,12 @@ fieldset{
                FOOTER
 ****************************/
 footer{
-    background-color:var(--primary);
+    background-color:var(--secondary);
     color:var(--lite);
 }
 
 footer h3{
-    color:var(--white);
+    color:var(--text-color);
     margin-bottom:1.5rem;
 }
 
@@ -147,7 +144,7 @@ footer a{
 }
 
 footer a:hover{
-    color:var(--white);
+    color:var(--text-color);
 }
 
 footer fieldset{
@@ -162,7 +159,7 @@ footer fieldset input{
 }
 
 footer fieldset .btn{
-    color: var(--white);
+    color: var(--text-color);
     border:1px solid var(--doubt);
     background: linear-gradient(to right, var(--doubt) 50%, transparent 50%);
     background-size: 200% 100%;
@@ -173,8 +170,8 @@ footer fieldset .btn{
 
 footer fieldset .btn_2:hover{
     background-position: left bottom;
-    background-color:var(--secondary);
-    color:var(--white);
+    background-color:var(--doubt);
+    color:var(--text-color);
 }
 
 footer .flex:last-child{
@@ -186,14 +183,14 @@ footer .flex:last-child .flex-content:last-child{
 }
 
 footer .flex:last-child p{
-    color:var(--white);
+    color:var(--text-color);
 }
 
 footer .flex:last-child a{
     width:40px;
     display:inline-block;
     background-color:var(--lite);
-    color:var(--white);
+    color:var(--text-color);
     padding:0.5rem;
     margin-right:3px;
     text-align:center;

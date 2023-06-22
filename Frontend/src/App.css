@@ -2,7 +2,7 @@
 	background: transparent;
 	height: 100vh;
 	overflow: hidden;
-	color: white;
+	color: var(--text-color);
 }
 .intro-text{
 	padding: 5% 10%;

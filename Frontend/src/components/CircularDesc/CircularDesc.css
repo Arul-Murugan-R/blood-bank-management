@@ -31,7 +31,7 @@
     left:50%;
     transform: translate(-50%,-50%);
     text-align: center;
-    color:white;
+    color:var(--text-color);
     display: grid;
     place-items: center;
     font-size: 30px;
@@ -52,7 +52,7 @@
     height:50px;
     text-align: center;
     background-color: var(--doubt);
-    color:white;
+    color:var(--text-color);
     border-radius: 50%;
     display: grid;
     place-items: center;
@@ -73,7 +73,7 @@
     font-size: 60px;
     letter-spacing: 10px;
     word-spacing: 0.2px;
-    color: white;
+    color: var(--text-color);
 }
 .catchy b{
   color: var(--doubt);

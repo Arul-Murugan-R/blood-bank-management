@@ -3,7 +3,7 @@
 	display: block !important;
 	width: 100% !important;
 	margin-bottom: 1rem !important;
-	background-color: white;
+	background-color: var(--text-color);
 	border-radius: 5px;
 }
 
