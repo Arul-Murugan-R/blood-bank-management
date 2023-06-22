@@ -40,7 +40,7 @@ app.use("/user", userRoutes);
 app.use("/donor", donorRoutes);
 app.use("/request", requestRoutes);
 app.get('/',(req,res)=>{
-	return res.json({text:'hello'})
+    res.status(200).json({message:'Success'});
 })
 app.all("*", (req, res, next) => {
 	next(new ExpressError("Page not found", 404));
@@ -52,6 +52,6 @@ app.use((err, req, res, next) => {
 	return res.status(status).json({ message: err.message });
 });
 
-app.listen(5000, () => {
+app.listen(process.env.PORT||5000, () => {
 	console.log("Server running at 5000");
 });
