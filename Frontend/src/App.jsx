@@ -8,7 +8,6 @@
 // function App() {
 // 	const [page, setPage] = useState(0);
 
-// 	console.log(Table);
 
 // 	return (
 // 		<div className="App">

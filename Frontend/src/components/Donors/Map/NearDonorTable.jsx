@@ -60,7 +60,6 @@ export default function NearDonorTable(props) {
 
 	const notifyDonor = async (row) => {
 		try {
-			console.log(props.reqId)
 			const response = await axios.post(
 				backendUrl + "/user/notify-donor",
 				{

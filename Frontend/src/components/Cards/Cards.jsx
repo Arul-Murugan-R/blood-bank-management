@@ -66,7 +66,6 @@ const Cards = (props) => {
 	}
 	var calWid = store.length * 22 + "vw";
 	var trans = store.length * 22 - 100 + "vw";
-	console.log(store)
 
 	return (
 		<>

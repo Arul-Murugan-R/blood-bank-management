@@ -54,11 +54,6 @@ const MyRequestCard = (props) => {
 		let date = new Date(request.requestDeadline);
 		const add = date.getDate() + 3;
 		date.setDate(add);
-		// console.log(moment(date).
-		// format("YYYY-MM-DD"),moment(new Date())
-		// .format("YYYY-MM-DD"),moment(date).
-		// format("YYYY-MM-DD")<moment(new Date())
-		// .format("YYYY-MM-DD"))
 		if (
 			moment(date).format("YYYY-MM-DD") <
 			moment(new Date()).format("YYYY-MM-DD")
@@ -188,7 +183,6 @@ const MyRequestCard = (props) => {
 				setEditMode(false);
 			}
 		} catch (error) {
-			// console.log(error);
 			setError(error.response.data.message || error);
 		}
 	};
@@ -293,7 +287,6 @@ const MyRequestCard = (props) => {
 		</Card>
 	);
 
-	console.log(requiredBefore.properties.value);
 
 	const EditContent = (
 		<Paper sx={{ backgroundColor: "white", p: 3 }}>

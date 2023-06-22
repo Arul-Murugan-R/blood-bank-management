@@ -24,7 +24,6 @@ const ViewRequest = () => {
 	const bloodGrp = useSelector((state) => state.donorData.bloodGroup);
 	const navigate = useNavigate();
 	const dispatch = useDispatch();
-	console.log(request);
 	const fetchUser = async () => {
 		try {
 			const response = await axios.get(
@@ -79,7 +78,6 @@ const ViewRequest = () => {
 
 	const updateRequestHandler = async () => {
 		try {
-			console.log(id);
 			const response = await axios.get(
 				`${backendUrl}/request/update-status/` + id,
 				{
@@ -109,7 +107,6 @@ const ViewRequest = () => {
 				}
 			}
 		} catch (error) {
-			console.log(error);
 			dispatch(
 				SnackActions.setSnack({
 					message: "Request update failed "+error.response.data.message,
@@ -121,7 +118,6 @@ const ViewRequest = () => {
 
 	useEffect(() => {
 		if (request == null) {
-			console.log(id);
 			dispatch(
 				SnackActions.setSnack({
 					message: "Request not found",

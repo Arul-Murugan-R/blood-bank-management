@@ -81,7 +81,6 @@ const rows = [
 	createData("neymar", "AB-ve", 45, 9876543210, "Tamil Nadu", ""),
 ].sort((a, b) => (a.name < b.name ? -1 : 1));
 */
-// console.log(rows)
 export default function HomeTable() {
 	const dispatch = useDispatch();
 	const [page, setPage] = useState(0);
@@ -89,7 +88,6 @@ export default function HomeTable() {
 	const [rows, setRows] = useState(DonorData);
 	const filterData = (data) => {
 		setRows(DonorData)
-		console.log(data.age)
 		var gt = data.age.split('-')[0]
 		var lt = data.age.split('-')[1]
 		setRows((prev)=>{
@@ -99,7 +97,6 @@ export default function HomeTable() {
 			&& ((item.age >= gt && item.age <= lt) || data.age == 'All'))
 				return item})
 		});
-		// console.log(rows)
 		dispatch(
 			SnackActions.setSnack({
 				message: "Filter Applied",

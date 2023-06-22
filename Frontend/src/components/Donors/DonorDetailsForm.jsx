@@ -58,7 +58,6 @@ const UserDetailsForm = (props) => {
 	const dispatch = useDispatch();
 
 	const updatePreviousDonated = (value) => {
-		console.log(previousDonated);
 		setPreviousDonated(() => Boolean(+value));
 	};
 

@@ -175,7 +175,6 @@ export default function TableFilterCus(props) {
 
 	const submitHandler = (e) => {
 		e.preventDefault();
-		console.log(filterData);
 		props.filter(filterData);
 	};
 	const resetHandler = (e) => {

@@ -7,7 +7,6 @@ import { SnackActions } from "../../store/SnackStore";
 const Footer = () => {
 	const navigate = useNavigate();
 	const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
-	console.log(isLoggedIn);
 	const dispatch = useDispatch();
 	return (
 		<>
