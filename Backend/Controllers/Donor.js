@@ -33,7 +33,6 @@ module.exports.insertDonorData = async (req, res, next) => {
 			donorData: donor,
 		});
 	} catch (e) {
-		console.log(e);
 		return res.status(401).json({
 			message: "Donor data insertion failed",
 			err: e,
@@ -82,11 +81,11 @@ module.exports.getAllDonors = async (req, res, next) => {
 		const donors = await Donor.find({});
 		for (let i = 0; i < donors.length; i++) {
 			if (canDonate(donors[i].lastDonation)) {
+				const user = await User.findById(donors[i].userId);
 				const donor = {
 					user_id: donors[i].userId,
-					username: await User.findById(donors[i].userId).username,
-					mobileNumber: await User.findById(donors[i].userId)
-						.mobileNumber,
+					name: user.username,
+					mobileNumber: user.mobileNumber,
 					location: {
 						latitude: donors[i].location.latitude,
 						longitude: donors[i].location.longitude,
@@ -98,7 +97,7 @@ module.exports.getAllDonors = async (req, res, next) => {
 			}
 		}
 		return res.status(200).json({
-			message: "Donor data fetched successfully",
+			message: "Donor data fetching successfull",
 			donorData: data,
 		});
 	} catch (e) {

@@ -130,13 +130,12 @@ module.exports.updateDonationInfo = async (req, res, next) => {
 				message: "Request not found",
 			});
 		}
-		if(request.status === "Accepted"){
+		if (request.status === "Accepted") {
 			return res.status(401).json({
 				message: "Request already accepted",
 			});
 		}
-		console.log(req.userId);
-		if(request.userId.equals(req.userId)){
+		if (request.userId.equals(req.userId)) {
 			return res.status(401).json({
 				message: "You cannot accept your own request",
 			});
@@ -144,8 +143,10 @@ module.exports.updateDonationInfo = async (req, res, next) => {
 		const recipient = await User.findById(request.userId);
 		const donor = await User.findById(req.userId);
 		request.numberOfUnits = request.numberOfUnits - 1;
-		let times = request.acceptedBy.filter((id)=>{ return id.toString()==req.userId.toString()}).length;
-		if(times>=2){
+		let times = request.acceptedBy.filter((id) => {
+			return id.toString() == req.userId.toString();
+		}).length;
+		if (times >= 2) {
 			return res.status(401).json({
 				message: "You cannot accept more than 2 times",
 			});
@@ -197,15 +198,18 @@ module.exports.getAcceptedBy = async (req, res, next) => {
 		}
 		let acceptedBy = [];
 		for (let i = 0; i < request.acceptedBy.length; i++) {
-			var index = acceptedBy.findIndex((user) => user._id.toString() == request.acceptedBy[i].toString());
-			if(index!=-1){
+			var index = acceptedBy.findIndex(
+				(user) =>
+					user._id.toString() == request.acceptedBy[i].toString()
+			);
+			if (index != -1) {
 				acceptedBy[index].password++;
 				continue;
 			}
 			let user = await User.findById(request.acceptedBy[i]);
-			if(!user)continue;
+			if (!user) continue;
 			acceptedBy.push(user);
-			if(user)acceptedBy[i]['password']=1;
+			if (user) acceptedBy[i]["password"] = 1;
 		}
 		return res.status(200).json({
 			message: "Accepted by fetched successfully",
@@ -249,8 +253,7 @@ module.exports.deleteRequestExpired = async (req, res, next) => {
 	try {
 		const reqID = await req.body.requestId;
 		const request = await Request.findById(reqID);
-		// console.log(req.body.secret!==process.env.DELETE_SECRET)
-		if(req.body.secret!==process.env.DELETE_SECRET){
+		if (req.body.secret !== process.env.DELETE_SECRET) {
 			return res.status(401).json({
 				message: "Unauthorized",
 			});

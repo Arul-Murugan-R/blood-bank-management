@@ -54,7 +54,6 @@ module.exports.registerUser = async (req, res, next) => {
 			},
 		});
 	} catch (e) {
-		console.log(e);
 		const existingField =
 			Object.keys(e.keyPattern)[0][0].toUpperCase() +
 			Object.keys(e.keyPattern)[0].slice(1);
