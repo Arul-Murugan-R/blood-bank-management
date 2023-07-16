@@ -122,7 +122,7 @@ const RequestBloodForm = () => {
 						<Select
 							labelId="blood-select-label"
 							id="simple-select-blood"
-							value={bloodGroup || ""}
+							value={bloodGroup === null ? "" : bloodGroup}
 							label="Blood group"
 							onChange={(event) =>
 								setBloodGroup((prev) => event.target.value)
@@ -152,8 +152,7 @@ const RequestBloodForm = () => {
 						<Select
 							labelId="request-select-label"
 							id="simple-select"
-							defaultValue="Choose an option"
-							value={selectedHospIndex>=0?selectedHospIndex:""}
+							value={selectedHospIndex ? selectedHospIndex : ""}
 							label="Requested from"
 							onChange={(event) => {
 								setRequestedFrom(

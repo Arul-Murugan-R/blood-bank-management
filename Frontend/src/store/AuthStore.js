@@ -67,7 +67,7 @@ export const verifyToken = () => {
 						requestsData: requestData.data.requests,
 					})
 				);
-
+			console.log(base_url);
 			const donorData = await axios.get(base_url + "/donor/all-donors");
 			if (donorData.status === 200 && donorData.data.donorData.length > 0)
 				dispatch(

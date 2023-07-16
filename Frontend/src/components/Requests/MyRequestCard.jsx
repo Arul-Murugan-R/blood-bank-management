@@ -31,8 +31,7 @@ const numberOfUnitsArr = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 const backendUrl = import.meta.env.VITE_BACKEND_URL;
 
 const MyRequestCard = (props) => {
-	const { type } = props;
-	const { request } = props;
+	const { type, request } = props;
 	const [editMode, setEditMode] = useState(false);
 	const [bloodGroup, setBloodGroup] = useState(request.bloodGroup);
 	const [error, setError] = useState(null);
@@ -45,8 +44,8 @@ const MyRequestCard = (props) => {
 	const [numberOfUnits, setNumberOfUnits] = useState(request.numberOfUnits);
 	const [acceptedBy, setAcceptedBy] = useState(null);
 	useEffect(() => {
-		setEditMode(false)
-	}, [request])
+		setEditMode(false);
+	}, [request]);
 	const userId = useSelector((state) => state.auth.userId);
 	const dispatch = useDispatch();
 	const navigate = useNavigate();
@@ -197,7 +196,7 @@ const MyRequestCard = (props) => {
 		moment(request.requestDeadline).format("YYYY-MM-DD") <
 		moment(new Date().toISOString()).format("YYYY-MM-DD");
 	const ViewContent = (
-		<Card className={classes.viewCard}>
+		<Card className={classes.viewCard} key={request._id}>
 			<CardContent>
 				<Typography variant="h5" component="div">
 					{request.numberOfUnits} units of {request.bloodGroup}
@@ -229,13 +228,16 @@ const MyRequestCard = (props) => {
 										<Typography
 											variant="body2"
 											fontWeight="bold"
-											key={index}
+											key={"accepted"}
 										>
 											Accepted By
 											<br />
 										</Typography>
 									)}
-									<Typography variant="body2" key={index}>
+									<Typography
+										variant="body2"
+										key={"acc" + index}
+									>
 										Donor name : {donor.username}, Email Id
 										: {donor.email}, No of Units :{" "}
 										{donor.password}
@@ -246,18 +248,18 @@ const MyRequestCard = (props) => {
 			</CardContent>
 			{type == "my" && (
 				<>
-						<IconButton
-							onClick={() => setEditMode(true)}
-							className={classes.editButton}
-							sx={{
-								position: "absolute",
-								border: "1px solid #000",
-								p: 1,
-							}}
-							size="small"
-						>
-							<Edit fontSize="inherit" />
-						</IconButton>
+					<IconButton
+						onClick={() => setEditMode(true)}
+						className={classes.editButton}
+						sx={{
+							position: "absolute",
+							border: "1px solid #000",
+							p: 1,
+						}}
+						size="small"
+					>
+						<Edit fontSize="inherit" />
+					</IconButton>
 					<IconButton
 						onClick={deleteRequestHandler}
 						className={classes.deleteButton}
@@ -287,7 +289,6 @@ const MyRequestCard = (props) => {
 		</Card>
 	);
 
-
 	const EditContent = (
 		<Paper sx={{ backgroundColor: "white", p: 3 }}>
 			{error && <Error message={error} />}
@@ -315,7 +316,7 @@ const MyRequestCard = (props) => {
 					}
 				>
 					{allBloodGroups.map((group) => (
-						<MenuItem value={group} key={group}>
+						<MenuItem value={group} key={"bg" + group}>
 							{group}
 						</MenuItem>
 					))}
@@ -346,7 +347,7 @@ const MyRequestCard = (props) => {
 					}}
 				>
 					{HospitalData.map((hosp, index) => (
-						<MenuItem value={index} key={index}>
+						<MenuItem value={index} key={"hd" + index}>
 							{hosp.name}
 						</MenuItem>
 					))}
@@ -376,7 +377,7 @@ const MyRequestCard = (props) => {
 					}
 				>
 					{numberOfUnitsArr.map((unit) => (
-						<MenuItem value={unit} key={unit}>
+						<MenuItem value={unit} key={"bu" + unit}>
 							{unit}
 						</MenuItem>
 					))}
@@ -402,7 +403,11 @@ const MyRequestCard = (props) => {
 			</center>
 		</Paper>
 	);
-	return <Box sx={{ my: 2 }}>{editMode ? EditContent : ViewContent}</Box>;
+	return (
+		<Box sx={{ my: 2 }} key={request._id}>
+			{editMode ? EditContent : ViewContent}
+		</Box>
+	);
 };
 
 export default MyRequestCard;

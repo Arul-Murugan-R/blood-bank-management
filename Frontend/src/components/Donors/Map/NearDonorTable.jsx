@@ -58,14 +58,20 @@ export default function NearDonorTable(props) {
 	const [rowsPerPage, setRowsPerPage] = useState(10);
 	const [rows, setRows] = useState(props.data);
 
+	const verifiedDonors = useSelector((state) => state.donorInfo);
+
 	const notifyDonor = async (row) => {
 		try {
+			console.log(row);
 			const response = await axios.post(
 				backendUrl + "/user/notify-donor",
 				{
-					donorId: row.id,
+					donorId: row.user_id,
 					requestId: props.reqId,
-					fake: (row.name === "bala" || row.name==="Arul") ? false : true,
+					fake:
+						row.name === "bala" || row.name === "Arul"
+							? false
+							: true,
 				}
 			);
 			if (response.status === 200) {
@@ -122,9 +128,7 @@ export default function NearDonorTable(props) {
 							<StyledTableCell >
 								Email Id&nbsp;
 							</StyledTableCell> */}
-							<StyledTableCell >
-								BloodGroup&nbsp;
-							</StyledTableCell>
+							<StyledTableCell>BloodGroup&nbsp;</StyledTableCell>
 							<StyledTableCell>
 								Make Request&nbsp;
 							</StyledTableCell>
@@ -139,7 +143,10 @@ export default function NearDonorTable(props) {
 							.map((row) => (
 								<StyledTableRow key={row.id}>
 									<StyledTableCell component="th" scope="row">
-										{row.name}{(row.name=='Arul' || row.name=='bala')&&'(verified)'}
+										{row.name}
+										{verifiedDonors.find(
+											(elem) => elem.username === row.name
+										) && "(verified)"}
 									</StyledTableCell>
 									<StyledTableCell>
 										{row.location.latitude}
@@ -157,7 +164,7 @@ export default function NearDonorTable(props) {
 										{row.email}&nbsp;
 									</StyledTableCell> */}
 									<StyledTableCell>
-									<button
+										<button
 											style={{
 												margin: "0",
 												padding: "5px",
@@ -172,14 +179,15 @@ export default function NearDonorTable(props) {
 												},
 											}}
 											onClick={() => {
-												props.modal(row)
+												props.modal(row);
 												dispatch(
-												SnackActions.setSnack({
-													open: true,
-													message: "Opened Description Scroll Down",
-													severity: "success",
-												})
-												)
+													SnackActions.setSnack({
+														open: true,
+														message:
+															"Opened Description Scroll Down",
+														severity: "success",
+													})
+												);
 											}}
 										>
 											Locate
@@ -199,7 +207,7 @@ export default function NearDonorTable(props) {
 												},
 											}}
 											onClick={() => {
-												notifyDonor(row)
+												notifyDonor(row);
 											}}
 										>
 											Request

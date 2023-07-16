@@ -374,24 +374,6 @@ const donors = [
 		},
 	},
 	{
-		id: "6416aff54f7fef4ccd3373b7",
-		name: "Arul",
-		bloodGroup: "AB+",
-		location: {
-			latitude: 13.037005,
-			longitude: 80.1357345,
-		},
-	},
-	{
-		id: "640b581e96d2489975acd4f2",
-		name: "bala",
-		bloodGroup: "A-",
-		location: {
-			latitude: 12.8996,
-			longitude: 80.2209,
-		},
-	},
-	{
 		id: "14e9e0d0-1a80-43f8-8bfa-2decac953b9a",
 		name: "Jayan Chhabra",
 		bloodGroup: "B+",

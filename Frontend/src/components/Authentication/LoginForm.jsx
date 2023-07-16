@@ -148,7 +148,13 @@ const LoginForm = () => {
 						flexWrap: "wrap",
 					}}
 				>
-					<Button variant="contained" fullWidth onClick={loginUser}>
+					<Button
+						variant="contained"
+						fullWidth
+						type="submit"
+						form="login-form"
+						onClick={loginUser}
+					>
 						Login
 					</Button>
 					<Link to="/register" className={classes.authLink}>

@@ -43,6 +43,7 @@ const SignUpForm = () => {
 					severity: "error",
 				})
 			);
+			console.log("run");
 			return navigate("/");
 		}
 	}, []);
@@ -104,7 +105,8 @@ const SignUpForm = () => {
 
 	const handleMouseDownPassword = (event) => event.preventDefault();
 
-	const registerUser = async () => {
+	const registerUser = async (event) => {
+		event.preventDefault();
 		if (!dobField.validities.isValid && role == "donor") {
 			dobField.validities.reset();
 			return setRegistrationerror(
@@ -166,12 +168,12 @@ const SignUpForm = () => {
 				/>
 				<CardContent className={classes.CardContent}>
 					<form
-						id="signUp-Form"
 						style={{
 							backgroundColor: "white",
 							borderRadius: "5px",
 							padding: "10px 5px",
 						}}
+						id="sign-up"
 					>
 						{registrationError && (
 							<Error message={registrationError} />
@@ -243,6 +245,8 @@ const SignUpForm = () => {
 						variant="contained"
 						fullWidth
 						onClick={registerUser}
+						type="submit"
+						form="sign-up"
 					>
 						Sign Up
 					</Button>

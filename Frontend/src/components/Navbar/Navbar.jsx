@@ -33,7 +33,7 @@ const Navbar = () => {
 				severity: "success",
 			})
 		);
-		return <Navigate to="/" replace />;
+		return navigate("/");
 	};
 
 	const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
