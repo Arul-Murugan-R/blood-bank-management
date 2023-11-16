@@ -50,39 +50,41 @@ const MyRequestCard = (props) => {
 	const userId = useSelector((state) => state.auth.userId);
 	const dispatch = useDispatch();
 	const navigate = useNavigate();
-	useState(async () => {
-		let date = new Date(request.requestDeadline);
-		const add = date.getDate() + 3;
-		date.setDate(add);
-		if (
-			moment(date).format("YYYY-MM-DD") <
-			moment(new Date()).format("YYYY-MM-DD")
-		) {
-			// For now it won't work da bcs i didn't set the right url
-			// bcs it might cause us creating more requests
-			const response = await axios.post(
-				`${backendUrl}/request/deleteExpire`,
-				{
-					requestId: request._id,
-					userId,
-					secret: import.meta.env.VITE_DELETE_SECRET,
-				}
-			);
-			if (response.status === 200) {
-				dispatch(
-					RequestDataActions.deleteRequestData({
-						requestId: request._id,
-					})
-				);
-				dispatch(
-					SnackActions.setSnack({
-						message: "Request deleted successfully",
-						severity: "success",
-					})
-				);
-			}
-		}
-	}, [request]);
+	// Removed the below content bcs when we refresh the dispatch func gets executed automatically
+
+	// useState(async () => {
+	// 	let date = new Date(request.requestDeadline);
+	// 	const add = date.getDate() + 3;
+	// 	date.setDate(add);
+	// 	if (
+	// 		moment(date).format("YYYY-MM-DD") <
+	// 		moment(new Date()).format("YYYY-MM-DD")
+	// 	) {
+	// 		// For now it won't work da bcs i didn't set the right url
+	// 		// bcs it might cause us creating more requests
+	// 		const response = await axios.post(
+	// 			`${backendUrl}/request/deleteExpire`,
+	// 			{
+	// 				requestId: request._id,
+	// 				userId,
+	// 				secret: import.meta.env.VITE_DELETE_SECRET,
+	// 			}
+	// 		);
+	// 		if (response.status === 200) {
+	// 			dispatch(
+	// 				RequestDataActions.deleteRequestData({
+	// 					requestId: request._id,
+	// 				})
+	// 			);
+	// 			dispatch(
+	// 				SnackActions.setSnack({
+	// 					message: "Request deleted successfully",
+	// 					severity: "success",
+	// 				})
+	// 			);
+	// 		}
+	// 	}
+	// }, [request]);
 	const requiredBefore = useInput(
 		{
 			type: "date",
