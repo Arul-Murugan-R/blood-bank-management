@@ -1,7 +1,7 @@
 const express = require("express");
 const app = express();
 const mongoose = require("mongoose");
-const bodyParser = require('body-parser')
+const bodyParser = require("body-parser");
 
 const ExpressError = require("./Utilities/ExpressError");
 const userRoutes = require("./Routes/User");
@@ -10,15 +10,14 @@ const requestRoutes = require("./Routes/Request");
 require("dotenv").config();
 app.use(bodyParser.json());
 
-app.use((req,res,next) => {
-    res.setHeader('Access-Control-Allow-Origin', '*');
-    res.setHeader('Access-Control-Allow-Methods', 'POST,GET,PUT,PATCH,DELETE');
-    res.setHeader('Access-Control-Allow-Headers', 'Content-Type,Authorization')
-    next()
-})
+app.use((req, res, next) => {
+	res.setHeader("Access-Control-Allow-Origin", "*");
+	res.setHeader("Access-Control-Allow-Methods", "POST,GET,PUT,PATCH,DELETE");
+	res.setHeader("Access-Control-Allow-Headers", "Content-Type,Authorization");
+	next();
+});
 
 const url = process.env.DB_URL || "mongodb://localhost:27017/blood-bank";
-console.log('deployed')
 mongoose
 	.connect(url)
 	.then(() => {
@@ -32,9 +31,9 @@ mongoose
 app.use("/user", userRoutes);
 app.use("/donor", donorRoutes);
 app.use("/request", requestRoutes);
-app.use("/",(req,res)=>{
-    res.status(200).json({message:'Success'});
-})
+app.use("/", (req, res) => {
+	res.status(200).json({ message: "Success" });
+});
 app.all("*", (req, res, next) => {
 	next(new ExpressError("Page not found", 404));
 });
@@ -45,6 +44,6 @@ app.use((err, req, res, next) => {
 	return res.status(status).json({ message: err.message });
 });
 
-app.listen(process.env.PORT||5000, () => {
+app.listen(process.env.PORT || 5000, () => {
 	console.log("Server running at 5000");
 });

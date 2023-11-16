@@ -2,7 +2,7 @@ import { Button, IconButton, Typography } from "@mui/material";
 import { Box } from "@mui/system";
 import axios from "axios";
 import { Popup } from "react-map-gl";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { SnackActions } from "../../../store/SnackStore";
 import classes from "./Map.module.css";
 
@@ -11,6 +11,7 @@ const backendUrl = import.meta.env.VITE_BACKEND_URL;
 const DonorsCards = (props) => {
 	const { popupInfo, setPopupInfo, reqId } = props;
 	const dispatch = useDispatch();
+	const verifiedDonors = useSelector((state) => state.donorInfo);
 
 	const notifyDonor = async () => {
 		try {
@@ -19,7 +20,7 @@ const DonorsCards = (props) => {
 				{
 					donorId: popupInfo.id,
 					requestId: reqId,
-					fake: (popupInfo.name === "bala" || popupInfo.name==="Arul") ? false : true,
+					fake: verifiedDonors.find(popupInfo.name) ? false : true,
 				}
 			);
 			if (response.status === 200) {

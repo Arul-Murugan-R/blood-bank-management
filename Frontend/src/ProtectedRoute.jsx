@@ -17,7 +17,7 @@ const ProtectedRoute = (props) => {
 				);
 			return navigate(props.redirect);
 		}
-	}, [props.condition, navigate, props.redirect]);
+	}, []);
 	return props.children;
 };
 

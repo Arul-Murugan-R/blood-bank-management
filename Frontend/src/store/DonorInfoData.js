@@ -3,7 +3,7 @@ import { createSlice } from "@reduxjs/toolkit";
 const initialDonorInfoState = [
 	{
 		user_id: null,
-		username: null,
+		name: null,
 		mobileNumber: null,
 		location: {
 			latitude: null,

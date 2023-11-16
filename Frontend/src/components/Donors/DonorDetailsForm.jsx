@@ -49,9 +49,9 @@ const UserDetailsForm = (props) => {
 
 	const userId = useSelector((state) => state.auth.userId);
 
-	const [previousDonated, setPreviousDonated] = useState(false);
+	const [previousDonated, setPreviousDonated] = useState("");
 
-	const [bloodGroup, setBloodGroup] = useState(null);
+	const [bloodGroup, setBloodGroup] = useState("");
 
 	const [error, setError] = useState(null);
 

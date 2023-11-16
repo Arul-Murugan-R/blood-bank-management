@@ -68,7 +68,8 @@ const DonorsMap = (props) => {
 	const request = useSelector((state) =>
 		state.requestData.find((data) => data._id === props.reqId)
 	);
-	const bloodGrp = request.bloodGroup
+	const verifiedDonors = useSelector((state) => state.donorInfo);
+	const bloodGrp = request.bloodGroup;
 	const ViewContent = (
 		<Card
 			style={{
@@ -106,13 +107,19 @@ const DonorsMap = (props) => {
 		</Card>
 	);
 	const mapRef = useRef(null);
-	let TableData = sortedList.filter(
-		(data) => whoCanDonate[data.bloodGroup].find((i)=>{return i==bloodGrp})
+	let TableData = sortedList.filter((data) =>
+		whoCanDonate[data.bloodGroup].find((i) => {
+			return i == bloodGrp;
+		})
 	);
 	var short = 0;
-	const pins = sortedList.map((data, index) => {
+	const dummyPins = sortedList.map((data, index) => {
 		// if (data.bloodGroup === request.bloodGroup) {
-			if(whoCanDonate[data.bloodGroup].find((i)=>{return i==bloodGrp})){
+		if (
+			whoCanDonate[data.bloodGroup].find((i) => {
+				return i == bloodGrp;
+			})
+		) {
 			short++;
 			return (
 				<Marker
@@ -130,19 +137,56 @@ const DonorsMap = (props) => {
 							],
 						});
 					}}
-
 				>
-					{short==1 ? (<ManIcon style={{ color:data.name=='Arul'||data.name=='bala'?'orange':'yellow' }} />):
-					data.name=='Arul'||data.name=='bala'?<ManIcon style={{ color:'green' }} />:<Pin/> }
+					{short == 1 ? (
+						<ManIcon
+							style={{
+								color:
+									data.name == "Arul" || data.name == "bala"
+										? "orange"
+										: "yellow",
+							}}
+						/>
+					) : data.name == "Arul" || data.name == "bala" ? (
+						<ManIcon style={{ color: "green" }} />
+					) : (
+						<Pin />
+					)}
 				</Marker>
 			);
 		}
 	});
 
+	const verifiedPins = verifiedDonors.map((data, index) => (
+		<Marker
+			key={`marker-${index}`}
+			longitude={data.location.longitude}
+			latitude={data.location.latitude}
+			anchor="center"
+			onClick={(e) => {
+				e.originalEvent.stopPropagation();
+				setPopupInfo(data);
+				mapRef.current.flyTo({
+					center: [data.location.longitude, data.location.latitude],
+				});
+			}}
+		>
+			<ManIcon
+				style={{
+					color: "orange",
+				}}
+			/>
+		</Marker>
+	));
+
 	return (
 		<>
 			{ViewContent}
-			<NearDonorTable data={TableData} modal={setPopupInfo} reqId={props.reqId}/>
+			<NearDonorTable
+				data={[...TableData, ...verifiedDonors]}
+				modal={setPopupInfo}
+				reqId={props.reqId}
+			/>
 			<Container sx={{ p: 2, height: "600px" }}>
 				<Map
 					initialViewState={{
@@ -164,7 +208,8 @@ const DonorsMap = (props) => {
 					<NavigationControl position="top-left" />
 					<ScaleControl />
 
-					{pins}
+					{dummyPins}
+					{verifiedPins}
 					<Marker
 						latitude={13.03701126158853}
 						longitude={80.13573450000001}
